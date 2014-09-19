@@ -21,10 +21,10 @@ import java.util.Map;
  */
 final class SymbolMapper {
 
-    private static final Map<String, String[][]> MAPPING = new HashMap<>();
+    private static final Map<Language, String[][]> MAPPING = new HashMap<>();
 
     static {
-        MAPPING.put("ar", new String[][]{
+        MAPPING.put(Language.ARABIC, new String[][]{
             {"∆", "delta"},
             {"∞", "la-nihaya"},
             {"♥", "hob"},
@@ -35,7 +35,7 @@ final class SymbolMapper {
             {"∑", "majmou"},
             {"¤", "omla"}
         });
-        MAPPING.put("de", new String[][]{
+        MAPPING.put(Language.GERMAN, new String[][]{
             {"∆", "delta"},
             {"∞", "unendlich"},
             {"♥", "Liebe"},
@@ -46,7 +46,7 @@ final class SymbolMapper {
             {"∑", "Summe von"},
             {"¤", "Waehrung"}
         });
-        MAPPING.put("nl", new String[][]{
+        MAPPING.put(Language.NETHERLAND, new String[][]{
             {"∆", "delta"},
             {"∞", "oneindig"},
             {"♥", "liefde"},
@@ -57,7 +57,7 @@ final class SymbolMapper {
             {"∑", "som"},
             {"¤", "valuta"}
         });
-        MAPPING.put("en", new String[][]{
+        MAPPING.put(Language.ENGLISH, new String[][]{
             {"∆", "delta"},
             {"∞", "infinity"},
             {"♥", "love"},
@@ -68,7 +68,7 @@ final class SymbolMapper {
             {"∑", "sum"},
             {"¤", "currency"}
         });
-        MAPPING.put("es", new String[][]{
+        MAPPING.put(Language.SPAIN, new String[][]{
             {"∆", "delta"},
             {"∞", "infinito"},
             {"♥", "amor"},
@@ -79,7 +79,7 @@ final class SymbolMapper {
             {"∑", "suma de los"},
             {"¤", "moneda"}
         });
-        MAPPING.put("fr", new String[][]{
+        MAPPING.put(Language.FRENCH, new String[][]{
             {"∆", "delta"},
             {"∞", "infiniment"},
             {"♥", "Amour"},
@@ -90,7 +90,7 @@ final class SymbolMapper {
             {"∑", "somme des"},
             {"¤", "monnaie"}
         });
-        MAPPING.put("pt", new String[][]{
+        MAPPING.put(Language.PORTUGETH, new String[][]{
             {"∆", "delta"},
             {"∞", "infinito"},
             {"♥", "amor"},
@@ -101,7 +101,7 @@ final class SymbolMapper {
             {"∑", "soma"},
             {"¤", "moeda"}
         });
-        MAPPING.put("ru", new String[][]{
+        MAPPING.put(Language.RUSSIAN, new String[][]{
             {"∆", "delta"},
             {"∞", "beskonechno"},
             {"♥", "lubov"},
@@ -112,7 +112,7 @@ final class SymbolMapper {
             {"∑", "summa"},
             {"¤", "valjuta"}
         });
-        MAPPING.put("cz", new String[][]{
+        MAPPING.put(Language.CZECH, new String[][]{
             {"∆", "delta"},
             {"∞", "nekonecno"},
             {"♥", "laska"},
@@ -123,7 +123,7 @@ final class SymbolMapper {
             {"∑", "soucet"},
             {"¤", "mena"}
         });
-        MAPPING.put("sk", new String[][]{
+        MAPPING.put(Language.SWEDISH, new String[][]{
             {"∆", "delta"},
             {"∞", "nekonecno"},
             {"♥", "laska"},
@@ -134,7 +134,7 @@ final class SymbolMapper {
             {"∑", "sucet"},
             {"¤", "mena"}
         });
-        MAPPING.put("vn", new String[][]{
+        MAPPING.put(Language.VIETNAMESE, new String[][]{
             {"∆", "delta"},
             {"∞", "vo cuc"},
             {"♥", "yeu"},

@@ -11,23 +11,57 @@
  */
 package de.weltraumschaf.speakingurl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * Language specific characters translations
+ * Supported languages.
+ *
+ * TODO Check spelling.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-final class LanguageCharacterMapper {
+public enum Language {
 
-    private static final Map<Language, String[][]> MAPPING = new HashMap<>();
-
-    static {
-        MAPPING.put(Language.ENGLISH, new String[0][0]);
-        MAPPING.put(Language.SWEDISH, new String[][]{
-            {"ä", "a"},
-            {"Ä", "A"}
-        });
-    }
+    /**
+     * ar.
+     */
+    ARABIC,
+    /**
+     * de.
+     */
+    GERMAN,
+    /**
+     * nl.
+     */
+    NETHERLAND,
+    /**
+     * en.
+     */
+    ENGLISH,
+    /**
+     * es.
+     */
+    SPAIN,
+    /**
+     * fr.
+     */
+    FRENCH,
+    /**
+     * pt.
+     */
+    PORTUGETH,
+    /**
+     * ru.
+     */
+    RUSSIAN,
+    /**
+     * cz.
+     */
+    CZECH,
+    /**
+     * sk.
+     */
+    SWEDISH,
+    /**
+     * vn.
+     */
+    VIETNAMESE;
 }
