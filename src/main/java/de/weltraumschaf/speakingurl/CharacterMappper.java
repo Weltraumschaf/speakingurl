@@ -18,9 +18,9 @@ package de.weltraumschaf.speakingurl;
  * 
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-final class CharacterMap {
+final class CharacterMappper {
 
-    private static final String[][] mapping = {
+    private static final String[][] MAPPING = {
         // Latin.
         {"À", "A"},
         {"Á", "A"},

@@ -11,16 +11,23 @@
  */
 package de.weltraumschaf.speakingurl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
+ * Language specific characters translations
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-final class CharacterEscaper {
-    private static final String REGEX = "[-\\\\^$*+?.()|\\[\\]{}\\/]";
-    private static final String REPLACEMENT = "\\\\$&";
-    
-    String escape(final String input) {
-        return input.replaceAll(REGEX, REPLACEMENT);
+final class LanguageCharacterMapper {
+
+    private static final Map<String, String[][]> MAPPING = new HashMap<>();
+
+    static {
+        MAPPING.put("en", new String[0][0]);
+        MAPPING.put("sk", new String[][]{
+            {"ä", "a"},
+            {"Ä", "A"}
+        });
     }
-    
 }
