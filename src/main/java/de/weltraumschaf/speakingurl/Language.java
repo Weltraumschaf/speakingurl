@@ -12,14 +12,17 @@
 package de.weltraumschaf.speakingurl;
 
 /**
- * Supported languages.
+ * Supported languages for symbol translations.
  *
  * TODO Check spelling.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public enum Language {
-
+    /**
+     * For no symbol translation.
+     */
+    NONE,
     /**
      * ar.
      */
