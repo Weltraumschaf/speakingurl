@@ -30,7 +30,7 @@ to Pid's versions.
 ## Credits
 
 - [@pid](https://github.com/pid/speakingurl)
-- [@dypsilon](https://github.com/dypsilon/js-replace-diacritics)
+- [@dypsilon](https://github.com/dypsilon)
 - [@simov](https://github.com/simov/slugify)
 - [@henrikjoreteg](https://github.com/henrikjoreteg/slugger)
 
