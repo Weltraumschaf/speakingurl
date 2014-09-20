@@ -3,7 +3,6 @@ package de.weltraumschaf.speakingurl;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,16 +25,16 @@ final class SlugImplementation implements Slug {
         URIC = Collections.unmodifiableSet(characters);
     }
     
-    String separator;
-    Language lang;
-    boolean maintainCase;
-    boolean titleCase;
-    String[] titleCaseExclude;
-    int truncate;
-    boolean uric;
-    boolean uricNoSlash;
-    boolean mark;
-    String[][] custom;
+    private String separator;
+    private Language lang;
+    private boolean maintainCase;
+    private boolean titleCase;
+    private Set<String> titleCaseExclude;
+    private int truncate;
+    private boolean uric;
+    private boolean uricNoSlash;
+    private boolean mark;
+    private String[][] custom;
 
     @Override
     public String get(final String input) {
@@ -45,4 +44,105 @@ final class SlugImplementation implements Slug {
 
         return "";
     }
+
+    @Override
+    public String getSeparator() {
+        return separator;
+    }
+
+    SlugImplementation setSeparator(final String separator) {
+        this.separator = separator;
+        return this;
+    }
+
+    @Override
+    public Language getLang() {
+        return lang;
+    }
+
+    SlugImplementation setLang(final Language lang) {
+        this.lang = lang;
+        return this;
+    }
+
+    @Override
+    public boolean isMaintainCase() {
+        return maintainCase;
+    }
+
+    SlugImplementation setMaintainCase(final boolean maintainCase) {
+        this.maintainCase = maintainCase;
+        return this;
+    }
+
+    @Override
+    public boolean isTitleCase() {
+        return titleCase;
+    }
+
+    SlugImplementation  setTitleCase(final boolean titleCase) {
+        this.titleCase = titleCase;
+        return this;
+    }
+
+    @Override
+    public Set<String> getTitleCaseExclude() {
+        return titleCaseExclude;
+    }
+
+    SlugImplementation  setTitleCaseExclude(final Set<String> titleCaseExclude) {
+        this.titleCaseExclude = titleCaseExclude;
+        return this;
+    }
+
+    @Override
+    public int getTruncate() {
+        return truncate;
+    }
+
+    SlugImplementation  setTruncate(final int truncate) {
+        this.truncate = truncate;
+        return this;
+    }
+
+    @Override
+    public boolean isUric() {
+        return uric;
+    }
+
+    SlugImplementation  setUric(final boolean uric) {
+        this.uric = uric;
+        return this;
+    }
+
+    @Override
+    public boolean isUricNoSlash() {
+        return uricNoSlash;
+    }
+
+    SlugImplementation  setUricNoSlash(final boolean uricNoSlash) {
+        this.uricNoSlash = uricNoSlash;
+        return this;
+    }
+
+    @Override
+    public boolean isMark() {
+        return mark;
+    }
+
+    SlugImplementation  setMark(final boolean mark) {
+        this.mark = mark;
+        return this;
+    }
+
+    @Override
+    public String[][] getCustom() {
+        return custom;
+    }
+
+    SlugImplementation  setCustom(final String[][] custom) {
+        this.custom = custom;
+        return this;
+    }
+    
 }
