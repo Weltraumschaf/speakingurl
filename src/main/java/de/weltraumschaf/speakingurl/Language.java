@@ -5,6 +5,7 @@ package de.weltraumschaf.speakingurl;
  *
  * TODO Check spelling.
  *
+ * @since 1.0.0
  * @author Sascha Droste <pid@posteo.net>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

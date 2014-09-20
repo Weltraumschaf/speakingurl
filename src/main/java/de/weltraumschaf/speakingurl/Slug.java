@@ -15,6 +15,7 @@ package de.weltraumschaf.speakingurl;
  * and create a slug.
  * </p>
  * 
+ * @since 1.0.0
  * @author Sascha Droste <pid@posteo.net>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
@@ -30,6 +31,8 @@ public interface Slug {
     
     /**
      * Builder to configure and create the {@link  Slug slugger}.
+     * 
+     * @since 1.0.0
      */
     public final class Builder {
         private static final String DEFAULT_SEPARATOR = "-";
