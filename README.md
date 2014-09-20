@@ -67,4 +67,4 @@ to Pid's versions.
 [original]:   https://github.com/pid/speakingurl
 [license]:    https://raw.github.com/Weltraumschaf/speakingurl/master/LICENSE
 [versioning]: http://semver.org/
-[changelog]:  https://raw.github.com/Weltraumschaf/speakingurl/master/CHANGELOG.md
+[changelog]:  https://github.com/Weltraumschaf/speakingurl/blob/master/CHANGELOG.md
