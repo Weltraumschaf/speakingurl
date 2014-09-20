@@ -28,7 +28,7 @@
         URL' or 'SEO-friendly URL' from a  string. This module aims to transliterate the
         input string.
 
-        Java port of https://github.com/pid/speakingurl
+        Java port of https://github.com/pid/speakingurl.
     </description>
     <url>http://weltraumschaf.github.io/speakingurl/</url>
 
