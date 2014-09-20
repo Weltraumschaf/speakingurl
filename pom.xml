@@ -48,6 +48,7 @@
     <licenses>
         <license>
             <name>The BSD 3-Clause License (BSD3)</name>
+            <url>https://raw.github.com/Weltraumschaf/speakingurl/master/LICENSE</url>
             <distribution>repo</distribution>
             <comments>
                 The BSD 3-Clause License (BSD3)
