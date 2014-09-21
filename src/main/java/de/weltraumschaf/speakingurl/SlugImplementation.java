@@ -13,11 +13,10 @@ import java.util.Set;
  */
 final class SlugImplementation implements Slug {
 
-    static final Set<Character> URIC_NO_SLASH;
-    static final Set<Character> URIC;
-    static final Set<Character> MARK = Collections.unmodifiableSet(
+    private static final Set<Character> URIC_NO_SLASH;
+    private static final Set<Character> URIC;
+    private static final Set<Character> MARK = Collections.unmodifiableSet(
         new HashSet<>(Arrays.asList('.', '!', '~', '*', '\'', '(', ')')));
-
     static {
         Set<Character> characters = new HashSet<>(Arrays.asList(';', '?', ':', '@', '&', '=', '+', '$', ','));
         URIC_NO_SLASH = Collections.unmodifiableSet(characters);
@@ -26,20 +25,18 @@ final class SlugImplementation implements Slug {
         URIC = Collections.unmodifiableSet(characters);
     }
 
-    private String separator;
-    private Language lang;
-    private boolean maintainCase;
-    private boolean titleCase;
-    private Set<String> titleCaseExclude;
-    private int truncate;
-    private boolean uric;
-    private boolean uricNoSlash;
-    private boolean mark;
-    private String[][] custom;
+    private final Options options;
+
+    private String allowedChars;
+
+    public SlugImplementation(final Options options) {
+        super();
+        this.options = options;
+    }
 
     @Override
     public String get(final String input) {
-        return get(input, separator);
+        return get(input, options.getSeparator());
     }
 
     @Override
@@ -57,102 +54,53 @@ final class SlugImplementation implements Slug {
 
     @Override
     public String getSeparator() {
-        return separator;
+        return options.getSeparator();
     }
 
-    SlugImplementation setSeparator(final String separator) {
-        this.separator = separator;
-        return this;
-    }
 
     @Override
     public Language getLang() {
-        return lang;
-    }
-
-    SlugImplementation setLang(final Language lang) {
-        this.lang = lang;
-        return this;
+        return options.getLang();
     }
 
     @Override
     public boolean isMaintainCase() {
-        return maintainCase;
-    }
-
-    SlugImplementation setMaintainCase(final boolean maintainCase) {
-        this.maintainCase = maintainCase;
-        return this;
+        return options.isMaintainCase();
     }
 
     @Override
     public boolean isTitleCase() {
-        return titleCase;
-    }
-
-    SlugImplementation  setTitleCase(final boolean titleCase) {
-        this.titleCase = titleCase;
-        return this;
+        return options.isTitleCase();
     }
 
     @Override
     public Set<String> getTitleCaseExclude() {
-        return titleCaseExclude;
-    }
-
-    SlugImplementation  setTitleCaseExclude(final Set<String> titleCaseExclude) {
-        this.titleCaseExclude = titleCaseExclude;
-        return this;
+        return options.getTitleCaseExclude();
     }
 
     @Override
     public int getTruncate() {
-        return truncate;
-    }
-
-    SlugImplementation  setTruncate(final int truncate) {
-        this.truncate = truncate;
-        return this;
+        return options.getTruncate();
     }
 
     @Override
     public boolean isUric() {
-        return uric;
-    }
-
-    SlugImplementation  setUric(final boolean uric) {
-        this.uric = uric;
-        return this;
+        return options.isUric();
     }
 
     @Override
     public boolean isUricNoSlash() {
-        return uricNoSlash;
-    }
-
-    SlugImplementation  setUricNoSlash(final boolean uricNoSlash) {
-        this.uricNoSlash = uricNoSlash;
-        return this;
+        return options.isUricNoSlash();
     }
 
     @Override
     public boolean isMark() {
-        return mark;
-    }
-
-    SlugImplementation  setMark(final boolean mark) {
-        this.mark = mark;
-        return this;
+        return options.isMark();
     }
 
     @Override
     public String[][] getCustom() {
-        return custom;
-    }
-
-    SlugImplementation  setCustom(final String[][] custom) {
-        this.custom = custom;
-        return this;
+        return options.getCustom();
     }
 
 }
