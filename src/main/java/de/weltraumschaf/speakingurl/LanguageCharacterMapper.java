@@ -1,5 +1,6 @@
 package de.weltraumschaf.speakingurl;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,13 +12,24 @@ import java.util.Map;
  */
 final class LanguageCharacterMapper {
 
-    private static final Map<Language, String[][]> MAPPING = new HashMap<>();
+    private static final Language DEFAULT = Language.ENGLISH;
+    private static final Map<Language, Map<String, String>> MAPPING = new HashMap<>();
 
     static {
-        MAPPING.put(Language.ENGLISH, new String[0][0]);
-        MAPPING.put(Language.SWEDISH, new String[][]{
-            {"ä", "a"},
-            {"Ä", "A"}
-        });
+        MAPPING.put(Language.ENGLISH, Collections.<String, String>emptyMap());
+
+        final Map<String, String> swedish = new HashMap<>();
+        swedish.put("ä", "a");
+        swedish.put("Ä", "A");
+        MAPPING.put(Language.SWEDISH, Collections.unmodifiableMap(swedish));
     }
+
+    Map<String, String> map(Language lang) {
+        if (MAPPING.containsKey(lang)) {
+            return MAPPING.get(lang);
+        }
+
+        return MAPPING.get(DEFAULT);
+    }
+
 }

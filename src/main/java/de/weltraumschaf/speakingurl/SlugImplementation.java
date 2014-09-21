@@ -1,11 +1,9 @@
 package de.weltraumschaf.speakingurl;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Implementation of slug.
@@ -15,22 +13,17 @@ import java.util.Set;
  */
 final class SlugImplementation implements Slug {
 
-    private static final Set<Character> URIC_NO_SLASH;
-    private static final Set<Character> URIC;
-    private static final Set<Character> MARK = Collections.unmodifiableSet(
-            new HashSet<>(Arrays.asList('.', '!', '~', '*', '\'', '(', ')')));
+    private static final String URIC_NO_SLASH = ";?:@&=+$,";
+    private static final String URIC = URIC_NO_SLASH + "/";
+    private static final String MARK = ".!~*'()";
 
-    static {
-        Set<Character> characters = new HashSet<>(Arrays.asList(';', '?', ':', '@', '&', '=', '+', '$', ','));
-        URIC_NO_SLASH = Collections.unmodifiableSet(characters);
+    private static final Pattern ALPHA_NUMERIC = Pattern.compile("/[a-zA-Z0-9]/");
 
-        characters.add('/');
-        URIC = Collections.unmodifiableSet(characters);
-    }
-
+    private final CharacterEscaper escaper = new CharacterEscaper();
+    private final LanguageCharacterMapper languageMapper = new LanguageCharacterMapper();
+    private final CharacterMappper characterMapper = new CharacterMappper();
+    private final SymbolMapper symbolMapper = new SymbolMapper();
     private final Options options;
-
-    private String allowedChars;
 
     public SlugImplementation(final Options options) {
         super();
@@ -93,40 +86,127 @@ final class SlugImplementation implements Slug {
     }
 
     @Override
-    public String get(final String input, final String separator) {
-        if (null == input) {
+    public String get(final String rawInput, final String separator) {
+        if (null == rawInput) {
             return "";
         }
 
-        if (input.trim().isEmpty()) {
+        if (rawInput.trim().isEmpty()) {
             return "";
         }
 
-        final Map<String, String> customReplacements = new HashMap<>();
+        final Map<String, String> customReplacements = new HashMap<>(options.getCustom());
+
+        if (options.isTitleCase()) {
+            for (final String titleCaseExclude : options.getTitleCaseExclude()) {
+                customReplacements.put(titleCaseExclude, titleCaseExclude);
+            }
+        }
+
         String allowedChars = separator;
 
         if (options.isUric()) {
-            allowedChars += join(URIC);
+            allowedChars += URIC;
         }
 
         if (options.isUricNoSlash()) {
-            allowedChars += join(URIC_NO_SLASH);
+            allowedChars += URIC_NO_SLASH;
         }
 
         if (options.isMark()) {
-            allowedChars += join(MARK);
+            allowedChars += MARK;
         }
 
-        throw new UnsupportedOperationException("Not implemented yet!");
-    }
+        allowedChars = escaper.escape(allowedChars);
+        String input = rawInput;
+        String result = "";
 
-    private String join(final Set<?> s) {
-        final StringBuilder buffer = new StringBuilder();
-
-        for (final Object o : s) {
-            buffer.append(o.toString());
+        for (final String key : customReplacements.keySet()) {
+            input = input.replaceAll(escaper.escape(key), customReplacements.get(key));
         }
 
-        return buffer.toString();
+        if (options.isTitleCase()) {
+            // TODO Implement title case.
+        }
+
+        input = input.trim();
+
+        final Map<String, String> langChars = languageMapper.map(options.getLang());
+        final Map<String, String> symbol = symbolMapper.map(options.getLang());
+        boolean lastCharWasSymbol = false;
+
+        for (int i = 0, l = input.length(); i < l; i++) {
+            String ch = input.substring(i, i + 1);
+
+            if (langChars.containsKey(ch)) {
+                if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(langChars.get(ch)).matches()) {
+                    ch = " " + langChars.get(ch);
+                } else {
+                    ch = langChars.get(ch);
+                }
+
+                lastCharWasSymbol = false;
+            } else if (characterMapper.map().containsKey(ch)) {
+                if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(characterMapper.map().get(ch)).matches()) {
+                    ch = " " + characterMapper.map().get(ch);
+                } else {
+                    ch = characterMapper.map().get(ch);
+                }
+
+                lastCharWasSymbol = false;
+            } else if (
+                symbol.containsKey(ch) && !(options.isUric() && URIC.indexOf(ch) != -1)
+                && !(options.isUricNoSlash() && URIC_NO_SLASH.indexOf(ch) != -1)
+                && !(options.isMark() && MARK.indexOf(ch) != -1)
+            ) {
+                // Process symbol chars.
+                ch = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
+                    ? separator + symbol.get(ch)
+                    : symbol.get(ch);
+                ch += ALPHA_NUMERIC.matcher(input.charAt(i + 1) + "").matches()
+                    ? separator
+                    : "";
+
+                lastCharWasSymbol = true;
+            } else {
+                // Process latin chars.
+                if (lastCharWasSymbol
+                    && (
+                        ALPHA_NUMERIC.matcher(ch).matches()
+                        || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
+                    )
+                ) {
+                    ch = " " + ch;
+                }
+
+                lastCharWasSymbol = false;
+            }
+
+            // Add allowed chars.
+            result += ch.replace("[^\\\\w\\\\s" + allowedChars + "_-]", separator);
+        }
+
+        // Eliminate duplicate separators,
+        // add separator
+        // and trim separators from start and end.
+        result = result.replace("/\\s+/g", separator)
+            .replace("/\\" + separator + "+/g", separator)
+            .replace("/(^\\" + separator + "+|\\" + separator + "+$)/g", "");
+
+        if (options.getTruncate() > 0 && result.length() > options.getTruncate()) {
+            final boolean lucky = separator.equals(result.charAt(options.getTruncate()) + "");
+            result = result.substring(0, options.getTruncate());
+
+            if (!lucky) {
+                result = result.substring(0, result.lastIndexOf(separator));
+            }
+        }
+
+        if (!options.isMaintainCase() && !options.isTitleCase() && options.getTitleCaseExclude().isEmpty()) {
+            result = result.toLowerCase();
+        }
+
+        return result;
     }
+
 }
