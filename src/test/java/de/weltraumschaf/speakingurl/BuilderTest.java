@@ -3,7 +3,9 @@ package de.weltraumschaf.speakingurl;
 import de.weltraumschaf.speakingurl.Slug.Builder;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -43,7 +45,7 @@ public class BuilderTest {
         final Slug product = sut.create();
 
         assertThat(product, is(not(nullValue())));
-        assertThat(product.getCustom(), is(equalTo(new String[0][0])));
+        assertThat(product.getCustom(), is(equalTo((Map<String, String>)new HashMap<String, String>())));
         assertThat(product.getLang(), is(equalTo(Language.ENGLISH)));
         assertThat(product.isMaintainCase(), is(equalTo(false)));
         assertThat(product.isMark(), is(equalTo(false)));

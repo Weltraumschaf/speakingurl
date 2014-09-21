@@ -1,5 +1,7 @@
 package de.weltraumschaf.speakingurl;
 
+import java.util.HashMap;
+import java.util.Map;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,42 +17,48 @@ public class SlugImplementation_CustomTest {
 
     @Test
     public void withCustomCharsReplacement() {
-        final Slug sut = Slug.Builder.newBuiler().custom(new String[][]{{"*", "o"}}).create();
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("*", "o");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).create();
 
         assertThat(sut.get("xyl*ph*n"), is(equalTo("xylophon")));
     }
 
     @Test
     public void withCustomCharsReplacementWithNotAllowedTargetChar() {
-        final Slug sut = Slug.Builder.newBuiler().custom(new String[][]{{"o", "*"}}).create();
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("o", "*");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).create();
 
         assertThat(sut.get("xylophon"), is(equalTo("xyl-ph-n")));
     }
 
     @Test
     public void withCustomCharsReplacementWithAllowedTargetCharOptionMark() {
-        final Slug sut = Slug.Builder.newBuiler().custom(new String[][]{{"o", "*"}}).mark(true).create();
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("o", "*");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).mark(true).create();
 
         assertThat(sut.get("xylophon"), is(equalTo("xyl*ph*n")));
     }
 
     @Test
     public void withCustomCharsReplacementWithOptionMark() {
-        final Slug sut = Slug.Builder.newBuiler().custom(new String[][]{{"*", "o"}}).mark(true).create();
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("*", "o");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).mark(true).create();
 
         assertThat(sut.get("xyl*ph*n"), is(equalTo("xylophon")));
     }
 
     @Test
     public void withCustomCharToStringReplacement() {
-        final Slug sut = Slug.Builder.newBuiler()
-            .custom(new String[][]{
-                {"*", "STAR"},
-                {"q", "qqq"},
-                {"and", ""},
-                {"or", ""}
-            })
-            .create();
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("*", "STAR");
+        custom.put("q", "qqq");
+        custom.put("and", "");
+        custom.put("or", "");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).create();
 
         assertThat(sut.get("xyl*ph*n"), is(equalTo("xylstarphstarn")));
         assertThat(sut.get("quack"), is(equalTo("qqquack")));
@@ -59,13 +67,11 @@ public class SlugImplementation_CustomTest {
 
     @Test
     public void withCustomStringReplacement() {
-        final Slug sut = Slug.Builder.newBuiler()
-            .custom(new String[][]{
-                {"and", "und"},
-                {"or", "oder"},
-                {"*", " and "}
-            })
-            .create();
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("and", "und");
+        custom.put("or", "oder");
+        custom.put("*", " and ");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).create();
 
         assertThat(sut.get("bus and train"), is(equalTo("bus-und-train")));
         assertThat(sut.get("bus or train"), is(equalTo("bus-oder-train")));
@@ -81,14 +87,11 @@ public class SlugImplementation_CustomTest {
 
     @Test
     public void withCustomStringReplacementWithOptionMark() {
-        final Slug sut = Slug.Builder.newBuiler()
-            .custom(new String[][]{
-                {"*", "STAR"},
-                {"q", "qqq"},
-                {"z", ""}
-            })
-            .mark(true)
-            .create();
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("*", "STAR");
+        custom.put("q", "qqq");
+        custom.put("z", "");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).mark(true).create();
 
         assertThat(sut.get("xyl*ph*n"), is(equalTo("xylstarphstarn")));
         assertThat(sut.get("qxxx"), is(equalTo("qqqxxx")));
@@ -101,13 +104,10 @@ public class SlugImplementation_CustomTest {
 
     @Test
     public void withCustomStringReplacementWithOptionMaintainCase() {
-        final Slug sut = Slug.Builder.newBuiler()
-            .custom(new String[][]{
-                {"*", "STAR"},
-                {"q", "qqq"},
-            })
-            .maintainCase(true)
-            .create();
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("*", "STAR");
+        custom.put("q", "qqq");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).maintainCase(true).create();
 
         assertThat(sut.get("xyl*ph*n"), is(equalTo("xylSTARphSTARn")));
         assertThat(sut.get("qXXX"), is(equalTo("qqqXXX")));

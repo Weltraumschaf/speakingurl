@@ -3,6 +3,7 @@ package de.weltraumschaf.speakingurl;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -57,7 +58,7 @@ public interface Slug {
 
     boolean isMark();
 
-    String[][] getCustom();
+    Map<String, String> getCustom();
 
     /**
      * Builder to configure and create the {@link  Slug slugger}.
@@ -237,7 +238,13 @@ public interface Slug {
          * </p>
          * <pre>
          * {@code
-         *      { '&': '#', '*': ' star ' }
+         * final Slug.Builder builder = Slug.Builder.newBuilder();
+         * ...
+         * final Map<String, String> custom = new HashMap<>();
+         * custom.put("&", "#");
+         * custom.put("*", "star");
+         * ...
+         * builder.custom(custom);
          * }
          * </pre>
          *
@@ -246,7 +253,7 @@ public interface Slug {
          * @param custom must not be {@code null}
          * @return self validated object for method chaining
          */
-        public Builder custom(final String[][] custom) {
+        public Builder custom(final Map<String, String> custom) {
             options.setCustom(validator.notNull(custom, "custom"));
             return this;
         }

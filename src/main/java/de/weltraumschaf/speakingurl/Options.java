@@ -1,6 +1,8 @@
 package de.weltraumschaf.speakingurl;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,7 +23,7 @@ final class Options {
     private static final boolean DEFAULT_URIC = false;
     private static final boolean DEFAULT_URIC_NO_SLASH = false;
     private static final boolean DEFAULT_MARK = false;
-    private static final String[][] DEFAULT_CUSTOM = new String[0][0];
+    private static final Map<String, String> DEFAULT_CUSTOM = new HashMap<>();
 
     private String separator = DEFAULT_SEPARATOR;
     private Language lang = DEFAULT_LANG;
@@ -32,7 +34,7 @@ final class Options {
     private boolean uric = DEFAULT_URIC;
     private boolean uricNoSlash = DEFAULT_URIC_NO_SLASH;
     private boolean mark = DEFAULT_MARK;
-    private String[][] custom = DEFAULT_CUSTOM;
+    private Map<String, String> custom = DEFAULT_CUSTOM;
 
     String getSeparator() {
         return separator;
@@ -106,12 +108,12 @@ final class Options {
         this.mark = mark;
     }
 
-    String[][] getCustom() {
-        return custom;
+    Map<String, String> getCustom() {
+        return Collections.unmodifiableMap(custom);
     }
 
-    void setCustom(final String[][] custom) {
-        this.custom = custom;
+    void setCustom(final Map<String, String> custom) {
+        this.custom = new HashMap<>(custom); // Defensive copy.
     }
 
     @Override

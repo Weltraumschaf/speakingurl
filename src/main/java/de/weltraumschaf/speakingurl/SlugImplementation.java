@@ -2,7 +2,9 @@ package de.weltraumschaf.speakingurl;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,7 +18,8 @@ final class SlugImplementation implements Slug {
     private static final Set<Character> URIC_NO_SLASH;
     private static final Set<Character> URIC;
     private static final Set<Character> MARK = Collections.unmodifiableSet(
-        new HashSet<>(Arrays.asList('.', '!', '~', '*', '\'', '(', ')')));
+            new HashSet<>(Arrays.asList('.', '!', '~', '*', '\'', '(', ')')));
+
     static {
         Set<Character> characters = new HashSet<>(Arrays.asList(';', '?', ':', '@', '&', '=', '+', '$', ','));
         URIC_NO_SLASH = Collections.unmodifiableSet(characters);
@@ -35,28 +38,9 @@ final class SlugImplementation implements Slug {
     }
 
     @Override
-    public String get(final String input) {
-        return get(input, options.getSeparator());
-    }
-
-    @Override
-    public String get(final String input, final String separator) {
-        if (null == input) {
-            return "";
-        }
-
-        if (input.trim().isEmpty()) {
-            return "";
-        }
-
-        throw new UnsupportedOperationException("Not implemented yet!");
-    }
-
-    @Override
     public String getSeparator() {
         return options.getSeparator();
     }
-
 
     @Override
     public Language getLang() {
@@ -99,8 +83,50 @@ final class SlugImplementation implements Slug {
     }
 
     @Override
-    public String[][] getCustom() {
+    public Map<String, String> getCustom() {
         return options.getCustom();
     }
 
+    @Override
+    public String get(final String input) {
+        return get(input, options.getSeparator());
+    }
+
+    @Override
+    public String get(final String input, final String separator) {
+        if (null == input) {
+            return "";
+        }
+
+        if (input.trim().isEmpty()) {
+            return "";
+        }
+
+        final Map<String, String> customReplacements = new HashMap<>();
+        String allowedChars = separator;
+
+        if (options.isUric()) {
+            allowedChars += join(URIC);
+        }
+
+        if (options.isUricNoSlash()) {
+            allowedChars += join(URIC_NO_SLASH);
+        }
+
+        if (options.isMark()) {
+            allowedChars += join(MARK);
+        }
+
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    private String join(final Set<?> s) {
+        final StringBuilder buffer = new StringBuilder();
+
+        for (final Object o : s) {
+            buffer.append(o.toString());
+        }
+
+        return buffer.toString();
+    }
 }
