@@ -80,7 +80,7 @@ final class SymbolMapper {
             {"∑", "somme des"},
             {"¤", "monnaie"}
         });
-        MAPPING.put(Language.PORTUGETH, new String[][]{
+        MAPPING.put(Language.PORTUGUESE, new String[][]{
             {"∆", "delta"},
             {"∞", "infinito"},
             {"♥", "amor"},
