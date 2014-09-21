@@ -58,7 +58,7 @@ final class SymbolMapper {
             {"∑", "sum"},
             {"¤", "currency"}
         });
-        MAPPING.put(Language.SPAIN, new String[][]{
+        MAPPING.put(Language.SPANISH, new String[][]{
             {"∆", "delta"},
             {"∞", "infinito"},
             {"♥", "amor"},

@@ -28,10 +28,19 @@ public interface Slug {
     /**
      * Generates a slug from given input string.
      *
-     * @param input must not be {@code null}
-     * @return never {@code null}, maybe empty
+     * @param input may be {@code null} or empty
+     * @return never {@code null}, may be empty
      */
     String get(String input);
+
+    /**
+     * Generates a slug from given input string.
+     *
+     * @param input may be {@code null} or empty
+     * @param separator must not be {@code null}
+     * @return never {@code null}, may be empty
+     */
+    String get(String input, String separator);
 
     String getSeparator();
 
@@ -183,7 +192,7 @@ public interface Slug {
             titleCaseExclude(new HashSet<>(Arrays.asList(titleCaseExclude)));
             return this;
         }
-        
+
         /**
          * Words to exclude from title case (default is
          * {@value #DEFAULT_TITLE_CASE_EXCLUDES}).

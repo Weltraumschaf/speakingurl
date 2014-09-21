@@ -12,6 +12,8 @@ package de.weltraumschaf.speakingurl;
 public enum Language {
     /**
      * For no symbol translation.
+     *//**
+     * For no symbol translation.
      */
     NONE,
     /**
@@ -33,7 +35,7 @@ public enum Language {
     /**
      * es.
      */
-    SPAIN,
+    SPANISH,
     /**
      * fr.
      */

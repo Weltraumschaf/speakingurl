@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Implementation of slug.
  *
  * @author Sascha Droste <pid@posteo.net>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
@@ -16,15 +17,15 @@ final class SlugImplementation implements Slug {
     static final Set<Character> URIC;
     static final Set<Character> MARK = Collections.unmodifiableSet(
         new HashSet<>(Arrays.asList('.', '!', '~', '*', '\'', '(', ')')));
-        
+
     static {
         Set<Character> characters = new HashSet<>(Arrays.asList(';', '?', ':', '@', '&', '=', '+', '$', ','));
         URIC_NO_SLASH = Collections.unmodifiableSet(characters);
-        
+
         characters.add('/');
         URIC = Collections.unmodifiableSet(characters);
     }
-    
+
     private String separator;
     private Language lang;
     private boolean maintainCase;
@@ -38,11 +39,20 @@ final class SlugImplementation implements Slug {
 
     @Override
     public String get(final String input) {
+        return get(input, separator);
+    }
+
+    @Override
+    public String get(final String input, final String separator) {
         if (null == input) {
-            throw new NullPointerException("Parameter 'input' must not be null!");
+            return "";
         }
 
-        return "";
+        if (input.trim().isEmpty()) {
+            return "";
+        }
+
+        throw new UnsupportedOperationException("Not implemented yet!");
     }
 
     @Override
@@ -144,5 +154,5 @@ final class SlugImplementation implements Slug {
         this.custom = custom;
         return this;
     }
-    
+
 }
