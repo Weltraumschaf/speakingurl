@@ -13,7 +13,7 @@ import java.util.Map;
 final class LanguageCharacterMapper {
 
     /**
-     * Default language ({@value}).
+     * Default language ({@value #DEFAULT}).
      */
     private static final Language DEFAULT = Language.ENGLISH;
     /**
