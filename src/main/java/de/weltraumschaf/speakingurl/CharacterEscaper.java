@@ -1,18 +1,28 @@
 package de.weltraumschaf.speakingurl;
 
+import java.util.regex.Pattern;
+
 /**
+ * Escapes special characters used in regular expressions.
  *
  * @author Sascha Droste <pid@posteo.net>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 final class CharacterEscaper {
-    private static final String REGEX = "[-\\\\^$*+?.()|\\[\\]{}\\/]";
-    private static final String REPLACEMENT = "\\\\$&";
-    
+
+    /**
+     * Validates the input string.
+     */
     private final Validator validator = new Validator();
-    
+
+    /**
+     * Escapes the given input string.
+     *
+     * @param input must not be {@code null}
+     * @return never {@code null} may be empty
+     */
     String escape(final String input) {
-        return validator.notNull(input, "input").replaceAll(REGEX, REPLACEMENT);
+        return Pattern.quote(validator.notNull(input, "input"));
     }
-    
+
 }
