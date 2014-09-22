@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"
+         name="${project.name} Project Site">
+
+    <skin>
+        <!--
+            http://repo1.maven.org/maven2/org/apache/maven/skins/
+            http://maven.apache.org/skins/maven-fluido-skin/
+            https://github.com/andriusvelykis/reflow-maven-skin
+        -->
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.3.0</version>
+    </skin>
+
+    <custom>
+        <fluidoSkin>
+            <leftColumnClass>span3</leftColumnClass>
+            <bodyColumnClass>span6</bodyColumnClass>
+            <topBarEnabled>false</topBarEnabled>
+            <sideBarEnabled>true</sideBarEnabled>
+            <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+            <gitHub>
+                <projectId>Weltraumschaf/speakingurl</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>black</ribbonColor>
+            </gitHub>
+        </fluidoSkin>
+    </custom>
+
+    <bannerLeft>
+        <name>${project.name}</name>
+        <alt>${project.name}</alt>
+    </bannerLeft>
+
+    <body>
+        <breadcrumbs>
+            <item name="Weltraumschaf" href="http://www.weltraumschaf.de"/>
+        </breadcrumbs>
+        <menu name="${project.name}">
+            <item name="Home" href="index.html"/>
+        </menu>
+        <menu name="Reports" ref="reports"/>
+    </body>
+</project>
