@@ -18,43 +18,43 @@ final class Options {
     /**
      * Default separator ({@value #DEFAULT_SEPARATOR}).
      */
-    private static final String DEFAULT_SEPARATOR = "-";
+    static final String DEFAULT_SEPARATOR = "-";
     /**
      * Default language ({@value #DEFAULT_LANG}).
      */
-    private static final Language DEFAULT_LANG = Language.ENGLISH;
+    static final Language DEFAULT_LANG = Language.ENGLISH;
     /**
      * Default maintain case flag ({@value #DEFAULT_MAINTAIN_CASE}).
      */
-    private static final boolean DEFAULT_MAINTAIN_CASE = false;
+    static final boolean DEFAULT_MAINTAIN_CASE = false;
     /**
      * Default title case flag ({@value #DEFAULT_TITLE_CASE}).
      */
-    private static final boolean DEFAULT_TITLE_CASE = false;
+    static final boolean DEFAULT_TITLE_CASE = false;
     /**
      * Default title case excludes ({@value #DEFAULT_TITLE_CASE_EXCLUDES}).
      */
-    private static final Set<String> DEFAULT_TITLE_CASE_EXCLUDES = Collections.emptySet();
+    static final Set<String> DEFAULT_TITLE_CASE_EXCLUDES = Collections.emptySet();
     /**
      * Default truncate length ({@value #DEFAULT_TRUNCATE}).
      */
-    private static final int DEFAULT_TRUNCATE = 0;
+    static final int DEFAULT_TRUNCATE = 0;
     /**
      * Default URI characters flag ({@value #DEFAULT_URIC}).
      */
-    private static final boolean DEFAULT_URIC = false;
+    static final boolean DEFAULT_URIC = false;
     /**
      * Default URI characters without slash flag ({@value #DEFAULT_URIC_WITHOUT_SLASH}).
      */
-    private static final boolean DEFAULT_URIC_WITHOUT_SLASH = false;
+    static final boolean DEFAULT_URIC_WITHOUT_SLASH = false;
     /**
      * Default mark flag ({@value #DEFAULT_MARK}).
      */
-    private static final boolean DEFAULT_MARK = false;
+    static final boolean DEFAULT_MARK = false;
     /**
      * Default custom mapping ({@value #DEFAULT_CUSTOM}).
      */
-    private static final Map<String, String> DEFAULT_CUSTOM = new HashMap<>();
+    static final Map<String, String> DEFAULT_CUSTOM = new HashMap<>();
 
     /**
      * Validates input.
