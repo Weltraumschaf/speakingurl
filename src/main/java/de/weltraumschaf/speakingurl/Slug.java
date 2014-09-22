@@ -63,6 +63,9 @@ public interface Slug {
     /**
      * Builder to configure and create the {@link  Slug slugger}.
      *
+     * TODO Remove validations because done in Options.
+     * TODO Change method names according to Options.
+     *
      * @since 1.0.0
      */
     public final class Builder {
@@ -102,7 +105,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder separator(final String separator) {
-            options.setSeparator(validator.notNull(separator, "separator"));
+            options.separator(validator.notNull(separator, "separator"));
             return this;
         }
 
@@ -116,7 +119,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder lang(final Language lang) {
-            options.setLang(validator.notNull(lang, "lang"));
+            options.language(validator.notNull(lang, "lang"));
             return this;
         }
 
@@ -127,7 +130,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder maintainCase(final boolean maintainCase) {
-            options.setMaintainCase(maintainCase);
+            options.maintainCase(maintainCase);
             return this;
         }
 
@@ -138,7 +141,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder titleCase(final boolean titleCase) {
-            options.setTitleCase(titleCase);
+            options.titleCase(titleCase);
             return this;
         }
 
@@ -167,7 +170,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder titleCaseExclude(final Set<String> titleCaseExclude) {
-            options.setTitleCaseExclude(Collections.unmodifiableSet(
+            options.titleCaseExclude(Collections.unmodifiableSet(
                     validator.notNull(titleCaseExclude, "titleCaseExclude")));
             return this;
         }
@@ -182,7 +185,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder truncate(final int truncate) {
-            options.setTruncate(validator.notNegative(truncate, "truncate"));
+            options.truncate(validator.notNegative(truncate, "truncate"));
             return this;
         }
 
@@ -196,7 +199,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder uric(final boolean uric) {
-            options.setUric(uric);
+            options.uric(uric);
             return this;
         }
 
@@ -210,7 +213,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder uricNoSlash(final boolean uricNoSlash) {
-            options.setUricNoSlash(uricNoSlash);
+            options.uricWithoutSlash(uricNoSlash);
             return this;
         }
 
@@ -224,7 +227,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder mark(final boolean mark) {
-            options.setMark(mark);
+            options.mark(mark);
             return this;
         }
 
@@ -252,7 +255,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder custom(final Map<String, String> custom) {
-            options.setCustom(validator.notNull(custom, "custom"));
+            options.custom(validator.notNull(custom, "custom"));
             return this;
         }
     }

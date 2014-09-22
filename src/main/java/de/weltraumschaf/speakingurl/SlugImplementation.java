@@ -38,57 +38,57 @@ final class SlugImplementation implements Slug {
 
     @Override
     public String getSeparator() {
-        return options.getSeparator();
+        return options.separator();
     }
 
     @Override
     public Language getLang() {
-        return options.getLang();
+        return options.language();
     }
 
     @Override
     public boolean isMaintainCase() {
-        return options.isMaintainCase();
+        return options.maintainCase();
     }
 
     @Override
     public boolean isTitleCase() {
-        return options.isTitleCase();
+        return options.titleCase();
     }
 
     @Override
     public Set<String> getTitleCaseExclude() {
-        return options.getTitleCaseExclude();
+        return options.titleCaseExclude();
     }
 
     @Override
     public int getTruncate() {
-        return options.getTruncate();
+        return options.truncate();
     }
 
     @Override
     public boolean isUric() {
-        return options.isUric();
+        return options.uric();
     }
 
     @Override
     public boolean isUricNoSlash() {
-        return options.isUricNoSlash();
+        return options.uricWithoutSlash();
     }
 
     @Override
     public boolean isMark() {
-        return options.isMark();
+        return options.mark();
     }
 
     @Override
     public Map<String, String> getCustom() {
-        return options.getCustom();
+        return options.custom();
     }
 
     @Override
     public String get(final String input) {
-        return get(input, options.getSeparator());
+        return get(input, options.separator());
     }
 
     @Override
@@ -101,25 +101,25 @@ final class SlugImplementation implements Slug {
             return "";
         }
 
-        final Map<String, String> customReplacements = new HashMap<>(options.getCustom());
+        final Map<String, String> customReplacements = new HashMap<>(options.custom());
 
-        if (options.isTitleCase()) {
-            for (final String titleCaseExclude : options.getTitleCaseExclude()) {
+        if (options.titleCase()) {
+            for (final String titleCaseExclude : options.titleCaseExclude()) {
                 customReplacements.put(titleCaseExclude, titleCaseExclude);
             }
         }
 
         String allowedChars = separator;
 
-        if (options.isUric()) {
+        if (options.uric()) {
             allowedChars += URIC;
         }
 
-        if (options.isUricNoSlash()) {
+        if (options.uricWithoutSlash()) {
             allowedChars += URIC_NO_SLASH;
         }
 
-        if (options.isMark()) {
+        if (options.mark()) {
             allowedChars += MARK;
         }
 
@@ -131,14 +131,14 @@ final class SlugImplementation implements Slug {
             input = input.replaceAll(escaper.escape(key), customReplacements.get(key));
         }
 
-        if (options.isTitleCase()) {
+        if (options.titleCase()) {
             // TODO Implement title case.
         }
 
         input = input.trim();
 
-        final Map<String, String> langChars = languageMapper.map(options.getLang());
-        final Map<String, String> symbol = symbolMapper.map(options.getLang());
+        final Map<String, String> langChars = languageMapper.map(options.language());
+        final Map<String, String> symbol = symbolMapper.map(options.language());
         boolean lastCharWasSymbol = false;
 
         for (int i = 0, l = input.length(); i < l; i++) {
@@ -152,9 +152,9 @@ final class SlugImplementation implements Slug {
                 ch = replaceCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
-            } else if (symbol.containsKey(ch) && !(options.isUric() && URIC.contains(ch))
-                    && !(options.isUricNoSlash() && URIC_NO_SLASH.contains(ch))
-                    && !(options.isMark() && MARK.contains(ch))) {
+            } else if (symbol.containsKey(ch) && !(options.uric() && URIC.contains(ch))
+                    && !(options.uricWithoutSlash() && URIC_NO_SLASH.contains(ch))
+                    && !(options.mark() && MARK.contains(ch))) {
                 ch = replaceSymbols(ch, lastCharWasSymbol, result, separator, symbol, input, i);
 
                 lastCharWasSymbol = true;
@@ -174,16 +174,16 @@ final class SlugImplementation implements Slug {
 
         result = cleanupReplacements(result, separator);
 
-        if (options.getTruncate() > 0 && result.length() > options.getTruncate()) {
-            final boolean lucky = separator.equals(result.charAt(options.getTruncate()) + "");
-            result = result.substring(0, options.getTruncate());
+        if (options.truncate() > 0 && result.length() > options.truncate()) {
+            final boolean lucky = separator.equals(result.charAt(options.truncate()) + "");
+            result = result.substring(0, options.truncate());
 
             if (!lucky) {
                 result = result.substring(0, result.lastIndexOf(separator));
             }
         }
 
-        if (!options.isMaintainCase() && !options.isTitleCase() && options.getTitleCaseExclude().isEmpty()) {
+        if (!options.maintainCase() && !options.titleCase() && options.titleCaseExclude().isEmpty()) {
             result = result.toLowerCase();
         }
 

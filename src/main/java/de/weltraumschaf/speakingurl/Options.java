@@ -2,6 +2,7 @@ package de.weltraumschaf.speakingurl;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -14,118 +15,287 @@ import java.util.Set;
  */
 final class Options {
 
+    /**
+     * Default separator ({@value}).
+     */
     private static final String DEFAULT_SEPARATOR = "-";
+    /**
+     * Default language ({@value}).
+     */
     private static final Language DEFAULT_LANG = Language.ENGLISH;
+    /**
+     * Default maintain case flag ({@value}).
+     */
     private static final boolean DEFAULT_MAINTAIN_CASE = false;
+    /**
+     * Default title case flag ({@value}).
+     */
     private static final boolean DEFAULT_TITLE_CASE = false;
+    /**
+     * Default title case excludes ({@value}).
+     */
     private static final Set<String> DEFAULT_TITLE_CASE_EXCLUDES = Collections.emptySet();
+    /**
+     * Default truncate length ({@value}).
+     */
     private static final int DEFAULT_TRUNCATE = 0;
+    /**
+     * Default URI characters flag ({@value}).
+     */
     private static final boolean DEFAULT_URIC = false;
+    /**
+     * Default URI characters without slash flag ({@value}).
+     */
     private static final boolean DEFAULT_URIC_NO_SLASH = false;
+    /**
+     * Default mark flag ({@value}).
+     */
     private static final boolean DEFAULT_MARK = false;
+    /**
+     * Default custom mapping ({@value}).
+     */
     private static final Map<String, String> DEFAULT_CUSTOM = new HashMap<>();
 
+    /**
+     * Validates input.
+     */
+    private final Validator validator = new Validator();
+    /**
+     * Used separator.
+     */
     private String separator = DEFAULT_SEPARATOR;
-    private Language lang = DEFAULT_LANG;
+    /**
+     * Used language.
+     */
+    private Language language = DEFAULT_LANG;
+    /**
+     * Used maintain case flag.
+     */
     private boolean maintainCase = DEFAULT_MAINTAIN_CASE;
+    /**
+     * Used title case flag.
+     */
     private boolean titleCase = DEFAULT_TITLE_CASE;
+    /**
+     * Used title case excludes.
+     */
     private Set<String> titleCaseExclude = DEFAULT_TITLE_CASE_EXCLUDES;
+    /**
+     * Used truncate length.
+     */
     private int truncate = DEFAULT_TRUNCATE;
+    /**
+     * Used URI characters flag.
+     */
     private boolean uric = DEFAULT_URIC;
-    private boolean uricNoSlash = DEFAULT_URIC_NO_SLASH;
+    /**
+     * Used URI characters without slash flag.
+     */
+    private boolean uricWithoutSlash = DEFAULT_URIC_NO_SLASH;
+    /**
+     * Used mark flag.
+     */
     private boolean mark = DEFAULT_MARK;
+    /**
+     * Used custom mapping.
+     */
     private Map<String, String> custom = DEFAULT_CUSTOM;
 
-    String getSeparator() {
+    /**
+     * The separator.
+     *
+     * @return never {@code null} or empty
+     */
+    String separator() {
         return separator;
     }
 
-    void setSeparator(final String separator) {
-        this.separator = separator;
+    /**
+     * Set the separator.
+     *
+     * @param separator must not be {@code null} or empty
+     */
+    void separator(final String separator) {
+        this.separator = validator.notEmpty(separator, "separator");
     }
 
-    Language getLang() {
-        return lang;
+    /**
+     * The language.
+     *
+     * @return never {@code null}
+     */
+    Language language() {
+        return language;
     }
 
-    void setLang(final Language lang) {
-        this.lang = lang;
+    /**
+     * Set the language.
+     *
+     * @param language must not be {@code null}
+     */
+    void language(final Language language) {
+        this.language = validator.notNull(language, "language");
     }
 
-    boolean isMaintainCase() {
+    /**
+     * The maintain case flag.
+     *
+     * @return whether it is on or off
+     */
+    boolean maintainCase() {
         return maintainCase;
     }
 
-    void setMaintainCase(final boolean maintainCase) {
+    /**
+     * Set maintain case flag.
+     *
+     * @param maintainCase on or off
+     */
+    void maintainCase(final boolean maintainCase) {
         this.maintainCase = maintainCase;
     }
 
-    boolean isTitleCase() {
+    /**
+     * The title case flag.
+     *
+     * @return whether it is on or off
+     */
+    boolean titleCase() {
         return titleCase;
     }
 
-    void setTitleCase(final boolean titleCase) {
+    /**
+     * Set title case flag.
+     *
+     * @param maintainCase on or off
+     */
+    void titleCase(final boolean titleCase) {
         this.titleCase = titleCase;
     }
 
-    Set<String> getTitleCaseExclude() {
-        return titleCaseExclude;
+    /**
+     * The words excluded from title case.
+     *
+     * @return never {@code null}, immutable
+     */
+    Set<String> titleCaseExclude() {
+        return Collections.unmodifiableSet(titleCaseExclude);
     }
 
-    void setTitleCaseExclude(final Set<String> titleCaseExclude) {
-        this.titleCaseExclude = titleCaseExclude;
+    /**
+     * Set words excluded from title case.
+     *
+     * @param titleCaseExclude must not be {@code null}, defensive copied
+     */
+    void titleCaseExclude(final Set<String> titleCaseExclude) {
+        this.titleCaseExclude = validator.notNull(new HashSet<>(titleCaseExclude), "titleCaseExclude");
     }
 
-    int getTruncate() {
+    /**
+     * The truncate length.
+     *
+     * @return not negative
+     */
+    int truncate() {
         return truncate;
     }
 
-    void setTruncate(final int truncate) {
-        this.truncate = truncate;
+    /**
+     * Set the truncate length.
+     *
+     * @param truncate must not be negative
+     */
+    void truncate(final int truncate) {
+        this.truncate = validator.notNegative(truncate, "truncate");
     }
 
-    boolean isUric() {
+    /**
+     * The URI characters flag.
+     *
+     * @return whether it is on or off
+     */
+    boolean uric() {
         return uric;
     }
 
-    void setUric(final boolean uric) {
+    /**
+     * Set URI characters flag.
+     *
+     * @param maintainCase on or off
+     */
+    void uric(final boolean uric) {
         this.uric = uric;
     }
 
-    boolean isUricNoSlash() {
-        return uricNoSlash;
+    /**
+     * The URI characters without slash flag.
+     *
+     * @return whether it is on or off
+     */
+    boolean uricWithoutSlash() {
+        return uricWithoutSlash;
     }
 
-    void setUricNoSlash(final boolean uricNoSlash) {
-        this.uricNoSlash = uricNoSlash;
+    /**
+     * Set URI characters without slash flag.
+     *
+     * @param maintainCase on or off
+     */
+    void uricWithoutSlash(final boolean uricWithoutSlash) {
+        this.uricWithoutSlash = uricWithoutSlash;
     }
 
-    boolean isMark() {
+    /**
+     * The mark characters flag.
+     *
+     * @return whether it is on or off
+     */
+    boolean mark() {
         return mark;
     }
 
-    void setMark(final boolean mark) {
+    /**
+     * The mark characters flag.
+     *
+     * @return whether it is on or off
+     */
+    void mark(final boolean mark) {
         this.mark = mark;
     }
 
-    Map<String, String> getCustom() {
+    /**
+     * The custom mapping.
+     *
+     * @return never {@code null}, immutable
+     */
+    Map<String, String> custom() {
         return Collections.unmodifiableMap(custom);
     }
 
-    void setCustom(final Map<String, String> custom) {
-        this.custom = new HashMap<>(custom); // Defensive copy.
+    /**
+     * Set custom mapping.
+     *
+     * @param custom must not be {@code null}, defensive copied
+     */
+    void custom(final Map<String, String> custom) {
+        this.custom = new HashMap<>(validator.notNull(custom, "custom"));
     }
 
+    /**
+     * Makes copy of the object.
+     *
+     * @return never {@code null}, always new instance
+     */
     Options copy() {
         final Options copy = new Options();
         copy.separator = separator;
-        copy.lang = lang;
+        copy.language = language;
         copy.maintainCase = maintainCase;
         copy.titleCase = titleCase;
         copy.titleCaseExclude = titleCaseExclude;
         copy.truncate = truncate;
         copy.uric = uric;
-        copy.uricNoSlash = uricNoSlash;
+        copy.uricWithoutSlash = uricWithoutSlash;
         copy.mark = mark;
         copy.custom = custom;
         return copy;
@@ -133,15 +303,14 @@ final class Options {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                separator,
-                lang,
+        return Objects.hash(separator,
+                language,
                 maintainCase,
                 titleCase,
                 titleCaseExclude,
                 truncate,
                 uric,
-                uricNoSlash,
+                uricWithoutSlash,
                 mark,
                 custom
         );
@@ -155,13 +324,13 @@ final class Options {
 
         final Options other = (Options) obj;
         return Objects.equals(separator, other.separator)
-                && Objects.equals(lang, other.lang)
+                && Objects.equals(language, other.language)
                 && Objects.equals(maintainCase, other.maintainCase)
                 && Objects.equals(titleCase, other.titleCase)
                 && Objects.equals(titleCaseExclude, other.titleCaseExclude)
                 && Objects.equals(truncate, other.truncate)
                 && Objects.equals(uric, other.uric)
-                && Objects.equals(uricNoSlash, other.uricNoSlash)
+                && Objects.equals(uricWithoutSlash, other.uricWithoutSlash)
                 && Objects.equals(mark, other.mark)
                 && Objects.equals(custom, other.custom);
     }
@@ -170,13 +339,13 @@ final class Options {
     public String toString() {
         return "void{"
                 + "separator=" + separator
-                + ", lang=" + lang
+                + ", lang=" + language
                 + ", maintainCase=" + maintainCase
                 + ", titleCase=" + titleCase
                 + ", titleCaseExclude=" + titleCaseExclude
                 + ", truncate=" + truncate
                 + ", uric=" + uric
-                + ", uricNoSlash=" + uricNoSlash
+                + ", uricNoSlash=" + uricWithoutSlash
                 + ", mark=" + mark
                 + ", custom=" + custom + '}';
     }
