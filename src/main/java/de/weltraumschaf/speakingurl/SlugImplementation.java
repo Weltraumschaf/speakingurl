@@ -226,7 +226,7 @@ final class SlugImplementation implements Slug {
     }
 
     String replaceNotAllowedCharacters(final String ch, final String allowedChars, final String separator) {
-        return ch.replace("[^\\w\\s" + allowedChars + "_\\-]", separator);
+        return ch.replaceAll("[^\\w\\s" + allowedChars + "_\\-]", separator);
     }
 
     String cleanupReplacements(final String result, final String separator) {
@@ -240,10 +240,11 @@ final class SlugImplementation implements Slug {
     }
 
     String replaceDuplicateSeparators(final String result, final String separator) {
-        return result.replaceAll("\\" + separator + "+", separator);
+        return result.replaceAll(escaper.escape(separator) + "+", separator);
     }
 
     String replaceLeadingAndTrailingSeparator(final String result, final String separator) {
-        return result.replaceAll("(^\\" + separator + "+|\\" + separator + "+$)", "");
+        return result.replaceAll("(^" + escaper.escape(separator) + "+"
+                               + "|" + escaper.escape(separator) + "+$)", "");
     }
 }
