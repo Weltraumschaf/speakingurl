@@ -116,6 +116,21 @@ final class Options {
         this.custom = new HashMap<>(custom); // Defensive copy.
     }
 
+    Options copy() {
+        final Options copy = new Options();
+        copy.separator = separator;
+        copy.lang = lang;
+        copy.maintainCase = maintainCase;
+        copy.titleCase = titleCase;
+        copy.titleCaseExclude = titleCaseExclude;
+        copy.truncate = truncate;
+        copy.uric = uric;
+        copy.uricNoSlash = uricNoSlash;
+        copy.mark = mark;
+        copy.custom = custom;
+        return copy;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(
