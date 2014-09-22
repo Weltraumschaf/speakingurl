@@ -13,47 +13,47 @@ public enum Language {
      */
     NONE,
     /**
-     * ar.
+     * For 'ar' locale.
      */
     ARABIC,
     /**
-     * de.
+     * For 'de' locale.
      */
     GERMAN,
     /**
-     * nl.
+     * For 'nl' locale.
      */
     NETHERLAND,
     /**
-     * en.
+     * For 'en' locale.
      */
     ENGLISH,
     /**
-     * es.
+     * For 'es' locale.
      */
     SPANISH,
     /**
-     * fr.
+     * For 'fr' locale.
      */
     FRENCH,
     /**
-     * pt.
+     * For 'pt' locale.
      */
     PORTUGUESE,
     /**
-     * ru.
+     * For 'ru' locale.
      */
     RUSSIAN,
     /**
-     * cz.
+     * For 'cz' locale.
      */
     CZECH,
     /**
-     * sk.
+     * For 'sk' locale.
      */
     SWEDISH,
     /**
-     * vn.
+     * For 'vn' locale.
      */
     VIETNAMESE;
 }

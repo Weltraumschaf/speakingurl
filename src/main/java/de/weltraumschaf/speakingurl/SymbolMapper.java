@@ -12,11 +12,18 @@ import java.util.Map;
  */
 final class SymbolMapper {
 
+    /**
+     * Default language ({@value}).
+     */
     private static final Language DEFAULT = Language.ENGLISH;
+    /**
+     * Holds the mapping.
+     */
     private static final Map<Language, Map<String, String>> MAPPING;
 
     static {
         final Map<Language, Map<String, String>> tmp = new HashMap<>();
+
         final Map<String, String> arabic = new HashMap<>();
         arabic.put("∆", "delta");
         arabic.put("∞", "la-nihaya");
@@ -152,7 +159,18 @@ final class SymbolMapper {
         MAPPING = Collections.unmodifiableMap(tmp);
     }
 
-    Map<String, String> map(Language lang) {
+    /**
+     * Get the mapping for given language.
+     *
+     * <p>
+     * If the given language has no mapping, then the mapping for {@link #DEFAULT}
+     * will be returned.
+     * </p>
+     *
+     * @param lang the get the mapping for
+     * @return never {@code null}, immutable
+     */
+    Map<String, String> map(final Language lang) {
         if (MAPPING.containsKey(lang)) {
             return MAPPING.get(lang);
         }

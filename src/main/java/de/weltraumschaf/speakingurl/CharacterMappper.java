@@ -14,9 +14,14 @@ import java.util.Map;
  */
 final class CharacterMappper {
 
+    /**
+     * Holds the mapping.
+     */
     private static final Map<String, String> MAPPING;
+
     static {
         final Map<String, String> tmp = new HashMap<>();
+
         // Latin.
         tmp.put("À", "A");
         tmp.put("Á", "A");
@@ -508,9 +513,15 @@ final class CharacterMappper {
         tmp.put("Ặ", "A");
         tmp.put("ẵ", "a");
         tmp.put("Ẵ", "A");
+
         MAPPING = Collections.unmodifiableMap(tmp);
     }
 
+    /**
+     * Get the mapping.
+     *
+     * @return never {@code null}, immutable
+     */
     Map<String, String> map() {
         return MAPPING;
     }

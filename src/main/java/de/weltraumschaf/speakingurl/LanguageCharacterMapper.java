@@ -12,7 +12,13 @@ import java.util.Map;
  */
 final class LanguageCharacterMapper {
 
+    /**
+     * Default language ({@value}).
+     */
     private static final Language DEFAULT = Language.ENGLISH;
+    /**
+     * Holds the mapping.
+     */
     private static final Map<Language, Map<String, String>> MAPPING = new HashMap<>();
 
     static {
@@ -21,10 +27,22 @@ final class LanguageCharacterMapper {
         final Map<String, String> swedish = new HashMap<>();
         swedish.put("ä", "a");
         swedish.put("Ä", "A");
+
         MAPPING.put(Language.SWEDISH, Collections.unmodifiableMap(swedish));
     }
 
-    Map<String, String> map(Language lang) {
+    /**
+     * Get the mapping for given language.
+     *
+     * <p>
+     * If the given language has no mapping, then the mapping for {@link #DEFAULT}
+     * will be returned.
+     * </p>
+     *
+     * @param lang the get the mapping for
+     * @return never {@code null}, immutable
+     */
+    Map<String, String> map(final Language lang) {
         if (MAPPING.containsKey(lang)) {
             return MAPPING.get(lang);
         }
