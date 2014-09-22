@@ -16,45 +16,45 @@ import java.util.Set;
 final class Options {
 
     /**
-     * Default separator ({@value #DEFAULT_SEPARATOR}).
+     * Default separator.
      */
-    static final String DEFAULT_SEPARATOR = "-";
+    private static final String DEFAULT_SEPARATOR = "-";
     /**
-     * Default language ({@value #DEFAULT_LANG}).
+     * Default language.
      */
-    static final Language DEFAULT_LANG = Language.ENGLISH;
+    private static final Language DEFAULT_LANG = Language.ENGLISH;
     /**
-     * Default maintain case flag ({@value #DEFAULT_MAINTAIN_CASE}).
+     * Default maintain case flag.
      */
-    static final boolean DEFAULT_MAINTAIN_CASE = false;
+    private static final boolean DEFAULT_MAINTAIN_CASE = false;
     /**
-     * Default title case flag ({@value #DEFAULT_TITLE_CASE}).
+     * Default title case flag.
      */
-    static final boolean DEFAULT_TITLE_CASE = false;
+    private static final boolean DEFAULT_TITLE_CASE = false;
     /**
-     * Default title case excludes ({@value #DEFAULT_TITLE_CASE_EXCLUDES}).
+     * Default title case excludes.
      */
-    static final Set<String> DEFAULT_TITLE_CASE_EXCLUDES = Collections.emptySet();
+    private static final Set<String> DEFAULT_TITLE_CASE_EXCLUDES = Collections.emptySet();
     /**
-     * Default truncate length ({@value #DEFAULT_TRUNCATE}).
+     * Default truncate length.
      */
-    static final int DEFAULT_TRUNCATE = 0;
+    private static final int DEFAULT_TRUNCATE = 0;
     /**
-     * Default URI characters flag ({@value #DEFAULT_URIC}).
+     * Default URI characters flag.
      */
-    static final boolean DEFAULT_URIC = false;
+    private static final boolean DEFAULT_URIC = false;
     /**
-     * Default URI characters without slash flag ({@value #DEFAULT_URIC_WITHOUT_SLASH}).
+     * Default URI characters without slash flag.
      */
-    static final boolean DEFAULT_URIC_WITHOUT_SLASH = false;
+    private static final boolean DEFAULT_URIC_WITHOUT_SLASH = false;
     /**
-     * Default mark flag ({@value #DEFAULT_MARK}).
+     * Default mark flag.
      */
-    static final boolean DEFAULT_MARK = false;
+    private static final boolean DEFAULT_MARK = false;
     /**
-     * Default custom mapping ({@value #DEFAULT_CUSTOM}).
+     * Default custom mapping.
      */
-    static final Map<String, String> DEFAULT_CUSTOM = new HashMap<>();
+    private static final Map<String, String> DEFAULT_CUSTOM = new HashMap<>();
 
     /**
      * Validates input.

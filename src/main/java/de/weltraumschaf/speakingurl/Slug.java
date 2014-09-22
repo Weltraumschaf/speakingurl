@@ -99,7 +99,7 @@ public interface Slug {
         }
 
         /**
-         * Character that replace the whitespaces (default is {@value OptionsOptions#DEFAULT_SEPARATOR}).
+         * Character that replace the whitespaces.
          *
          * @param separator must not be {@code null}
          * @return self validated object for method chaining
@@ -110,7 +110,7 @@ public interface Slug {
         }
 
         /**
-         * Language for symbol translation (Default is {@link Options#DEFAULT_LANG}).
+         * Language for symbol translation.
          * <p>
          * {@link Language#NONE} for don't convert symbols.
          * </p>
@@ -124,7 +124,7 @@ public interface Slug {
         }
 
         /**
-         * How to deal with case of characters (default is {@value Options#DEFAULT_MAINTAIN_CASE}).
+         * How to deal with case of characters.
          *
          * @param maintainCase if {@code true} maintain case, if {@code false} convert all chars to lower case
          * @return self validated object for method chaining
@@ -135,7 +135,7 @@ public interface Slug {
         }
 
         /**
-         * Whether to convert input string to title-case (default is {@value Options#DEFAULT_TITLE_CASE}).
+         * Whether to convert input string to title-case.
          *
          * @param titleCase {@code true} to convert, else {@code false}
          * @return self validated object for method chaining
@@ -146,7 +146,7 @@ public interface Slug {
         }
 
         /**
-         * Words to exclude from title case (default is {@value Options#DEFAULT_TITLE_CASE_EXCLUDES}).
+         * Words to exclude from title case.
          * <p>
          * This option has only effect if {@link Builder#titleCase(boolean) titleCase} is set {@code true}.
          * </p>
@@ -161,7 +161,7 @@ public interface Slug {
         }
 
         /**
-         * Words to exclude from title case (default is {@value Options#DEFAULT_TITLE_CASE_EXCLUDES}).
+         * Words to exclude from title case.
          * <p>
          * This option has only effect if {@link Builder#titleCase(boolean) titleCase} is set {@code true}.
          * </p>
@@ -176,7 +176,7 @@ public interface Slug {
         }
 
         /**
-         * Max length to truncate without breaking words (default is {@value Options#DEFAULT_TRUNCATE}).
+         * Max length to truncate without breaking words.
          * <p>
          * {@code 0} does not truncate.
          * </p>
@@ -190,9 +190,9 @@ public interface Slug {
         }
 
         /**
-         * Whether to allow additional characters (default {@value Options#DEFAULT_URIC}).
+         * Whether to allow additional characters.
          * <p>
-         * If {@code true} special characters ({@value SlugImplementation#URIC}).
+         * If {@code true} special characters will not be replaced.
          * </p>
          *
          * @param uric if {@code true} they will not be converted
@@ -204,9 +204,9 @@ public interface Slug {
         }
 
         /**
-         * Whether to allow additional characters (default {@value Options#DEFAULT_URIC_NO_SLASH}).
+         * Whether to allow additional characters.
          * <p>
-         * If {@code true} special characters ({@value SlugImplementation#URIC_NO_SLASH}).
+         * If {@code true} special characters will not be replaced.
          * </p>
          *
          * @param uricNoSlash if {@code true} they will not be converted
@@ -218,9 +218,9 @@ public interface Slug {
         }
 
         /**
-         * Whether to allow additional characters (default {@value Options#DEFAULT_MARK}).
+         * Whether to allow additional characters.
          * <p>
-         * If {@code true} special characters ({@value SlugImplementation#MARK}).
+         * If {@code true} special characters will not be replaced.
          * </p>
          *
          * @param mark if {@code true} they will not be converted
@@ -232,7 +232,7 @@ public interface Slug {
         }
 
         /**
-         * Custom map for translation (default is {@value Options#DEFAULT_CUSTOM}.
+         * Custom map for translation.
          * <p>
          * This overwrites all!
          * </p>

@@ -13,7 +13,7 @@ import java.util.Map;
 final class SymbolMapper {
 
     /**
-     * Default language ({@value #DEFAULT}).
+     * Default language.
      */
     private static final Language DEFAULT = Language.ENGLISH;
     /**
