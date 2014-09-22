@@ -16,43 +16,43 @@ import java.util.Set;
 final class Options {
 
     /**
-     * Default separator ({@value}).
+     * Default separator ({@value #DEFAULT_SEPARATOR}).
      */
     private static final String DEFAULT_SEPARATOR = "-";
     /**
-     * Default language ({@value}).
+     * Default language ({@value #DEFAULT_LANG}).
      */
     private static final Language DEFAULT_LANG = Language.ENGLISH;
     /**
-     * Default maintain case flag ({@value}).
+     * Default maintain case flag ({@value #DEFAULT_MAINTAIN_CASE}).
      */
     private static final boolean DEFAULT_MAINTAIN_CASE = false;
     /**
-     * Default title case flag ({@value}).
+     * Default title case flag ({@value #DEFAULT_TITLE_CASE}).
      */
     private static final boolean DEFAULT_TITLE_CASE = false;
     /**
-     * Default title case excludes ({@value}).
+     * Default title case excludes ({@value #DEFAULT_TITLE_CASE_EXCLUDES}).
      */
     private static final Set<String> DEFAULT_TITLE_CASE_EXCLUDES = Collections.emptySet();
     /**
-     * Default truncate length ({@value}).
+     * Default truncate length ({@value #DEFAULT_TRUNCATE}).
      */
     private static final int DEFAULT_TRUNCATE = 0;
     /**
-     * Default URI characters flag ({@value}).
+     * Default URI characters flag ({@value #DEFAULT_URIC}).
      */
     private static final boolean DEFAULT_URIC = false;
     /**
-     * Default URI characters without slash flag ({@value}).
+     * Default URI characters without slash flag ({@value #DEFAULT_URIC_WITHOUT_SLASH}).
      */
-    private static final boolean DEFAULT_URIC_NO_SLASH = false;
+    private static final boolean DEFAULT_URIC_WITHOUT_SLASH = false;
     /**
-     * Default mark flag ({@value}).
+     * Default mark flag ({@value #DEFAULT_MARK}).
      */
     private static final boolean DEFAULT_MARK = false;
     /**
-     * Default custom mapping ({@value}).
+     * Default custom mapping ({@value #DEFAULT_CUSTOM}).
      */
     private static final Map<String, String> DEFAULT_CUSTOM = new HashMap<>();
 
@@ -91,7 +91,7 @@ final class Options {
     /**
      * Used URI characters without slash flag.
      */
-    private boolean uricWithoutSlash = DEFAULT_URIC_NO_SLASH;
+    private boolean uricWithoutSlash = DEFAULT_URIC_WITHOUT_SLASH;
     /**
      * Used mark flag.
      */
