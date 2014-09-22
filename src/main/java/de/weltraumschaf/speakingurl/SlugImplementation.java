@@ -20,12 +20,18 @@ final class SlugImplementation implements Slug {
     private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]");
 
     private final CharacterEscaper escaper = new CharacterEscaper();
+    private final Validator validator = new Validator();
     private final LanguageCharacterMapper languageMapper = new LanguageCharacterMapper();
     private final CharacterMappper characterMapper = new CharacterMappper();
     private final SymbolMapper symbolMapper = new SymbolMapper();
+
     private final Options options;
 
-    public SlugImplementation(final Options options) {
+    SlugImplementation() {
+        this(new Options());
+    }
+
+    SlugImplementation(final Options options) {
         super();
         this.options = options;
     }
@@ -136,62 +142,37 @@ final class SlugImplementation implements Slug {
         boolean lastCharWasSymbol = false;
 
         for (int i = 0, l = input.length(); i < l; i++) {
-            String ch = input.substring(i, i + 1);
+            String ch = currentCharacter(input, i);
 
             if (langChars.containsKey(ch)) {
-                if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(langChars.get(ch)).matches()) {
-                    ch = " " + langChars.get(ch);
-                } else {
-                    ch = langChars.get(ch);
-                }
+                ch = replaceLanguageCharacters(lastCharWasSymbol, langChars, ch);
 
                 lastCharWasSymbol = false;
             } else if (characterMapper.map().containsKey(ch)) {
-                if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(characterMapper.map().get(ch)).matches()) {
-                    ch = " " + characterMapper.map().get(ch);
-                } else {
-                    ch = characterMapper.map().get(ch);
-                }
+                ch = replaceCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
-            } else if (
-                symbol.containsKey(ch) && !(options.isUric() && URIC.contains(ch))
-                && !(options.isUricNoSlash() && URIC_NO_SLASH.contains(ch))
-                && !(options.isMark() && MARK.contains(ch))
-            ) {
-                // Process symbol chars.
-                ch = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
-                    ? separator + symbol.get(ch)
-                    : symbol.get(ch);
-                ch += ALPHA_NUMERIC.matcher(input.charAt(i + 1) + "").matches()
-                    ? separator
-                    : "";
+            } else if (symbol.containsKey(ch) && !(options.isUric() && URIC.contains(ch))
+                    && !(options.isUricNoSlash() && URIC_NO_SLASH.contains(ch))
+                    && !(options.isMark() && MARK.contains(ch))) {
+                ch = replaceSymbols(ch, lastCharWasSymbol, result, separator, symbol, input, i);
 
                 lastCharWasSymbol = true;
             } else {
                 // Process latin chars.
                 if (lastCharWasSymbol
-                    && (
-                        ALPHA_NUMERIC.matcher(ch).matches()
-                        || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
-                    )
-                ) {
+                        && (ALPHA_NUMERIC.matcher(ch).matches()
+                        || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches())) {
                     ch = " " + ch;
                 }
 
                 lastCharWasSymbol = false;
             }
 
-            // Add allowed chars.
-            result += ch.replace("[^\\w\\s" + allowedChars + "_\\-]", separator);
+            result += replaceNotAllowedCharacters(ch, allowedChars, separator);
         }
 
-        // Eliminate duplicate separators,
-        // add separator
-        // and trim separators from start and end.
-        result = result.replace("\\s+", separator)
-            .replace("\\" + separator + "+", separator)
-            .replace("(^\\" + separator + "+|\\" + separator + "+$)", "");
+        result = cleanupReplacements(result, separator);
 
         if (options.getTruncate() > 0 && result.length() > options.getTruncate()) {
             final boolean lucky = separator.equals(result.charAt(options.getTruncate()) + "");
@@ -209,4 +190,60 @@ final class SlugImplementation implements Slug {
         return result;
     }
 
+    String currentCharacter(final String input, final int index) {
+        validator.notNull(input, "input");
+        validator.notNegative(index, "index");
+
+        return input.substring(index, index + 1);
+    }
+
+    String replaceSymbols(final String ch, final boolean lastCharWasSymbol, final String result, final String separator, final Map<String, String> symbol, String input, int index) {
+        String buffer = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
+                ? separator + symbol.get(ch)
+                : symbol.get(ch);
+
+        buffer += ALPHA_NUMERIC.matcher(input.charAt(index + 1) + "").matches()
+                ? separator
+                : "";
+
+        return buffer;
+    }
+
+    String replaceCharacters(final boolean lastCharWasSymbol, final String ch) {
+        if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(characterMapper.map().get(ch)).matches()) {
+            return " " + characterMapper.map().get(ch);
+        }
+
+        return characterMapper.map().get(ch);
+    }
+
+    String replaceLanguageCharacters(final boolean lastCharWasSymbol, final Map<String, String> langChars, final String ch) {
+        if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(langChars.get(ch)).matches()) {
+            return " " + langChars.get(ch);
+        }
+
+        return langChars.get(ch);
+    }
+
+    String replaceNotAllowedCharacters(final String ch, final String allowedChars, final String separator) {
+        return ch.replace("[^\\w\\s" + allowedChars + "_\\-]", separator);
+    }
+
+    String cleanupReplacements(final String result, final String separator) {
+        String tmp = replaceWhitespaces(result, separator);
+        tmp = replaceDuplicateSeparators(tmp, separator);
+        return replaceLeadingAndTrailingSeparator(tmp, separator);
+    }
+
+    String replaceWhitespaces(final String result, final String separator) {
+        return result.replaceAll("\\s+", separator);
+    }
+
+    String replaceDuplicateSeparators(final String result, final String separator) {
+        return result.replaceAll("\\" + separator + "+", separator);
+    }
+
+    String replaceLeadingAndTrailingSeparator(final String result, final String separator) {
+        return result.replaceAll("(^\\" + separator + "+|\\" + separator + "+$)", "");
+    }
 }
