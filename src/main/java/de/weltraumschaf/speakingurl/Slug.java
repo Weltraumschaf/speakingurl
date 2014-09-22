@@ -248,8 +248,6 @@ public interface Slug {
          * }
          * </pre>
          *
-         * FIXME Fix example.
-         *
          * @param custom must not be {@code null}
          * @return self validated object for method chaining
          */
