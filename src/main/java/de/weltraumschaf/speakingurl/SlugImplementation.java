@@ -17,7 +17,7 @@ final class SlugImplementation implements Slug {
     private static final String URIC = URIC_NO_SLASH + "/";
     private static final String MARK = ".!~*'()";
 
-    private static final Pattern ALPHA_NUMERIC = Pattern.compile("/[a-zA-Z0-9]/");
+    private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]");
 
     private final CharacterEscaper escaper = new CharacterEscaper();
     private final LanguageCharacterMapper languageMapper = new LanguageCharacterMapper();
@@ -155,9 +155,9 @@ final class SlugImplementation implements Slug {
 
                 lastCharWasSymbol = false;
             } else if (
-                symbol.containsKey(ch) && !(options.isUric() && URIC.indexOf(ch) != -1)
-                && !(options.isUricNoSlash() && URIC_NO_SLASH.indexOf(ch) != -1)
-                && !(options.isMark() && MARK.indexOf(ch) != -1)
+                symbol.containsKey(ch) && !(options.isUric() && URIC.contains(ch))
+                && !(options.isUricNoSlash() && URIC_NO_SLASH.contains(ch))
+                && !(options.isMark() && MARK.contains(ch))
             ) {
                 // Process symbol chars.
                 ch = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
@@ -183,15 +183,15 @@ final class SlugImplementation implements Slug {
             }
 
             // Add allowed chars.
-            result += ch.replace("[^\\\\w\\\\s" + allowedChars + "_-]", separator);
+            result += ch.replace("[^\\w\\s" + allowedChars + "_\\-]", separator);
         }
 
         // Eliminate duplicate separators,
         // add separator
         // and trim separators from start and end.
-        result = result.replace("/\\s+/g", separator)
-            .replace("/\\" + separator + "+/g", separator)
-            .replace("/(^\\" + separator + "+|\\" + separator + "+$)/g", "");
+        result = result.replace("\\s+", separator)
+            .replace("\\" + separator + "+", separator)
+            .replace("(^\\" + separator + "+|\\" + separator + "+$)", "");
 
         if (options.getTruncate() > 0 && result.length() > options.getTruncate()) {
             final boolean lucky = separator.equals(result.charAt(options.getTruncate()) + "");
