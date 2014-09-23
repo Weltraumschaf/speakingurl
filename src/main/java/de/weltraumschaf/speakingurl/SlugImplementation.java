@@ -17,7 +17,7 @@ final class SlugImplementation implements Slug {
     private static final String URIC_SLASH = "/";
     private static final String MARK = ".!~*'()";
 
-    private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]");
+    private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]+");
 
     private final CharacterEscaper escaper = new CharacterEscaper();
     private final Validator validator = new Validator();
@@ -215,6 +215,14 @@ final class SlugImplementation implements Slug {
     }
 
     String replaceCharacters(final boolean lastCharWasSymbol, final String ch) {
+        if (ch == null) {
+            return "";
+        }
+
+        if (ch.isEmpty()) {
+            return "";
+        }
+
         if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(characterMapper.map().get(ch)).matches()) {
             return " " + characterMapper.map().get(ch);
         }

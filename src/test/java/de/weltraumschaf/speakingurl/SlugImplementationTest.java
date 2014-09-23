@@ -99,8 +99,18 @@ public class SlugImplementationTest {
     }
 
     @Test
-    @Ignore
-    public void replaceCharacters() {
+    public void replaceCharacters_lastCharWasSymbol() {
+        assertThat(sut.replaceCharacters(true, null), is(equalTo("")));
+        assertThat(sut.replaceCharacters(true, ""), is(equalTo("")));
+        assertThat(sut.replaceCharacters(true, "ß"), is(equalTo(" ss")));
+        assertThat(sut.replaceCharacters(true, "α"), is(equalTo(" a")));
+    }
+
+    @Test
+    public void replaceCharacters_lastCharWasNotSymbol() {
+        assertThat(sut.replaceCharacters(false, null), is(equalTo("")));
+        assertThat(sut.replaceCharacters(false, "ß"), is(equalTo("ss")));
+        assertThat(sut.replaceCharacters(false, "α"), is(equalTo("a")));
     }
 
     @Test
