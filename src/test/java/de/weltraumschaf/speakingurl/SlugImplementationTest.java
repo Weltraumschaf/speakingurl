@@ -114,8 +114,67 @@ public class SlugImplementationTest {
     }
 
     @Test
-    @Ignore
-    public void replaceLanguageCharacters() {
+    public void replaceLanguageCharacters_default_lastCharWasSymbol() {
+        assertThat(sut.replaceLanguageCharacters(true, null), is(equalTo("")));
+        assertThat(sut.replaceLanguageCharacters(true, ""), is(equalTo("")));
+        assertThat(sut.replaceLanguageCharacters(true, "ä"), is(equalTo("ä")));
+        assertThat(sut.replaceLanguageCharacters(true, "Ä"), is(equalTo("Ä")));
+    }
+
+    @Test
+    public void replaceLanguageCharacters_default_lastCharWasNotSymbol() {
+        assertThat(sut.replaceLanguageCharacters(false, null), is(equalTo("")));
+        assertThat(sut.replaceLanguageCharacters(false, ""), is(equalTo("")));
+        assertThat(sut.replaceLanguageCharacters(false, "ä"), is(equalTo("ä")));
+        assertThat(sut.replaceLanguageCharacters(false, "Ä"), is(equalTo("Ä")));
+    }
+
+    @Test
+    public void replaceLanguageCharacters_english_lastCharWasSymbol() {
+        final Options options = new Options();
+        options.language(Language.ENGLISH);
+        final SlugImplementation sutEnglish = new SlugImplementation(options);
+
+        assertThat(sutEnglish.replaceLanguageCharacters(true, null), is(equalTo("")));
+        assertThat(sutEnglish.replaceLanguageCharacters(true, ""), is(equalTo("")));
+        assertThat(sutEnglish.replaceLanguageCharacters(true, "ä"), is(equalTo("ä")));
+        assertThat(sutEnglish.replaceLanguageCharacters(true, "Ä"), is(equalTo("Ä")));
+    }
+
+    @Test
+    public void replaceLanguageCharacters_english_lastCharWasNotSymbol() {
+        final Options options = new Options();
+        options.language(Language.ENGLISH);
+        final SlugImplementation sutEnglish = new SlugImplementation(options);
+
+        assertThat(sutEnglish.replaceLanguageCharacters(false, null), is(equalTo("")));
+        assertThat(sutEnglish.replaceLanguageCharacters(false, ""), is(equalTo("")));
+        assertThat(sutEnglish.replaceLanguageCharacters(false, "ä"), is(equalTo("ä")));
+        assertThat(sutEnglish.replaceLanguageCharacters(false, "Ä"), is(equalTo("Ä")));
+    }
+
+    @Test
+    public void replaceLanguageCharacters_swedish_lastCharWasSymbol() {
+        final Options options = new Options();
+        options.language(Language.SWEDISH);
+        final SlugImplementation sutSwedish = new SlugImplementation(options);
+
+        assertThat(sutSwedish.replaceLanguageCharacters(true, null), is(equalTo("")));
+        assertThat(sutSwedish.replaceLanguageCharacters(true, ""), is(equalTo("")));
+        assertThat(sutSwedish.replaceLanguageCharacters(true, "ä"), is(equalTo(" a")));
+        assertThat(sutSwedish.replaceLanguageCharacters(true, "Ä"), is(equalTo(" A")));
+    }
+
+    @Test
+    public void replaceLanguageCharacters_swedish_lastCharWasNotSymbol() {
+        final Options options = new Options();
+        options.language(Language.SWEDISH);
+        final SlugImplementation sutSwedish = new SlugImplementation(options);
+
+        assertThat(sutSwedish.replaceLanguageCharacters(false, null), is(equalTo("")));
+        assertThat(sutSwedish.replaceLanguageCharacters(false, ""), is(equalTo("")));
+        assertThat(sutSwedish.replaceLanguageCharacters(false, "ä"), is(equalTo("a")));
+        assertThat(sutSwedish.replaceLanguageCharacters(false, "Ä"), is(equalTo("A")));
     }
 
     @Test

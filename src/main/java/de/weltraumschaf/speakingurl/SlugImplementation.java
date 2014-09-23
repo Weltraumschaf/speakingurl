@@ -35,22 +35,21 @@ final class SlugImplementation implements Slug {
      */
     private final Validator validator = new Validator();
     /**
-     * Maps language dependent characters.
-     */
-    private final LanguageCharacterMapper languageMapper = new LanguageCharacterMapper();
-    /**
      * Maps general characters.
      */
     private final CharacterMappper characterMapper = new CharacterMappper();
     /**
-     * Maps language dependent symbols.
-     */
-    private final SymbolMapper symbolMapper = new SymbolMapper();
-
-    /**
      * Holds the slugger options.
      */
     private final Options options;
+    /**
+     * Maps language dependent characters.
+     */
+    private final Map<String, String> langChars;
+    /**
+     * Maps language dependent symbols.
+     */
+    private final Map<String, String> symbols;
 
     /**
      * Creates slugger with default options.
@@ -67,6 +66,8 @@ final class SlugImplementation implements Slug {
     SlugImplementation(final Options options) {
         super();
         this.options = validator.notNull(options, "options");
+        this.langChars = new LanguageCharacterMapper().map(options.language());
+        this.symbols = new SymbolMapper().map(options.language());
     }
 
     @Override
@@ -155,26 +156,24 @@ final class SlugImplementation implements Slug {
         }
 
         input = input.trim();
-
-        final Map<String, String> langChars = languageMapper.map(options.language());
-        final Map<String, String> symbol = symbolMapper.map(options.language());
         boolean lastCharWasSymbol = false;
 
         for (int i = 0, l = input.length(); i < l; i++) {
             String ch = currentCharacter(input, i);
 
             if (langChars.containsKey(ch)) {
-                ch = replaceLanguageCharacters(lastCharWasSymbol, langChars, ch);
+                ch = replaceLanguageCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
             } else if (characterMapper.map().containsKey(ch)) {
                 ch = replaceCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
-            } else if (symbol.containsKey(ch) && !(options.uric() && URIC_SLASH.contains(ch))
+            } else if (symbols.containsKey(ch)
+                    && !(options.uric() && URIC_SLASH.contains(ch))
                     && !(options.uricWithoutSlash() && URIC_WITHOUT_SLASH.contains(ch))
                     && !(options.mark() && MARK.contains(ch))) {
-                ch = replaceSymbols(ch, lastCharWasSymbol, result, separator, symbol, input, i);
+                ch = replaceSymbols(ch, lastCharWasSymbol, result, separator, input, i);
 
                 lastCharWasSymbol = true;
             } else {
@@ -235,10 +234,10 @@ final class SlugImplementation implements Slug {
         return input.substring(index, index + 1);
     }
 
-    String replaceSymbols(final String ch, final boolean lastCharWasSymbol, final String result, final String separator, final Map<String, String> symbol, String input, int index) {
+    String replaceSymbols(final String ch, final boolean lastCharWasSymbol, final String result, final String separator, final String input, int index) {
         String buffer = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
-                ? separator + symbol.get(ch)
-                : symbol.get(ch);
+                ? separator + symbols.get(ch)
+                : symbols.get(ch);
 
         buffer += ALPHA_NUMERIC.matcher(input.charAt(index + 1) + "").matches()
                 ? separator
@@ -263,12 +262,24 @@ final class SlugImplementation implements Slug {
         return characterMapper.map().get(ch);
     }
 
-    String replaceLanguageCharacters(final boolean lastCharWasSymbol, final Map<String, String> langChars, final String ch) {
-        if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(langChars.get(ch)).matches()) {
-            return " " + langChars.get(ch);
+    String replaceLanguageCharacters(final boolean lastCharWasSymbol, final String ch) {
+        if (ch == null) {
+            return "";
         }
 
-        return langChars.get(ch);
+        if (ch.isEmpty()) {
+            return "";
+        }
+
+        final String replacement = langChars.containsKey(ch)
+            ? langChars.get(ch)
+            : ch;
+
+        if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(replacement).matches()) {
+            return " " + replacement;
+        }
+
+        return replacement;
     }
 
     String replaceNotAllowedCharacters(final String ch, final String allowedChars, final String separator) {
