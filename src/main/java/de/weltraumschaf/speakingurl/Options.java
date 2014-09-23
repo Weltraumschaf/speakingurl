@@ -167,7 +167,7 @@ final class Options {
     /**
      * Set title case flag.
      *
-     * @param maintainCase on or off
+     * @param titleCase on or off
      */
     void titleCase(final boolean titleCase) {
         this.titleCase = titleCase;
@@ -221,7 +221,7 @@ final class Options {
     /**
      * Set URI characters flag.
      *
-     * @param maintainCase on or off
+     * @param uric on or off
      */
     void uric(final boolean uric) {
         this.uric = uric;
@@ -239,7 +239,7 @@ final class Options {
     /**
      * Set URI characters without slash flag.
      *
-     * @param maintainCase on or off
+     * @param uricWithoutSlash on or off
      */
     void uricWithoutSlash(final boolean uricWithoutSlash) {
         this.uricWithoutSlash = uricWithoutSlash;
