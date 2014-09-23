@@ -257,7 +257,7 @@ final class Options {
     /**
      * The mark characters flag.
      *
-     * @return whether it is on or off
+     * @param mark on or off
      */
     void mark(final boolean mark) {
         this.mark = mark;
