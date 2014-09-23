@@ -13,15 +13,38 @@ import java.util.regex.Pattern;
  */
 final class SlugImplementation implements Slug {
 
+    /**
+     * URI characters without slash.
+     */
     private static final String URIC_WITHOUT_SLASH = ";?:@&=+$,";
+    /**
+     * URI characters with slash.
+     */
     private static final String URIC_SLASH = "/";
+    /**
+     * Punctuation characters.
+     */
     private static final String MARK = ".!~*'()";
-
+    /**
+     * Matches alpha numeric characters.
+     */
     private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]+");
 
+    /**
+     * Validates input.
+     */
     private final Validator validator = new Validator();
+    /**
+     * Maps language dependent characters.
+     */
     private final LanguageCharacterMapper languageMapper = new LanguageCharacterMapper();
+    /**
+     * Maps general characters.
+     */
     private final CharacterMappper characterMapper = new CharacterMappper();
+    /**
+     * Maps language dependent symbols.
+     */
     private final SymbolMapper symbolMapper = new SymbolMapper();
 
     /**
