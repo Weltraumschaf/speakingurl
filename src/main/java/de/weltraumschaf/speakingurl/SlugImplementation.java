@@ -19,21 +19,35 @@ final class SlugImplementation implements Slug {
 
     private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]+");
 
+    /**
+     *
+     */
     private final CharacterEscaper escaper = new CharacterEscaper();
     private final Validator validator = new Validator();
     private final LanguageCharacterMapper languageMapper = new LanguageCharacterMapper();
     private final CharacterMappper characterMapper = new CharacterMappper();
     private final SymbolMapper symbolMapper = new SymbolMapper();
 
+    /**
+     * Holds the slugger options.
+     */
     private final Options options;
 
+    /**
+     * Creates slugger with default options.
+     */
     SlugImplementation() {
         this(new Options());
     }
 
+    /**
+     * Dedicated constructor.
+     *
+     * @param options must not be {@code null}
+     */
     SlugImplementation(final Options options) {
         super();
-        this.options = options;
+        this.options = validator.notNull(options, "options");
     }
 
     @Override
