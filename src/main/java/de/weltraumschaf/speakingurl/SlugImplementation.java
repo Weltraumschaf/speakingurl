@@ -19,10 +19,6 @@ final class SlugImplementation implements Slug {
 
     private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]+");
 
-    /**
-     *
-     */
-    private final CharacterEscaper escaper = new CharacterEscaper();
     private final Validator validator = new Validator();
     private final LanguageCharacterMapper languageMapper = new LanguageCharacterMapper();
     private final CharacterMappper characterMapper = new CharacterMappper();
@@ -128,7 +124,7 @@ final class SlugImplementation implements Slug {
         String result = "";
 
         for (final String key : customReplacements.keySet()) {
-            input = input.replaceAll(escaper.escape(key), customReplacements.get(key));
+            input = input.replaceAll(Pattern.quote(key), customReplacements.get(key));
         }
 
         if (options.titleCase()) {
@@ -206,7 +202,7 @@ final class SlugImplementation implements Slug {
             allowedChars.append(MARK);
         }
 
-        return escaper.escape(allowedChars.toString());
+        return Pattern.quote(allowedChars.toString());
     }
 
     String currentCharacter(final String input, final int index) {
@@ -267,11 +263,11 @@ final class SlugImplementation implements Slug {
     }
 
     String replaceDuplicateSeparators(final String result, final String separator) {
-        return result.replaceAll(escaper.escape(separator) + "+", separator);
+        return result.replaceAll(Pattern.quote(separator) + "+", separator);
     }
 
     String replaceLeadingAndTrailingSeparator(final String result, final String separator) {
-        return result.replaceAll("(^" + escaper.escape(separator) + "+"
-                               + "|" + escaper.escape(separator) + "+$)", "");
+        return result.replaceAll("(^" + Pattern.quote(separator) + "+"
+                               + "|" + Pattern.quote(separator) + "+$)", "");
     }
 }
