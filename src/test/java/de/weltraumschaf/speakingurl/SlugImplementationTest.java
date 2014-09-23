@@ -3,6 +3,7 @@ package de.weltraumschaf.speakingurl;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -38,15 +39,72 @@ public class SlugImplementationTest {
         assertThat(sut.currentCharacter(fixture, 6), is(equalTo("r")));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void generateAllowedCharatcers_nullSeparator() {
+        sut.generateAllowedCharatcers(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void generateAllowedCharatcers_emptySeparator() {
+        sut.generateAllowedCharatcers("");
+    }
+
     @Test
+    public void generateAllowedCharatcers() {
+        assertThat(sut.generateAllowedCharatcers("-"), is(equalTo("\\Q-\\E")));
+    }
+
+    @Test
+    public void generateAllowedCharatcers_withUric() {
+        final Options options = new Options();
+        options.uric(true);
+        final SlugImplementation sutWithUric = new SlugImplementation(options);
+
+        assertThat(sutWithUric.generateAllowedCharatcers("-"), is(equalTo("\\Q-;?:@&=+$,/\\E")));
+    }
+
+    @Test
+    public void generateAllowedCharatcers_withUricWithoutSlash() {
+        final Options options = new Options();
+        options.uricWithoutSlash(true);
+        final SlugImplementation sutWithUricWithoutSlash = new SlugImplementation(options);
+
+        assertThat(sutWithUricWithoutSlash.generateAllowedCharatcers("-"), is(equalTo("\\Q-;?:@&=+$,\\E")));
+    }
+
+    @Test
+    public void generateAllowedCharatcers_withMark() {
+        final Options options = new Options();
+        options.mark(true);
+        final SlugImplementation sutWithMark = new SlugImplementation(options);
+
+        assertThat(sutWithMark.generateAllowedCharatcers("-"), is(equalTo("\\Q-.!~*'()\\E")));
+    }
+
+    @Test
+    public void generateAllowedCharatcers_withUricUricwithoutSlashAndMark() {
+        final Options options = new Options();
+        options.uric(true);
+        options.uricWithoutSlash(true);
+        options.mark(true);
+        final SlugImplementation sutWithUricURicWithoutSlashAndMark = new SlugImplementation(options);
+
+        assertThat(sutWithUricURicWithoutSlashAndMark.generateAllowedCharatcers("-"),
+                is(equalTo("\\Q-;?:@&=+$,/.!~*'()\\E")));
+    }
+
+    @Test
+    @Ignore
     public void replaceSymbols() {
     }
 
     @Test
+    @Ignore
     public void replaceCharacters() {
     }
 
     @Test
+    @Ignore
     public void replaceLanguageCharacters() {
     }
 

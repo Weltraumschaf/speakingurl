@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
  */
 final class SlugImplementation implements Slug {
 
-    private static final String URIC_NO_SLASH = ";?:@&=+$,";
-    private static final String URIC = URIC_NO_SLASH + "/";
+    private static final String URIC_WITHOUT_SLASH = ";?:@&=+$,";
+    private static final String URIC_SLASH = "/";
     private static final String MARK = ".!~*'()";
 
     private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]");
@@ -109,21 +109,7 @@ final class SlugImplementation implements Slug {
             }
         }
 
-        String allowedChars = separator;
-
-        if (options.uric()) {
-            allowedChars += URIC;
-        }
-
-        if (options.uricWithoutSlash()) {
-            allowedChars += URIC_NO_SLASH;
-        }
-
-        if (options.mark()) {
-            allowedChars += MARK;
-        }
-
-        allowedChars = escaper.escape(allowedChars);
+        final String allowedChars = generateAllowedCharatcers(separator);
         String input = rawInput;
         String result = "";
 
@@ -152,8 +138,8 @@ final class SlugImplementation implements Slug {
                 ch = replaceCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
-            } else if (symbol.containsKey(ch) && !(options.uric() && URIC.contains(ch))
-                    && !(options.uricWithoutSlash() && URIC_NO_SLASH.contains(ch))
+            } else if (symbol.containsKey(ch) && !(options.uric() && URIC_SLASH.contains(ch))
+                    && !(options.uricWithoutSlash() && URIC_WITHOUT_SLASH.contains(ch))
                     && !(options.mark() && MARK.contains(ch))) {
                 ch = replaceSymbols(ch, lastCharWasSymbol, result, separator, symbol, input, i);
 
@@ -188,6 +174,25 @@ final class SlugImplementation implements Slug {
         }
 
         return result;
+    }
+
+    String generateAllowedCharatcers(final String separator) {
+        final StringBuilder allowedChars = new StringBuilder();
+        allowedChars.append(validator.notEmpty(separator, "separator"));
+
+        if (options.uricWithoutSlash() || options.uric()) {
+            allowedChars.append(URIC_WITHOUT_SLASH);
+        }
+
+        if (options.uric()) {
+            allowedChars.append(URIC_SLASH);
+        }
+
+        if (options.mark()) {
+            allowedChars.append(MARK);
+        }
+
+        return escaper.escape(allowedChars.toString());
     }
 
     String currentCharacter(final String input, final int index) {
