@@ -234,7 +234,15 @@ final class SlugImplementation implements Slug {
         return input.substring(index, index + 1);
     }
 
-    String replaceSymbols(final String ch, final boolean lastCharWasSymbol, final String result, final String separator, final String input, int index) {
+    String replaceSymbols(final String ch, final boolean lastCharWasSymbol, final String result, final String separator, final String input, final int index) {
+        if (ch == null) {
+            return "";
+        }
+
+        if (ch.isEmpty()) {
+            return "";
+        }
+
         String buffer = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
                 ? separator + symbols.get(ch)
                 : symbols.get(ch);
