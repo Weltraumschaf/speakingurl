@@ -153,6 +153,11 @@ final class SlugImplementation implements Slug {
 
         if (options.titleCase()) {
             // TODO Implement title case.
+//            input = input.replace(/(\w)(\S*)/g, function(_, i, r) {
+//                var j = i.toUpperCase() + (r !== null ? r : "");
+//                return (Object.keys(customReplacements).indexOf(j.toLowerCase()) <
+//                    0) ? j : j.toLowerCase();
+//            });
         }
 
         input = input.trim();
@@ -234,7 +239,14 @@ final class SlugImplementation implements Slug {
         return input.substring(index, index + 1);
     }
 
-    String replaceSymbols(final String ch, final boolean lastCharWasSymbol, final String result, final String separator, final String input, final int index) {
+    String replaceSymbols(
+        final String ch,
+        final boolean lastCharWasSymbol,
+        final String result,
+        final String separator,
+        final String input,
+        final int index)
+    {
         if (ch == null) {
             return "";
         }
