@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<rss version="0.91">
+  <channel>
+    <title>Speaking URL - Checkstyle report</title>
+    <link>http://weltraumschaf.github.io/speakingurl/</link>
+    <description>Speaking URL - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2014 Weltraumschaf</copyright>
+    <item>
+      <title>File: 26,
+             Errors: 79,
+             Warnings: 10,
+             Infos: 0
+      </title>
+            <link>http://weltraumschaf.github.io/speakingurl//checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.ValidatorTest.java">de/weltraumschaf/speakingurl/ValidatorTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithTruncateTest.java">de/weltraumschaf/speakingurl/SlugImplementation_WithTruncateTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithSeparator.java">de/weltraumschaf/speakingurl/SlugImplementation_WithSeparator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.CharacterMappper.java">de/weltraumschaf/speakingurl/CharacterMappper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithTitleCaseTest.java">de/weltraumschaf/speakingurl/SlugImplementation_WithTitleCaseTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_CustomTest.java">de/weltraumschaf/speakingurl/SlugImplementation_CustomTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_LanguagesTest.java">de/weltraumschaf/speakingurl/SlugImplementation_LanguagesTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation.java">de/weltraumschaf/speakingurl/SlugImplementation.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_ConfigCombinationsTest.java">de/weltraumschaf/speakingurl/SlugImplementation_ConfigCombinationsTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithUricNoSlashTest.java">de/weltraumschaf/speakingurl/SlugImplementation_WithUricNoSlashTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_DefaultTest.java">de/weltraumschaf/speakingurl/SlugImplementation_DefaultTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.LanguageCharacterMapper.java">de/weltraumschaf/speakingurl/LanguageCharacterMapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.Validator.java">de/weltraumschaf/speakingurl/Validator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementationTest.java">de/weltraumschaf/speakingurl/SlugImplementationTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SymbolMapper.java">de/weltraumschaf/speakingurl/SymbolMapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithUricTest.java">de/weltraumschaf/speakingurl/SlugImplementation_WithUricTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.Language.java">de/weltraumschaf/speakingurl/Language.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_ArabicTest.java">de/weltraumschaf/speakingurl/SlugImplementation_ArabicTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.Slug.java">de/weltraumschaf/speakingurl/Slug.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithSymbols.java">de/weltraumschaf/speakingurl/SlugImplementation_WithSymbols.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  21
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithMarkTest.java">de/weltraumschaf/speakingurl/SlugImplementation_WithMarkTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.BuilderTest.java">de/weltraumschaf/speakingurl/BuilderTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithMaintainCaseTest.java">de/weltraumschaf/speakingurl/SlugImplementation_WithMaintainCaseTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_WithSeparatorTest.java">de/weltraumschaf/speakingurl/SlugImplementation_WithSeparatorTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.SlugImplementation_Rfc3986Test.java">de/weltraumschaf/speakingurl/SlugImplementation_Rfc3986Test.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://weltraumschaf.github.io/speakingurl//checkstyle.html#de.weltraumschaf.speakingurl.Options.java">de/weltraumschaf/speakingurl/Options.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  10
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
