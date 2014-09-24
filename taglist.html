@@ -233,7 +233,7 @@
 <th>de.weltraumschaf.speakingurl.SlugImplementation</th>
 <th>Line</th></tr>
 <tr class="a">
-<td>Implement title case.</td>
+<td>Implement title case. input = input.replace(/(\w)(\S*)/g, function(_, i, r) { var j = i.toUpperCase() + (r !== null ? r : &quot;&quot;); return (Object.keys(customReplacements).indexOf(j.toLowerCase()) &lt; 0) ? j : j.toLowerCase(); });</td>
 <td>155</td></tr></table></div></div>
                   </div>
             </div>
