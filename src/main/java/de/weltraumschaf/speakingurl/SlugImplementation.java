@@ -3,6 +3,7 @@ package de.weltraumschaf.speakingurl;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -152,12 +153,7 @@ final class SlugImplementation implements Slug {
         }
 
         if (options.titleCase()) {
-            // TODO Implement title case.
-//            input = input.replace(/(\w)(\S*)/g, function(_, i, r) {
-//                var j = i.toUpperCase() + (r !== null ? r : "");
-//                return (Object.keys(customReplacements).indexOf(j.toLowerCase()) <
-//                    0) ? j : j.toLowerCase();
-//            });
+            input = transformCase(input, customReplacements);
         }
 
         input = input.trim();
@@ -240,13 +236,12 @@ final class SlugImplementation implements Slug {
     }
 
     String replaceSymbols(
-        final String ch,
-        final boolean lastCharWasSymbol,
-        final String result,
-        final String separator,
-        final String input,
-        final int index)
-    {
+            final String ch,
+            final boolean lastCharWasSymbol,
+            final String result,
+            final String separator,
+            final String input,
+            final int index) {
         if (ch == null) {
             return "";
         }
@@ -292,8 +287,8 @@ final class SlugImplementation implements Slug {
         }
 
         final String replacement = langChars.containsKey(ch)
-            ? langChars.get(ch)
-            : ch;
+                ? langChars.get(ch)
+                : ch;
 
         if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(replacement).matches()) {
             return " " + replacement;
@@ -322,6 +317,43 @@ final class SlugImplementation implements Slug {
 
     String replaceLeadingAndTrailingSeparator(final String result, final String separator) {
         return result.replaceAll("(^" + Pattern.quote(separator) + "+"
-                               + "|" + Pattern.quote(separator) + "+$)", "");
+                + "|" + Pattern.quote(separator) + "+$)", "");
+    }
+
+    String transformCase(final String input, final Map<String, String> customReplacements) {
+        final Pattern pattern = Pattern.compile("(\\w\\S*)");
+        final Matcher matcher = pattern.matcher(input);
+        final StringBuffer buffer = new StringBuffer();
+
+        while (matcher.find()) {
+            final String match = ucfirst(matcher.group());
+
+            if (customReplacements.containsKey(match.toLowerCase())) {
+                matcher.appendReplacement(buffer, match);
+            } else{
+                matcher.appendReplacement(buffer, match.toLowerCase());
+            }
+        }
+
+        matcher.appendTail(buffer);
+        return buffer.toString();
+    }
+
+    String ucfirst(final String input) {
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
+        char[] chars = new char[1];
+        input.getChars(0, 1, chars, 0);
+
+        if (Character.isUpperCase(chars[0])) {
+            return input;
+        } else {
+            StringBuilder buffer = new StringBuilder(input.length());
+            buffer.append(Character.toUpperCase(chars[0]));
+            buffer.append(input.toCharArray(), 1, input.length() - 1);
+            return buffer.toString();
+        }
     }
 }

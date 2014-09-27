@@ -237,4 +237,12 @@ public class SlugImplementationTest {
         assertThat(sut.replaceLeadingAndTrailingSeparator("--foo--", "-"), is(equalTo("foo")));
         assertThat(sut.replaceLeadingAndTrailingSeparator("---foo---", "-"), is(equalTo("foo")));
     }
+
+    @Test
+    public void ucfirst() {
+        assertThat(sut.ucfirst(null), is(equalTo("")));
+        assertThat(sut.ucfirst(""), is(equalTo("")));
+        assertThat(sut.ucfirst("foobar"), is(equalTo("Foobar")));
+        assertThat(sut.ucfirst("Foobar"), is(equalTo("Foobar")));
+    }
 }
