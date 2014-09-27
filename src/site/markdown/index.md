@@ -1,4 +1,4 @@
-# Welcome to the Speaking URL Project
+# Speaking URL
 
 Generate a slug with a lot of  options; create of so called 'static' or 'Clean
 URL' or 'Pretty  URL' or 'nice-looking URL' or 'Speaking  URL' or 'user-friendly
