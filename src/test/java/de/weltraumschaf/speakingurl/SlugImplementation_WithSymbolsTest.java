@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author Sascha Droste <pid@posteo.net>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class SlugImplementation_WithSymbols {
+public class SlugImplementation_WithSymbolsTest {
 
     @Test
     public void shouldConvertSymbols() {
@@ -180,7 +180,7 @@ public class SlugImplementation_WithSymbols {
     public void shouldIgnoreNotAvailableLanguageParam() {
         Slug sut = Slug.Builder.newBuiler().lang(Language.NONE).create();
 
-        assertThat(sut.get("Äpfel & Birnen"), is(equalTo("aepfel-and-birnen")));
+        assertThat(sut.get("Äpfel & Birnen"), is(equalTo("aepfel-birnen")));
     }
 
     @Test
