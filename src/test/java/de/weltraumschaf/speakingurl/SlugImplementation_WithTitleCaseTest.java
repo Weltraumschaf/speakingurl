@@ -34,7 +34,8 @@ public class SlugImplementation_WithTitleCaseTest {
         assertThat(sut.get("This is a foo and an angry bird"), is(equalTo("This-Is-a-Foo-and-an-Angry-Bird")));
 
         sut = Slug.Builder.newBuiler().titleCase(true).titleCaseExclude("a").create();
-        assertThat(sut.get("This is a foo and an angry bird show"), is(equalTo("This-Is-a-Foo-And-An-Angry-Bird-Show")));
+        assertThat(sut.get("This is a foo and an angry bird show"),
+                is(equalTo("This-Is-a-Foo-And-An-Angry-Bird-Show")));
 
         sut = Slug.Builder.newBuiler().titleCase(true).titleCaseExclude("and").create();
         assertThat(sut.get("Don't drink and drive"), is(equalTo("Don-t-Drink-and-Drive")));
@@ -42,7 +43,10 @@ public class SlugImplementation_WithTitleCaseTest {
         sut = Slug.Builder.newBuiler().titleCase(true).titleCaseExclude(Collections.<String>emptySet()).create();
         assertThat(sut.get("Don't drink and drive"), is(equalTo("Don-t-Drink-And-Drive")));
 
-        sut = Slug.Builder.newBuiler().titleCase(true).titleCaseExclude(new HashSet<>(Arrays.asList("drink", "drive"))).create();
+        sut = Slug.Builder.newBuiler()
+            .titleCase(true)
+            .titleCaseExclude(new HashSet<>(Arrays.asList("drink", "drive")))
+            .create();
         assertThat(sut.get("Don't drink and drive"), is(equalTo("Don-t-drink-And-drive")));
 
         sut = Slug.Builder.newBuiler().titleCase(true).titleCaseExclude(new HashSet<>(Arrays.asList("42"))).create();
