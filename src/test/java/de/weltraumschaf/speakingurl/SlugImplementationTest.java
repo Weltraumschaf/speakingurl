@@ -239,6 +239,12 @@ public class SlugImplementationTest {
     }
 
     @Test
+    @Ignore
+    public void transformCase() {
+
+    }
+
+    @Test
     public void ucfirst() {
         assertThat(sut.ucfirst(null), is(equalTo("")));
         assertThat(sut.ucfirst(""), is(equalTo("")));
