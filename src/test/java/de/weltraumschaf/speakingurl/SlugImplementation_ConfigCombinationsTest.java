@@ -3,7 +3,6 @@ package de.weltraumschaf.speakingurl;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -15,13 +14,12 @@ import org.junit.Test;
 public class SlugImplementation_ConfigCombinationsTest {
 
     @Test
-    @Ignore
     public void shouldSeparateWithConfiguredCharacterWithNonBase64Separator() {
         final Slug sut = Slug.Builder.newBuiler().separator("*").maintainCase(true).create();
 
-        assertThat(sut.get("Foo, Bar Baz"), is(equalTo("foo*bar*baz")));
-        assertThat(sut.get("Foo- Bar Baz"), is(equalTo("foo-*bar*baz")));
-        assertThat(sut.get("Foo] Bar Baz"), is(equalTo("foo*bar*baz")));
+        assertThat(sut.get("Foo, Bar Baz"), is(equalTo("Foo*Bar*Baz")));
+        assertThat(sut.get("Foo- Bar Baz"), is(equalTo("Foo-*Bar*Baz")));
+        assertThat(sut.get("Foo] Bar Baz"), is(equalTo("Foo*Bar*Baz")));
     }
 
     @Test
@@ -36,24 +34,25 @@ public class SlugImplementation_ConfigCombinationsTest {
     }
 
     @Test
-    @Ignore
     public void shouldMaintainCaseCharactersWithNonBase64Separator() {
         final Slug sut = Slug.Builder.newBuiler().separator("*").mark(true).create();
 
-        assertThat(sut.get("Foo, Bar Baz"), is(equalTo("Foo*Bar*Baz")));
-        assertThat(sut.get("Foo- Bar Baz"), is(equalTo("Foo-*Bar*Baz")));
-        assertThat(sut.get("Foo] Bar Baz"), is(equalTo("Foo*Bar*Baz")));
+        assertThat(sut.get("Foo, Bar Baz"), is(equalTo("foo*bar*baz")));
+        assertThat(sut.get("Foo- Bar Baz"), is(equalTo("foo-*bar*baz")));
+        assertThat(sut.get("Foo] Bar Baz"), is(equalTo("foo*bar*baz")));
     }
 
     @Test
-    @Ignore
     public void shouldMaintainCaseCharactersWithOnlyBase64CharactersAllowed() {
         Slug sut = Slug.Builder.newBuiler().maintainCase(true).uric(true).uricNoSlash(true).mark(true).create();
-        assertThat(sut.get("Foo, Bar Baz"), is(equalTo("Foo-Bar-Baz")));
+        assertThat(sut.get("Foo- Bar Baz"), is(equalTo("Foo-Bar-Baz")));
+        assertThat(sut.get("Foo] Bar Baz"), is(equalTo("Foo-Bar-Baz")));
+        assertThat(sut.get("Foo, Bar Baz"), is(equalTo("Foo,-Bar-Baz")));
 
         sut = Slug.Builder.newBuiler().maintainCase(true).uric(false).uricNoSlash(false).mark(false).create();
         assertThat(sut.get("Foo- Bar Baz"), is(equalTo("Foo-Bar-Baz")));
         assertThat(sut.get("Foo] Bar Baz"), is(equalTo("Foo-Bar-Baz")));
+        assertThat(sut.get("Foo, Bar Baz"), is(equalTo("Foo-Bar-Baz")));
     }
 
     @Test
