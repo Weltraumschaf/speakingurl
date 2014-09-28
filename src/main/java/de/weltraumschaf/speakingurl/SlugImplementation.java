@@ -250,13 +250,15 @@ final class SlugImplementation implements Slug {
             return "";
         }
 
-        String buffer = "";
+        final StringBuilder buffer = new StringBuilder();
         final int prevPos = result.length() - 1;
 
         if (prevPos >= 0) {
-            buffer = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(prevPos)).matches()
-                ? separator + symbols.get(ch)
-                : symbols.get(ch);
+            if (lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(prevPos)).matches()) {
+                buffer.append(separator);
+            }
+
+            symbols.get(ch);
         }
 
         final int nextPos = index + 1;
@@ -265,11 +267,11 @@ final class SlugImplementation implements Slug {
             final char next = input.charAt(nextPos);
 
             if (ALPHA_NUMERIC.matcher(String.valueOf(next)).matches()) {
-                buffer += separator;
+                buffer.append(separator);
             }
         }
 
-        return buffer;
+        return buffer.toString();
     }
 
     String replaceCharacters(final boolean lastCharWasSymbol, final String ch) {
