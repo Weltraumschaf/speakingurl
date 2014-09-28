@@ -29,7 +29,7 @@ final class SlugImplementation implements Slug {
     /**
      * Matches alpha numeric characters.
      */
-    private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]+");
+    private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]");
     /**
      * Matches each word for titles.
      */
@@ -138,13 +138,13 @@ final class SlugImplementation implements Slug {
         }
 
         final String allowedChars = generateAllowedCharatcers(separator);
-        String input = rawInput;
-        String result = "";
+        String input = rawInput.trim();
 
         for (final String key : customReplacements.keySet()) {
             final String pattern;
 
             if (key.length() > 1) {
+                // Math to word boundary.
                 pattern = "\\b" + Pattern.quote(key) + "\\b";
             } else {
                 pattern = Pattern.quote(key);
@@ -157,7 +157,27 @@ final class SlugImplementation implements Slug {
             input = transformCase(input, customReplacements);
         }
 
-        input = input.trim();
+        String result = processByCharacters(input, separator, allowedChars);
+        result = cleanupReplacements(result, separator);
+
+        if (options.truncate() > 0 && result.length() > options.truncate()) {
+            final boolean lucky = separator.equals(result.charAt(options.truncate()) + "");
+            result = result.substring(0, options.truncate());
+
+            if (!lucky) {
+                result = result.substring(0, result.lastIndexOf(separator));
+            }
+        }
+
+        if (!options.maintainCase() && !options.titleCase() && options.titleCaseExclude().isEmpty()) {
+            result = result.toLowerCase();
+        }
+
+        return result;
+    }
+
+    private String processByCharacters(final String input, final String separator, final String allowedChars) {
+        String result = "";
         boolean lastCharWasSymbol = false;
 
         for (int i = 0, l = input.length(); i < l; i++) {
@@ -180,31 +200,20 @@ final class SlugImplementation implements Slug {
                 lastCharWasSymbol = true;
             } else {
                 // Process latin chars.
-                if (lastCharWasSymbol
-                        && (ALPHA_NUMERIC.matcher(ch).matches()
-                        || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches())) {
-                    ch = " " + ch;
+                if (i > 0) {
+                    final String lastResultChar = result.substring(result.length() - 1);
+
+                    if (lastCharWasSymbol
+                            && (ALPHA_NUMERIC.matcher(ch).matches()
+                            || Pattern.compile("a-zA-Z0-9]").matcher(lastResultChar).matches())) {
+                        ch = " " + ch;
+                    }
                 }
 
                 lastCharWasSymbol = false;
             }
 
             result += replaceNotAllowedCharacters(ch, allowedChars, separator);
-        }
-
-        result = cleanupReplacements(result, separator);
-
-        if (options.truncate() > 0 && result.length() > options.truncate()) {
-            final boolean lucky = separator.equals(result.charAt(options.truncate()) + "");
-            result = result.substring(0, options.truncate());
-
-            if (!lucky) {
-                result = result.substring(0, result.lastIndexOf(separator));
-            }
-        }
-
-        if (!options.maintainCase() && !options.titleCase() && options.titleCaseExclude().isEmpty()) {
-            result = result.toLowerCase();
         }
 
         return result;
