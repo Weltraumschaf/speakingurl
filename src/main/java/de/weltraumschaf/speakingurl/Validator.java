@@ -16,6 +16,7 @@ final class Validator {
      * the developer must dig into the stacktrace (if available).
      * </p>
      *
+     * @param <T> type of validated object
      * @param validated asserted to be not {@code null}
      * @param name of asserted parameter, must not be {@code null} or empty
      * @return validated object for method chaining

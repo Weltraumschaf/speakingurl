@@ -44,7 +44,7 @@ public class BuilderTest {
         final Slug product = sut.create();
 
         assertThat(product, is(not(nullValue())));
-        assertThat(product.getCustom(), is(equalTo((Map<String, String>)new HashMap<String, String>())));
+        assertThat(product.getCustom(), is(equalTo((Map<String, String>) new HashMap<String, String>())));
         assertThat(product.lang(), is(equalTo(Language.ENGLISH)));
         assertThat(product.maintainCase(), is(equalTo(false)));
         assertThat(product.mark(), is(equalTo(false)));
@@ -99,12 +99,12 @@ public class BuilderTest {
         final Slug product = sut.titleCaseExclude("foo", "bar", "baz").create();
 
         assertThat(product.titleCaseExclude(),
-            is(equalTo((Set<String>)new HashSet<>(Arrays.asList("foo", "bar", "baz")))));
+            is(equalTo((Set<String>) new HashSet<>(Arrays.asList("foo", "bar", "baz")))));
     }
 
     @Test(expected = NullPointerException.class)
     public void create_withNullTitleCaseExclude_varArg() {
-        sut.titleCaseExclude((String[])null);
+        sut.titleCaseExclude((String[]) null);
     }
 
     @Test
@@ -113,12 +113,12 @@ public class BuilderTest {
                 new HashSet<>(Arrays.asList("foo", "bar", "baz"))).create();
 
         assertThat(product.titleCaseExclude(),
-            is(equalTo((Set<String>)new HashSet<>(Arrays.asList("foo", "bar", "baz")))));
+            is(equalTo((Set<String>) new HashSet<>(Arrays.asList("foo", "bar", "baz")))));
     }
 
     @Test(expected = NullPointerException.class)
     public void create_withNullTitleCaseExclude_set() {
-        sut.titleCaseExclude((Set<String>)null);
+        sut.titleCaseExclude((Set<String>) null);
     }
 
     @Test
