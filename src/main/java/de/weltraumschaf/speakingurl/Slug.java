@@ -144,7 +144,7 @@ public interface Slug {
          * @return never {@code null}, always new instance
          */
         public Slug create() {
-            return new SlugImplementation(options.copy());// Make copy to be threadsafe.
+            return new SlugImplementation(options.copy()); // Make copy to be threadsafe.
         }
 
         /**

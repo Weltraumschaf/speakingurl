@@ -176,6 +176,14 @@ final class SlugImplementation implements Slug {
         return result;
     }
 
+    /**
+     * Processes each character of the input string.
+     *
+     * @param input must not be {@cde null}
+     * @param separator must not be {@code null} or empty
+     * @param allowedChars must not be {@cde null}
+     * @return never {@code null}
+     */
     private String processByCharacters(final String input, final String separator, final String allowedChars) {
         String result = "";
         boolean lastCharWasSymbol = false;
@@ -188,7 +196,7 @@ final class SlugImplementation implements Slug {
 
                 lastCharWasSymbol = false;
             } else if (characterMapper.knowsCharacter(ch)) {
-                ch = replaceCharacters(lastCharWasSymbol, ch);
+                ch = replaceCharacters(ch, lastCharWasSymbol);
 
                 lastCharWasSymbol = false;
             } else if (new SymbolMapper().knowsSymbol(options.language(), ch)
@@ -219,6 +227,12 @@ final class SlugImplementation implements Slug {
         return result;
     }
 
+    /**
+     * Generates a string containing all allowed characters.
+     *
+     * @param separator must not be {@code null} or empty
+     * @return never {@code null}
+     */
     String generateAllowedCharatcers(final String separator) {
         final StringBuilder allowedChars = new StringBuilder();
         allowedChars.append(validator.notEmpty(separator, "separator"));
@@ -238,13 +252,31 @@ final class SlugImplementation implements Slug {
         return Pattern.quote(allowedChars.toString());
     }
 
-    String currentCharacter(final String input, final int index) {
+    /**
+     * Returns character at a given position from a string.
+     *
+     * @param input string to get character from
+     * @param position the obtained position
+     * @return never {@code null}
+     */
+    String currentCharacter(final String input, final int position) {
         validator.notNull(input, "input");
-        validator.notNegative(index, "index");
+        validator.notNegative(position, "index");
 
-        return input.substring(index, index + 1);
+        return input.substring(position, position + 1);
     }
 
+    /**
+     * Replace symbol characters.
+     *
+     * @param ch the current character to replace
+     * @param lastCharWasSymbol whether the last character was a symbol
+     * @param result
+     * @param separator must not be {@code null} or empty
+     * @param input
+     * @param currentPos
+     * @return never {@code null}
+     */
     String replaceSymbols(
             final String ch,
             final boolean lastCharWasSymbol,
@@ -291,7 +323,14 @@ final class SlugImplementation implements Slug {
         return buffer.toString();
     }
 
-    String replaceCharacters(final boolean lastCharWasSymbol, final String ch) {
+    /**
+     * Replace characters.
+     *
+     * @param ch the current character to replace
+     * @param lastCharWasSymbol whether the last character was a symbol
+     * @return never {@code null}
+     */
+    String replaceCharacters(final String ch, final boolean lastCharWasSymbol) {
         if (ch == null) {
             return "";
         }
@@ -307,6 +346,13 @@ final class SlugImplementation implements Slug {
         return characterMapper.mapCharacter(ch);
     }
 
+    /**
+     * Replace language depending characters.
+     *
+     * @param lastCharWasSymbol whether the last character was a symbol
+     * @param ch the current character to replace
+     * @return never {@code null}
+     */
     String replaceLanguageCharacters(final boolean lastCharWasSymbol, final String ch) {
         if (ch == null) {
             return "";
@@ -327,26 +373,62 @@ final class SlugImplementation implements Slug {
         return replacement;
     }
 
+    /**
+     * Replace all not allowed characters.
+     *
+     * @param ch the current character to replace
+     * @param allowedChars
+     * @param separator must not be {@code null} or empty
+     * @return
+     */
     String replaceNotAllowedCharacters(final String ch, final String allowedChars, final String separator) {
         return ch.replaceAll("[^\\w\\s" + allowedChars + "_\\-]", separator);
     }
 
-    String cleanupReplacements(final String result, final String separator) {
-        String tmp = replaceWhitespaces(result, separator);
+    /**
+     * Cleans the resulting slug from duplicate separators and such.
+     *
+     * @param input will be cleaned
+     * @param separator must not be {@code null} or empty
+     * @return never {@code null}
+     */
+    String cleanupReplacements(final String input, final String separator) {
+        String tmp = replaceWhitespaces(input, separator);
         tmp = replaceDuplicateSeparators(tmp, separator);
         return replaceLeadingAndTrailingSeparator(tmp, separator);
     }
 
-    String replaceWhitespaces(final String result, final String separator) {
-        return result.replaceAll("\\s+", separator);
+    /**
+     * Replace all whitespaces with separators.
+     *
+     * @param input will be processed
+     * @param separator must not be {@code null} or empty
+     * @return never {@code null}
+     */
+    String replaceWhitespaces(final String input, final String separator) {
+        return input.replaceAll("\\s+", separator);
     }
 
-    String replaceDuplicateSeparators(final String result, final String separator) {
-        return result.replaceAll(Pattern.quote(separator) + "+", separator);
+    /**
+     * Removes duplicate separators.
+     *
+     * @param input will be processed
+     * @param separator must not be {@code null} or empty
+     * @return never {@code null}
+     */
+    String replaceDuplicateSeparators(final String input, final String separator) {
+        return input.replaceAll(Pattern.quote(separator) + "+", separator);
     }
 
-    String replaceLeadingAndTrailingSeparator(final String result, final String separator) {
-        return result.replaceAll("(^" + Pattern.quote(separator) + "+"
+    /**
+     * Removes leading and trailing separators.
+     *
+     * @param input will be processed
+     * @param separator must not be {@code null} or empty
+     * @return never {@code null}
+     */
+    String replaceLeadingAndTrailingSeparator(final String input, final String separator) {
+        return input.replaceAll("(^" + Pattern.quote(separator) + "+"
                 + "|" + Pattern.quote(separator) + "+$)", "");
     }
 

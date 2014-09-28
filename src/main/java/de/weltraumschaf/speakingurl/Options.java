@@ -113,10 +113,10 @@ final class Options {
     /**
      * Set the separator.
      *
-     * @param separator must not be {@code null} or empty
+     * @param withSeparator must not be {@code null} or empty
      */
-    void separator(final String separator) {
-        this.separator = validator.notEmpty(separator, "separator");
+    void separator(final String withSeparator) {
+        this.separator = validator.notEmpty(withSeparator, "withSeparator");
     }
 
     /**
@@ -149,7 +149,7 @@ final class Options {
     /**
      * Set maintain case flag.
      *
-     * withMaintainCase maintainCase on or off
+     * @param withMaintainCase maintainCase on or off
      */
     void maintainCase(final boolean withMaintainCase) {
         this.maintainCase = withMaintainCase;
@@ -203,7 +203,7 @@ final class Options {
     /**
      * Set the truncate length.
      *
-     * withTruncate truncate must not be negative
+     * @param withTruncate truncate must not be negative
      */
     void truncate(final int withTruncate) {
         this.truncate = validator.notNegative(withTruncate, "withTruncate");
@@ -221,7 +221,7 @@ final class Options {
     /**
      * Set URI characters flag.
      *
-     * withUric uric on or off
+     * @param withUric uric on or off
      */
     void uric(final boolean withUric) {
         this.uric = withUric;
