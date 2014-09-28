@@ -66,7 +66,7 @@ public class SlugImplementation_LanguagesTest {
         assertThat(sut.get("Foo ∆ Bar"), is(equalTo("Foo-Bar")));
         assertThat(sut.get("Foo ∞ Bar"), is(equalTo("Foo-Bar")));
         assertThat(sut.get("Foo ♥ Bar"), is(equalTo("Foo-Bar")));
-        assertThat(sut.get("Foo & Bar"), is(equalTo("Foo-bar")));
+        assertThat(sut.get("Foo & Bar"), is(equalTo("Foo-Bar")));
         assertThat(sut.get("Foo | Bar"), is(equalTo("Foo-Bar")));
         assertThat(sut.get("Foo < Bar"), is(equalTo("Foo-Bar")));
         assertThat(sut.get("Foo > Bar"), is(equalTo("Foo-Bar")));

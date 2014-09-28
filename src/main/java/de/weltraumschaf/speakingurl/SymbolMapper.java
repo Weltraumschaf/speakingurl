@@ -13,10 +13,6 @@ import java.util.Map;
 final class SymbolMapper {
 
     /**
-     * Default language.
-     */
-    private static final Language DEFAULT = Language.ENGLISH;
-    /**
      * Holds the mapping.
      */
     private static final Map<Language, Map<String, String>> MAPPING;
@@ -71,7 +67,6 @@ final class SymbolMapper {
         english.put("∑", "sum");
         english.put("¤", "currency");
         tmp.put(Language.ENGLISH, Collections.unmodifiableMap(english));
-        tmp.put(Language.NONE, Collections.unmodifiableMap(english));
 
         final Map<String, String> spanish = new HashMap<>();
         spanish.put("∆", "delta");

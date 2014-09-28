@@ -17,6 +17,10 @@ public class SymbolMapperTest {
     @Test
     public void knowsSymbol() {
         for (final Language lang : Language.values()) {
+            if (lang == Language.NONE) {
+                continue;
+            }
+
             assertThat(lang.toString(), sut.knowsSymbol(lang, "∆"), is(equalTo(true)));
             assertThat(lang.toString(), sut.knowsSymbol(lang, "∞"), is(equalTo(true)));
             assertThat(lang.toString(), sut.knowsSymbol(lang, "♥"), is(equalTo(true)));
@@ -30,16 +34,16 @@ public class SymbolMapperTest {
     }
 
     @Test
-    public void mapSymbol_none() {
-        assertThat(sut.mapSymbol(Language.NONE, "∆"), is(equalTo("delta")));
-        assertThat(sut.mapSymbol(Language.NONE, "∞"), is(equalTo("infinity")));
-        assertThat(sut.mapSymbol(Language.NONE, "♥"), is(equalTo("love")));
-        assertThat(sut.mapSymbol(Language.NONE, "&"), is(equalTo("and")));
-        assertThat(sut.mapSymbol(Language.NONE, "|"), is(equalTo("or")));
-        assertThat(sut.mapSymbol(Language.NONE, "<"), is(equalTo("less than")));
-        assertThat(sut.mapSymbol(Language.NONE, ">"), is(equalTo("greater than")));
-        assertThat(sut.mapSymbol(Language.NONE, "∑"), is(equalTo("sum")));
-        assertThat(sut.mapSymbol(Language.NONE, "¤"), is(equalTo("currency")));
+    public void knowsSymbol_none() {
+        assertThat(sut.knowsSymbol(Language.NONE, "∆"), is(equalTo(false)));
+        assertThat(sut.knowsSymbol(Language.NONE, "∞"), is(equalTo(false)));
+        assertThat(sut.knowsSymbol(Language.NONE, "♥"), is(equalTo(false)));
+        assertThat(sut.knowsSymbol(Language.NONE, "&"), is(equalTo(false)));
+        assertThat(sut.knowsSymbol(Language.NONE, "|"), is(equalTo(false)));
+        assertThat(sut.knowsSymbol(Language.NONE, "<"), is(equalTo(false)));
+        assertThat(sut.knowsSymbol(Language.NONE, ">"), is(equalTo(false)));
+        assertThat(sut.knowsSymbol(Language.NONE, "∑"), is(equalTo(false)));
+        assertThat(sut.knowsSymbol(Language.NONE, "¤"), is(equalTo(false)));
     }
 
     @Test
