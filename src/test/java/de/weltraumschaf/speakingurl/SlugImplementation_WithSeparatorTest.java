@@ -22,31 +22,26 @@ public class SlugImplementation_WithSeparatorTest {
     }
 
     @Test
-    @Ignore
     public void shouldNotFailIfAndAtTheEnd() {
         assertThat(sut.get("test &"), is(equalTo("test_and")));
     }
 
     @Test
-    @Ignore
     public void shouldNotFailIfAndAtTheEndAndWhitespace() {
         assertThat(sut.get("test & "), is(equalTo("test_and")));
     }
 
     @Test
-    @Ignore
     public void shouldNotFailIfLoveAtTheEnd() {
         assertThat(sut.get("test ♥"), is(equalTo("test_love")));
     }
 
     @Test
-    @Ignore
     public void shouldNotFailIfLoveAtTheEndAndWhitespace() {
         assertThat(sut.get("test ♥ "), is(equalTo("test_love")));
     }
 
     @Test
-    @Ignore
     public void shouldNotFailIfLoveAtTheEndAndWhitespaces() {
         assertThat(sut.get("test ♥  "), is(equalTo("test_love")));
     }
