@@ -36,7 +36,7 @@ public class SlugImplementation_LanguagesTest {
         assertThat(sut.get("Foo ∆ Bar"), is(equalTo("Foo-delta-Bar")));
         assertThat(sut.get("Foo ∞ Bar"), is(equalTo("Foo-infinity-Bar")));
         assertThat(sut.get("Foo ♥ Bar"), is(equalTo("Foo-love-Bar")));
-        assertThat(sut.get("Foo & Bar"), is(equalTo("Foo-and-bar")));
+        assertThat(sut.get("Foo & Bar"), is(equalTo("Foo-and-Bar")));
         assertThat(sut.get("Foo | Bar"), is(equalTo("Foo-or-Bar")));
         assertThat(sut.get("Foo < Bar"), is(equalTo("Foo-less-than-Bar")));
         assertThat(sut.get("Foo > Bar"), is(equalTo("Foo-greater-than-Bar")));
@@ -110,7 +110,7 @@ public class SlugImplementation_LanguagesTest {
 
         assertThat(sut.get("Foo ∆ Bar"), is(equalTo("foo-delta-bar")));
         assertThat(sut.get("Foo ∞ Bar"), is(equalTo("foo-unendlich-bar")));
-        assertThat(sut.get("Foo ♥ Bar"), is(equalTo("foo-Liebe-bar")));
+        assertThat(sut.get("Foo ♥ Bar"), is(equalTo("foo-liebe-bar")));
         assertThat(sut.get("Foo & Bar"), is(equalTo("foo-und-bar")));
         assertThat(sut.get("Foo | Bar"), is(equalTo("foo-oder-bar")));
         assertThat(sut.get("Foo < Bar"), is(equalTo("foo-kleiner-als-bar")));
@@ -156,7 +156,7 @@ public class SlugImplementation_LanguagesTest {
         assertThat(sut.get("Foo ∆ Bar"), is(equalTo("Foo-delta-Bar")));
         assertThat(sut.get("Foo ∞ Bar"), is(equalTo("Foo-infinity-Bar")));
         assertThat(sut.get("Foo ♥ Bar"), is(equalTo("Foo-love-Bar")));
-        assertThat(sut.get("Foo & Bar"), is(equalTo("Foo-and-bar")));
+        assertThat(sut.get("Foo & Bar"), is(equalTo("Foo-and-Bar")));
         assertThat(sut.get("Foo | Bar"), is(equalTo("Foo-or-Bar")));
         assertThat(sut.get("Foo < Bar"), is(equalTo("Foo-less-than-Bar")));
         assertThat(sut.get("Foo > Bar"), is(equalTo("Foo-greater-than-Bar")));
@@ -218,7 +218,7 @@ public class SlugImplementation_LanguagesTest {
         assertThat(sut.get("Foo ♥ Bar"), is(equalTo("Foo-Amour-Bar")));
         assertThat(sut.get("Foo & Bar"), is(equalTo("Foo-et-Bar")));
         assertThat(sut.get("Foo | Bar"), is(equalTo("Foo-ou-Bar")));
-        assertThat(sut.get("Foo < Bar"), is(equalTo("foo-moins-que-Bar")));
+        assertThat(sut.get("Foo < Bar"), is(equalTo("Foo-moins-que-Bar")));
         assertThat(sut.get("Foo > Bar"), is(equalTo("Foo-superieure-a-Bar")));
         assertThat(sut.get("Foo ∑ Bar"), is(equalTo("Foo-somme-des-Bar")));
         assertThat(sut.get("Foo ¤ Bar"), is(equalTo("Foo-monnaie-Bar")));
