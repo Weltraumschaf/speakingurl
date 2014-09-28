@@ -192,7 +192,7 @@ final class SlugImplementation implements Slug {
 
                 lastCharWasSymbol = false;
             } else if (symbols().containsKey(ch)
-                    && !(options.uric() && URIC_SLASH.contains(ch))
+                    && !(options.uric() && (URIC_WITHOUT_SLASH + URIC_SLASH).contains(ch))
                     && !(options.uricWithoutSlash() && URIC_WITHOUT_SLASH.contains(ch))
                     && !(options.mark() && MARK.contains(ch))) {
                 ch = replaceSymbols(ch, lastCharWasSymbol, result, separator, input, i);
