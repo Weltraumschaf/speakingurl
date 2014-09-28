@@ -63,13 +63,13 @@ public interface Slug {
     /**
      * Builder to configure and create the {@link  Slug slugger}.
      *
-     * TODO Remove validations because done in Options.
-     *
      * @since 1.0.0
      */
     public final class Builder {
 
-        private final Validator validator = new Validator();
+        /**
+         * Data holder.
+         */
         private final Options options = new Options();
 
         /**
@@ -104,7 +104,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder separator(final String separator) {
-            options.separator(validator.notNull(separator, "separator"));
+            options.separator(separator);
             return this;
         }
 
@@ -118,7 +118,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder lang(final Language lang) {
-            options.language(validator.notNull(lang, "lang"));
+            options.language(lang);
             return this;
         }
 
@@ -154,7 +154,6 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder titleCaseExclude(final String... titleCaseExclude) {
-            validator.notNull(titleCaseExclude, "titleCaseExclude");
             titleCaseExclude(new HashSet<>(Arrays.asList(titleCaseExclude)));
             return this;
         }
@@ -169,8 +168,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder titleCaseExclude(final Set<String> titleCaseExclude) {
-            options.titleCaseExclude(Collections.unmodifiableSet(
-                    validator.notNull(titleCaseExclude, "titleCaseExclude")));
+            options.titleCaseExclude(Collections.unmodifiableSet(titleCaseExclude));
             return this;
         }
 
@@ -184,7 +182,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder truncate(final int truncate) {
-            options.truncate(validator.notNegative(truncate, "truncate"));
+            options.truncate(truncate);
             return this;
         }
 
@@ -254,7 +252,7 @@ public interface Slug {
          * @return self validated object for method chaining
          */
         public Builder custom(final Map<String, String> custom) {
-            options.custom(validator.notNull(custom, "custom"));
+            options.custom(custom);
             return this;
         }
     }
