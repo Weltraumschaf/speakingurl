@@ -339,6 +339,12 @@ final class SlugImplementation implements Slug {
         return buffer.toString();
     }
 
+    /**
+     * Makes the first character upper case.
+     *
+     * @param input may be {@code null} or empty
+     * @return never {@code null}, may be empty
+     */
     String ucfirst(final String input) {
         if (input == null || input.isEmpty()) {
             return "";
