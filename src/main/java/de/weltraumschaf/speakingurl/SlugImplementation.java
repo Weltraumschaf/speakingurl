@@ -187,8 +187,9 @@ final class SlugImplementation implements Slug {
     private String processByCharacters(final String input, final String separator, final String allowedChars) {
         String result = "";
         boolean lastCharWasSymbol = false;
+        final int length = input.length();
 
-        for (int i = 0, l = input.length(); i < l; i++) {
+        for (int i = 0; i < length; i++) {
             String ch = currentCharacter(input, i);
 
             if (new LanguageCharacterMapper().knowsCharacter(options.language(), ch)) {
@@ -271,10 +272,10 @@ final class SlugImplementation implements Slug {
      *
      * @param ch the current character to replace
      * @param lastCharWasSymbol whether the last character was a symbol
-     * @param result
+     * @param result the current result
      * @param separator must not be {@code null} or empty
-     * @param input
-     * @param currentPos
+     * @param input the preprocessed input string
+     * @param currentPos the current position in the input string
      * @return never {@code null}
      */
     String replaceSymbols(
@@ -377,9 +378,9 @@ final class SlugImplementation implements Slug {
      * Replace all not allowed characters.
      *
      * @param ch the current character to replace
-     * @param allowedChars
+     * @param allowedChars string containing all allowed characters
      * @param separator must not be {@code null} or empty
-     * @return
+     * @return never {@code null}
      */
     String replaceNotAllowedCharacters(final String ch, final String allowedChars, final String separator) {
         return ch.replaceAll("[^\\w\\s" + allowedChars + "_\\-]", separator);
@@ -433,7 +434,8 @@ final class SlugImplementation implements Slug {
     }
 
     /**
-     * Make each word which starts with alphanumeric character to upper case, except them in the replacement mapCharacter.
+     * Make each word which starts with alphanumeric character to upper case,
+     * except them in the replacement mapCharacter.
      *
      * @param input may be {@code null} or empty
      * @param exclusiions mapCharacter with key and value same
@@ -473,7 +475,7 @@ final class SlugImplementation implements Slug {
             return "";
         }
 
-        char[] chars = new char[1];
+        final char[] chars = new char[1];
         input.getChars(0, 1, chars, 0);
 
         if (Character.isUpperCase(chars[0])) {

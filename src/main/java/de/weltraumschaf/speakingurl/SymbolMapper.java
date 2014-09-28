@@ -155,20 +155,43 @@ final class SymbolMapper {
         MAPPING = Collections.unmodifiableMap(tmp);
     }
 
-    boolean knowsSymbol(final Language lang, final String symbol) {
-        if (MAPPING.containsKey(lang)) {
-            return MAPPING.get(lang).containsKey(symbol);
+    /**
+     * Validates input.
+     */
+    private final Validator validator = new Validator();
+
+    /**
+     * Whether the mapper knows the given symbol to map for particular language.
+     *
+     * @param language must not be {@code null}
+     * @param symbol must not be {@code null}
+     * @return {@code true} if known, else {@code false}
+     */
+    boolean knowsSymbol(final Language language, final String symbol) {
+        if (MAPPING.containsKey(validator.notNull(language, "language"))) {
+            return MAPPING.get(language).containsKey(validator.notNull(symbol, "symbol"));
         }
 
         return false;
     }
 
-    String mapSymbol(final Language lang, final String symbol) {
-        if (knowsSymbol(lang, symbol)) {
-            return MAPPING.get(lang).get(symbol);
+    /**
+     * Maps the given symbol to map for particular language.
+     * <p>
+     * Throws {@link IllegalArgumentException} if given symbol {@link #knowsSymbol(de.weltraumschaf.speakingurl.Language,
+     * java.lang.String) is not known}.
+     * </p>
+     *
+     * @param language must not be {@code null}
+     * @param symbol must not be {@code null} 
+     * @return never {@code null}
+     */
+    String mapSymbol(final Language language, final String symbol) {
+        if (knowsSymbol(language, symbol)) {
+            return MAPPING.get(language).get(symbol);
         }
 
-        throw new IllegalArgumentException(String.format("Unknown symbol '%s' for language %s!", symbol, lang));
+        throw new IllegalArgumentException(String.format("Unknown symbol '%s' for language %s!", symbol, language));
     }
 
 }
