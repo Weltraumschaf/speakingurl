@@ -140,17 +140,17 @@ final class SlugImplementation implements Slug {
         final String allowedChars = generateAllowedCharatcers(separator);
         String input = rawInput.trim();
 
-        for (final String key : customReplacements.keySet()) {
+        for (final Map.Entry<String, String> entry : customReplacements.entrySet()) {
             final String pattern;
 
-            if (key.length() > 1) {
+            if (entry.getKey().length() > 1) {
                 // Math to word boundary.
-                pattern = "\\b" + Pattern.quote(key) + "\\b";
+                pattern = "\\b" + Pattern.quote(entry.getKey()) + "\\b";
             } else {
-                pattern = Pattern.quote(key);
+                pattern = Pattern.quote(entry.getKey());
             }
 
-            input = input.replaceAll(pattern, customReplacements.get(key));
+            input = input.replaceAll(pattern, entry.getValue());
         }
 
         if (options.titleCase()) {
