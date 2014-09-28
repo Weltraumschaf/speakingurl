@@ -45,22 +45,22 @@ public class BuilderTest {
 
         assertThat(product, is(not(nullValue())));
         assertThat(product.getCustom(), is(equalTo((Map<String, String>)new HashMap<String, String>())));
-        assertThat(product.getLang(), is(equalTo(Language.ENGLISH)));
-        assertThat(product.isMaintainCase(), is(equalTo(false)));
-        assertThat(product.isMark(), is(equalTo(false)));
-        assertThat(product.getSeparator(), is(equalTo("-")));
-        assertThat(product.isTitleCase(), is(equalTo(false)));
-        assertThat(product.getTitleCaseExclude(), is(equalTo(Collections.<String>emptySet())));
-        assertThat(product.getTruncate(), is(equalTo(0)));
-        assertThat(product.isUric(), is(equalTo(false)));
-        assertThat(product.isUricNoSlash(), is(equalTo(false)));
+        assertThat(product.lang(), is(equalTo(Language.ENGLISH)));
+        assertThat(product.maintainCase(), is(equalTo(false)));
+        assertThat(product.mark(), is(equalTo(false)));
+        assertThat(product.separator(), is(equalTo("-")));
+        assertThat(product.titleCase(), is(equalTo(false)));
+        assertThat(product.titleCaseExclude(), is(equalTo(Collections.<String>emptySet())));
+        assertThat(product.truncate(), is(equalTo(0)));
+        assertThat(product.uric(), is(equalTo(false)));
+        assertThat(product.uricNoSlash(), is(equalTo(false)));
     }
 
     @Test
     public void create_withSeparator() {
         final Slug product = sut.separator("_").create();
 
-        assertThat(product.getSeparator(), is(equalTo("_")));
+        assertThat(product.separator(), is(equalTo("_")));
     }
 
     @Test(expected = NullPointerException.class)
@@ -72,7 +72,7 @@ public class BuilderTest {
     public void create_withLang() {
         final Slug product = sut.lang(Language.NONE).create();
 
-        assertThat(product.getLang(), is(equalTo(Language.NONE)));
+        assertThat(product.lang(), is(equalTo(Language.NONE)));
     }
 
     @Test(expected = NullPointerException.class)
@@ -84,21 +84,21 @@ public class BuilderTest {
     public void create_withMaintainCase() {
         final Slug product = sut.maintainCase(true).create();
 
-        assertThat(product.isMaintainCase(), is(equalTo(true)));
+        assertThat(product.maintainCase(), is(equalTo(true)));
     }
 
     @Test
     public void create_withTitleCase() {
         final Slug product = sut.titleCase(true).create();
 
-        assertThat(product.isTitleCase(), is(equalTo(true)));
+        assertThat(product.titleCase(), is(equalTo(true)));
     }
 
     @Test
     public void create_withTitleCaseExclude_varArg() {
         final Slug product = sut.titleCaseExclude("foo", "bar", "baz").create();
 
-        assertThat(product.getTitleCaseExclude(),
+        assertThat(product.titleCaseExclude(),
             is(equalTo((Set<String>)new HashSet<>(Arrays.asList("foo", "bar", "baz")))));
     }
 
@@ -112,7 +112,7 @@ public class BuilderTest {
         final Slug product = sut.titleCaseExclude(
                 new HashSet<>(Arrays.asList("foo", "bar", "baz"))).create();
 
-        assertThat(product.getTitleCaseExclude(),
+        assertThat(product.titleCaseExclude(),
             is(equalTo((Set<String>)new HashSet<>(Arrays.asList("foo", "bar", "baz")))));
     }
 
@@ -125,7 +125,7 @@ public class BuilderTest {
     public void create_withTruncate() {
         final Slug product = sut.truncate(23).create();
 
-        assertThat(product.getTruncate(), is(equalTo(23)));
+        assertThat(product.truncate(), is(equalTo(23)));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -137,21 +137,21 @@ public class BuilderTest {
     public void create_withUric() {
         final Slug product = sut.uric(true).create();
 
-        assertThat(product.isUric(), is(equalTo(true)));
+        assertThat(product.uric(), is(equalTo(true)));
     }
 
     @Test
     public void create_withUricNoSlash() {
         final Slug product = sut.uricNoSlash(true).create();
 
-        assertThat(product.isUricNoSlash(), is(equalTo(true)));
+        assertThat(product.uricNoSlash(), is(equalTo(true)));
     }
 
     @Test
     public void create_withMark() {
         final Slug product = sut.mark(true).create();
 
-        assertThat(product.isMark(), is(equalTo(true)));
+        assertThat(product.mark(), is(equalTo(true)));
     }
 
     @Test

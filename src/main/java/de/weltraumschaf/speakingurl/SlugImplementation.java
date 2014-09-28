@@ -65,47 +65,47 @@ final class SlugImplementation implements Slug {
     }
 
     @Override
-    public String getSeparator() {
+    public String separator() {
         return options.separator();
     }
 
     @Override
-    public Language getLang() {
+    public Language lang() {
         return options.language();
     }
 
     @Override
-    public boolean isMaintainCase() {
+    public boolean maintainCase() {
         return options.maintainCase();
     }
 
     @Override
-    public boolean isTitleCase() {
+    public boolean titleCase() {
         return options.titleCase();
     }
 
     @Override
-    public Set<String> getTitleCaseExclude() {
+    public Set<String> titleCaseExclude() {
         return options.titleCaseExclude();
     }
 
     @Override
-    public int getTruncate() {
+    public int truncate() {
         return options.truncate();
     }
 
     @Override
-    public boolean isUric() {
+    public boolean uric() {
         return options.uric();
     }
 
     @Override
-    public boolean isUricNoSlash() {
+    public boolean uricNoSlash() {
         return options.uricWithoutSlash();
     }
 
     @Override
-    public boolean isMark() {
+    public boolean mark() {
         return options.mark();
     }
 

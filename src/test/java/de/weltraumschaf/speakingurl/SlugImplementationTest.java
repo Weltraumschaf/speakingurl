@@ -183,7 +183,7 @@ public class SlugImplementationTest {
     public void replaceLanguageCharacters_swedish_lastCharWasSymbol() {
         options.language(Language.SWEDISH);
 
-        assertThat(sut.getLang(), is(equalTo(Language.SWEDISH)));
+        assertThat(sut.lang(), is(equalTo(Language.SWEDISH)));
         assertThat(sut.replaceLanguageCharacters(true, null), is(equalTo("")));
         assertThat(sut.replaceLanguageCharacters(true, ""), is(equalTo("")));
         assertThat(sut.replaceLanguageCharacters(true, "ä"), is(equalTo(" a")));
@@ -194,7 +194,7 @@ public class SlugImplementationTest {
     public void replaceLanguageCharacters_swedish_lastCharWasNotSymbol() {
         options.language(Language.SWEDISH);
 
-        assertThat(sut.getLang(), is(equalTo(Language.SWEDISH)));
+        assertThat(sut.lang(), is(equalTo(Language.SWEDISH)));
         assertThat(sut.replaceLanguageCharacters(false, null), is(equalTo("")));
         assertThat(sut.replaceLanguageCharacters(false, ""), is(equalTo("")));
         assertThat(sut.replaceLanguageCharacters(false, "ä"), is(equalTo("a")));

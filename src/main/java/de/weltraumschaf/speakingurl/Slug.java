@@ -40,24 +40,74 @@ public interface Slug {
      */
     String get(String input, String separator);
 
-    String getSeparator();
+    /**
+     * Get the separator option.
+     *
+     * @return never {@code null}
+     */
+    String separator();
 
-    Language getLang();
+    /**
+     * Get the language option.
+     *
+     * @return never {@code null}
+     */
+    Language lang();
 
-    boolean isMaintainCase();
+    /**
+     * Get the maintain case option.
+     *
+     * @return whether the option is enabled
+     */
+    boolean maintainCase();
 
-    boolean isTitleCase();
+    /**
+     * Get the title case option.
+     *
+     * @return whether the option is enabled
+     */
+    boolean titleCase();
 
-    Set<String> getTitleCaseExclude();
+    /**
+     * Get the title case excludes option.
+     *
+     * @return never {@code null}
+     */
+    Set<String> titleCaseExclude();
 
-    int getTruncate();
+    /**
+     * Get the truncate length option.
+     *
+     * @return not negative
+     */
+    int truncate();
 
-    boolean isUric();
+    /**
+     * Get the URI characters option.
+     *
+     * @return whether the option is enabled
+     */
+    boolean uric();
 
-    boolean isUricNoSlash();
+    /**
+     * Get the URI characters without slash option.
+     *
+     * @return whether the option is enabled
+     */
+    boolean uricNoSlash();
 
-    boolean isMark();
+    /**
+     * Get the mark option.
+     *
+     * @return whether the option is enabled
+     */
+    boolean mark();
 
+    /**
+     * Get the custom mapping option.
+     *
+     * @return never {@code null}
+     */
     Map<String, String> getCustom();
 
     /**
