@@ -25,4 +25,5 @@
     <suppress checks="ImportControl" files=".*Test\.java$"/>
     <suppress checks="JavadocPackage" files=".*Test\.java$"/>
     <suppress checks="TypeName" files=".*Test\.java$"/>
+    <suppress checks="VisibilityModifier" files=".*Test\.java$"/>
 </suppressions>
