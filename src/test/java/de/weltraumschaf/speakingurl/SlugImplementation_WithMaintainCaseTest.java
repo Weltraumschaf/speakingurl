@@ -3,7 +3,6 @@ package de.weltraumschaf.speakingurl;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -25,7 +24,6 @@ public class SlugImplementation_WithMaintainCaseTest {
     }
 
     @Test
-    @Ignore
     public void shouldMaintainCasecharactersAndSymbol() {
         assertThat(sut.get("Foo > Bar ♥ Baz"), is(equalTo("Foo-greater-than-Bar-love-Baz")));
     }
