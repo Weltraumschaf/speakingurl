@@ -481,7 +481,7 @@ final class SlugImplementation implements Slug {
         if (Character.isUpperCase(chars[0])) {
             return input;
         } else {
-            StringBuilder buffer = new StringBuilder(input.length());
+            final StringBuilder buffer = new StringBuilder(input.length());
             buffer.append(Character.toUpperCase(chars[0]));
             buffer.append(input.toCharArray(), 1, input.length() - 1);
             return buffer.toString();

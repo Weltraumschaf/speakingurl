@@ -178,12 +178,12 @@ final class SymbolMapper {
     /**
      * Maps the given symbol to map for particular language.
      * <p>
-     * Throws {@link IllegalArgumentException} if given symbol {@link #knowsSymbol(de.weltraumschaf.speakingurl.Language,
-     * java.lang.String) is not known}.
+     * Throws {@link IllegalArgumentException} if given symbol {@link #knowsSymbol(
+     * de.weltraumschaf.speakingurl.Language, java.lang.String) is not known}.
      * </p>
      *
      * @param language must not be {@code null}
-     * @param symbol must not be {@code null} 
+     * @param symbol must not be {@code null}
      * @return never {@code null}
      */
     String mapSymbol(final Language language, final String symbol) {

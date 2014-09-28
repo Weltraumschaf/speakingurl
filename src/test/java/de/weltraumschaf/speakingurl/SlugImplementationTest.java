@@ -273,9 +273,9 @@ public class SlugImplementationTest {
         assertThat(sut.transformCase(null, emptyMap), is(equalTo("")));
         assertThat(sut.transformCase("", emptyMap), is(equalTo("")));
 
-        assertThat(sut.transformCase("This is big foo",emptyMap), is(equalTo("This Is Big Foo")));
-        assertThat(sut.transformCase("This is Big foo",emptyMap), is(equalTo("This Is Big Foo")));
-        assertThat(sut.transformCase("Don't drink and drive",emptyMap), is(equalTo("Don't Drink And Drive")));
+        assertThat(sut.transformCase("This is big foo", emptyMap), is(equalTo("This Is Big Foo")));
+        assertThat(sut.transformCase("This is Big foo", emptyMap), is(equalTo("This Is Big Foo")));
+        assertThat(sut.transformCase("Don't drink and drive", emptyMap), is(equalTo("Don't Drink And Drive")));
     }
 
     @Test
@@ -289,9 +289,9 @@ public class SlugImplementationTest {
         assertThat(sut.transformCase(null, emptyMap), is(equalTo("")));
         assertThat(sut.transformCase("", emptyMap), is(equalTo("")));
 
-        assertThat(sut.transformCase("This is big foo",emptyMap), is(equalTo("This Is Big Foo")));
-        assertThat(sut.transformCase("This is Big foo",emptyMap), is(equalTo("This Is Big Foo")));
-        assertThat(sut.transformCase("Don't drink and drive",emptyMap), is(equalTo("Don't Drink And Drive")));
+        assertThat(sut.transformCase("This is big foo", emptyMap), is(equalTo("This Is Big Foo")));
+        assertThat(sut.transformCase("This is Big foo", emptyMap), is(equalTo("This Is Big Foo")));
+        assertThat(sut.transformCase("Don't drink and drive", emptyMap), is(equalTo("Don't Drink And Drive")));
     }
 
     @Test
@@ -302,9 +302,9 @@ public class SlugImplementationTest {
         assertThat(sut.transformCase(null, emptyMap), is(equalTo("")));
         assertThat(sut.transformCase("", emptyMap), is(equalTo("")));
 
-        assertThat(sut.transformCase("This is big foo",emptyMap), is(equalTo("This is Big foo")));
-        assertThat(sut.transformCase("This is Big foo",emptyMap), is(equalTo("This is Big foo")));
-        assertThat(sut.transformCase("Don't drink and drive",emptyMap), is(equalTo("Don't Drink And Drive")));
+        assertThat(sut.transformCase("This is big foo", emptyMap), is(equalTo("This is Big foo")));
+        assertThat(sut.transformCase("This is Big foo", emptyMap), is(equalTo("This is Big foo")));
+        assertThat(sut.transformCase("Don't drink and drive", emptyMap), is(equalTo("Don't Drink And Drive")));
     }
 
     @Test
