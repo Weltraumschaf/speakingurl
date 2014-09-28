@@ -192,14 +192,14 @@ public class SlugImplementation_WithSymbolsTest {
 
     @Test
     public void shouldIgnoreNotAvailableLanguageParam() {
-        Slug sut = Slug.Builder.newBuiler().lang(Language.NONE).create();
+        final Slug sut = Slug.Builder.newBuiler().lang(Language.NONE).create();
 
         assertThat(sut.get("Äpfel & Birnen"), is(equalTo("aepfel-birnen")));
     }
 
     @Test
     public void shouldConvertCurrencySymbolsToLowercase() {
-        Slug sut = Slug.Builder.newBuiler().create();
+        final Slug sut = Slug.Builder.newBuiler().create();
 
         assertThat(sut.get("NEXUS4 only €199!"), is(equalTo("nexus4-only-eur199")));
         assertThat(sut.get("NEXUS4 only €299.93"), is(equalTo("nexus4-only-eur299-93")));
@@ -208,7 +208,7 @@ public class SlugImplementation_WithSymbolsTest {
 
     @Test
     public void shouldConvertCurrencySymbolsToUppercase() {
-        Slug sut = Slug.Builder.newBuiler().maintainCase(true).create();
+        final Slug sut = Slug.Builder.newBuiler().maintainCase(true).create();
 
         assertThat(sut.get("NEXUS4 only €199!"), is(equalTo("NEXUS4-only-EUR199")));
         assertThat(sut.get("NEXUS4 only €299.93"), is(equalTo("NEXUS4-only-EUR299-93")));
