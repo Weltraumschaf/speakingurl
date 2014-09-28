@@ -131,10 +131,10 @@ final class Options {
     /**
      * Set the language.
      *
-     * @param language must not be {@code null}
+     * @param withLanguage must not be {@code null}
      */
-    void language(final Language language) {
-        this.language = validator.notNull(language, "language");
+    void language(final Language withLanguage) {
+        this.language = validator.notNull(withLanguage, "withLanguage");
     }
 
     /**
@@ -149,10 +149,10 @@ final class Options {
     /**
      * Set maintain case flag.
      *
-     * @param maintainCase on or off
+     * withMaintainCase maintainCase on or off
      */
-    void maintainCase(final boolean maintainCase) {
-        this.maintainCase = maintainCase;
+    void maintainCase(final boolean withMaintainCase) {
+        this.maintainCase = withMaintainCase;
     }
 
     /**
@@ -167,10 +167,10 @@ final class Options {
     /**
      * Set title case flag.
      *
-     * @param titleCase on or off
+     * @param withTitleCase on or off
      */
-    void titleCase(final boolean titleCase) {
-        this.titleCase = titleCase;
+    void titleCase(final boolean withTitleCase) {
+        this.titleCase = withTitleCase;
     }
 
     /**
@@ -185,10 +185,10 @@ final class Options {
     /**
      * Set words excluded from title case.
      *
-     * @param titleCaseExclude must not be {@code null}, defensive copied
+     * @param withTitleCaseExclude must not be {@code null}, defensive copied
      */
-    void titleCaseExclude(final Set<String> titleCaseExclude) {
-        this.titleCaseExclude = validator.notNull(new HashSet<>(titleCaseExclude), "titleCaseExclude");
+    void titleCaseExclude(final Set<String> withTitleCaseExclude) {
+        this.titleCaseExclude = validator.notNull(new HashSet<>(withTitleCaseExclude), "withTitleCaseExclude");
     }
 
     /**
@@ -203,10 +203,10 @@ final class Options {
     /**
      * Set the truncate length.
      *
-     * @param truncate must not be negative
+     * withTruncate truncate must not be negative
      */
-    void truncate(final int truncate) {
-        this.truncate = validator.notNegative(truncate, "truncate");
+    void truncate(final int withTruncate) {
+        this.truncate = validator.notNegative(withTruncate, "withTruncate");
     }
 
     /**
@@ -221,10 +221,10 @@ final class Options {
     /**
      * Set URI characters flag.
      *
-     * @param uric on or off
+     * withUric uric on or off
      */
-    void uric(final boolean uric) {
-        this.uric = uric;
+    void uric(final boolean withUric) {
+        this.uric = withUric;
     }
 
     /**
@@ -239,10 +239,10 @@ final class Options {
     /**
      * Set URI characters without slash flag.
      *
-     * @param uricWithoutSlash on or off
+     * @param withUricAndSlash on or off
      */
-    void uricWithoutSlash(final boolean uricWithoutSlash) {
-        this.uricWithoutSlash = uricWithoutSlash;
+    void uricWithoutSlash(final boolean withUricAndSlash) {
+        this.uricWithoutSlash = withUricAndSlash;
     }
 
     /**
@@ -257,10 +257,10 @@ final class Options {
     /**
      * The mark characters flag.
      *
-     * @param mark on or off
+     * @param withMark on or off
      */
-    void mark(final boolean mark) {
-        this.mark = mark;
+    void mark(final boolean withMark) {
+        this.mark = withMark;
     }
 
     /**
@@ -275,10 +275,10 @@ final class Options {
     /**
      * Set custom mapping.
      *
-     * @param custom must not be {@code null}, defensive copied
+     * @param withCustom must not be {@code null}, defensive copied
      */
-    void custom(final Map<String, String> custom) {
-        this.custom = new HashMap<>(validator.notNull(custom, "custom"));
+    void custom(final Map<String, String> withCustom) {
+        this.custom = new HashMap<>(validator.notNull(withCustom, "withCustom"));
     }
 
     /**
