@@ -185,7 +185,7 @@ final class SlugImplementation implements Slug {
      * @return never {@code null}
      */
     private String processByCharacters(final String input, final String separator, final String allowedChars) {
-        String result = "";
+        final StringBuilder result = new StringBuilder();
         boolean lastCharWasSymbol = false;
         final int length = input.length();
 
@@ -204,7 +204,7 @@ final class SlugImplementation implements Slug {
                     && !(options.uric() && (URIC_WITHOUT_SLASH + URIC_SLASH).contains(ch))
                     && !(options.uricWithoutSlash() && URIC_WITHOUT_SLASH.contains(ch))
                     && !(options.mark() && MARK.contains(ch))) {
-                ch = replaceSymbols(ch, lastCharWasSymbol, result, separator, input, i);
+                ch = replaceSymbols(ch, lastCharWasSymbol, result.toString(), separator, input, i);
 
                 lastCharWasSymbol = true;
             } else {
@@ -222,10 +222,10 @@ final class SlugImplementation implements Slug {
                 lastCharWasSymbol = false;
             }
 
-            result += replaceNotAllowedCharacters(ch, allowedChars, separator);
+            result.append(replaceNotAllowedCharacters(ch, allowedChars, separator));
         }
 
-        return result;
+        return result.toString();
     }
 
     /**
