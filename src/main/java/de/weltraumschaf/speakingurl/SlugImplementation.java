@@ -250,13 +250,24 @@ final class SlugImplementation implements Slug {
             return "";
         }
 
-        String buffer = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(result.length() - 1)).matches()
+        String buffer = "";
+        final int prevPos = result.length() - 1;
+
+        if (prevPos >= 0) {
+            buffer = lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(prevPos)).matches()
                 ? separator + symbols.get(ch)
                 : symbols.get(ch);
+        }
 
-        buffer += ALPHA_NUMERIC.matcher(input.charAt(index + 1) + "").matches()
-                ? separator
-                : "";
+        final int nextPos = index + 1;
+
+        if (nextPos < input.length()) {
+            final char next = input.charAt(nextPos);
+
+            if (ALPHA_NUMERIC.matcher(String.valueOf(next)).matches()) {
+                buffer += separator;
+            }
+        }
 
         return buffer;
     }
@@ -330,7 +341,7 @@ final class SlugImplementation implements Slug {
 
             if (customReplacements.containsKey(match.toLowerCase())) {
                 matcher.appendReplacement(buffer, match);
-            } else{
+            } else {
                 matcher.appendReplacement(buffer, match.toLowerCase());
             }
         }
