@@ -1,8 +1,12 @@
 package de.weltraumschaf.speakingurl;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -14,7 +18,13 @@ import org.junit.Test;
  */
 public class SlugImplementationTest {
 
-    private final SlugImplementation sut = new SlugImplementation();
+    private final Options options = new Options();
+    private final SlugImplementation sut = new SlugImplementation(options);
+
+    @Before
+    public void resetOptions() {
+        options.resetToDefaults();
+    }
 
     @Test(expected = NullPointerException.class)
     public void currentCharacter_nullInput() {
@@ -239,9 +249,48 @@ public class SlugImplementationTest {
     }
 
     @Test
-    @Ignore
-    public void transformCase() {
+    public void transformCase_emptyMap_titleCaseOff() {
+        options.titleCase(true);
 
+        assertThat(sut.transformCase(null, null), is(equalTo("")));
+        assertThat(sut.transformCase("", null), is(equalTo("")));
+
+        final Map<String, String> emptyMap = Collections.<String, String>emptyMap();
+        assertThat(sut.transformCase(null, emptyMap), is(equalTo("")));
+        assertThat(sut.transformCase("", emptyMap), is(equalTo("")));
+
+        assertThat(sut.transformCase("This is big foo",emptyMap), is(equalTo("This Is Big Foo")));
+        assertThat(sut.transformCase("This is Big foo",emptyMap), is(equalTo("This Is Big Foo")));
+        assertThat(sut.transformCase("Don't drink and drive",emptyMap), is(equalTo("Don't Drink And Drive")));
+    }
+
+    @Test
+    public void transformCase_emptyMap_titleCaseOn() {
+        options.titleCase(true);
+
+        assertThat(sut.transformCase(null, null), is(equalTo("")));
+        assertThat(sut.transformCase("", null), is(equalTo("")));
+
+        final Map<String, String> emptyMap = Collections.<String, String>emptyMap();
+        assertThat(sut.transformCase(null, emptyMap), is(equalTo("")));
+        assertThat(sut.transformCase("", emptyMap), is(equalTo("")));
+
+        assertThat(sut.transformCase("This is big foo",emptyMap), is(equalTo("This Is Big Foo")));
+        assertThat(sut.transformCase("This is Big foo",emptyMap), is(equalTo("This Is Big Foo")));
+        assertThat(sut.transformCase("Don't drink and drive",emptyMap), is(equalTo("Don't Drink And Drive")));
+    }
+
+    @Test
+    public void transformCase() {
+        final Map<String, String> emptyMap = new HashMap<>();
+        emptyMap.put("is", "is");
+        emptyMap.put("foo", "foo");
+        assertThat(sut.transformCase(null, emptyMap), is(equalTo("")));
+        assertThat(sut.transformCase("", emptyMap), is(equalTo("")));
+
+        assertThat(sut.transformCase("This is big foo",emptyMap), is(equalTo("This is Big foo")));
+        assertThat(sut.transformCase("This is Big foo",emptyMap), is(equalTo("This is Big foo")));
+        assertThat(sut.transformCase("Don't drink and drive",emptyMap), is(equalTo("Don't Drink And Drive")));
     }
 
     @Test

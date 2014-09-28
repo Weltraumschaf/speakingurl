@@ -301,6 +301,22 @@ final class Options {
         return copy;
     }
 
+    /**
+     * Resets the object to the "factory settings".
+     */
+    void resetToDefaults() {
+        separator = DEFAULT_SEPARATOR;
+        language = DEFAULT_LANG;
+        maintainCase = DEFAULT_MAINTAIN_CASE;
+        titleCase = DEFAULT_TITLE_CASE;
+        titleCaseExclude = DEFAULT_TITLE_CASE_EXCLUDES;
+        truncate = DEFAULT_TRUNCATE;
+        uric = DEFAULT_URIC;
+        uricWithoutSlash = DEFAULT_URIC_WITHOUT_SLASH;
+        mark = DEFAULT_MARK;
+        custom = DEFAULT_CUSTOM;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(separator,

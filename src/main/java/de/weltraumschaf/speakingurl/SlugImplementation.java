@@ -334,6 +334,10 @@ final class SlugImplementation implements Slug {
     }
 
     String transformCase(final String input, final Map<String, String> customReplacements) {
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
         final Pattern pattern = Pattern.compile("(\\w\\S*)");
         final Matcher matcher = pattern.matcher(input);
         final StringBuffer buffer = new StringBuffer();
@@ -341,10 +345,10 @@ final class SlugImplementation implements Slug {
         while (matcher.find()) {
             final String match = ucfirst(matcher.group());
 
-            if (customReplacements.containsKey(match.toLowerCase())) {
-                matcher.appendReplacement(buffer, match);
-            } else {
+            if (null != customReplacements && customReplacements.containsKey(match.toLowerCase())) {
                 matcher.appendReplacement(buffer, match.toLowerCase());
+            } else {
+                matcher.appendReplacement(buffer, match);
             }
         }
 
