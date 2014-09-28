@@ -64,7 +64,6 @@ public interface Slug {
      * Builder to configure and create the {@link  Slug slugger}.
      *
      * TODO Remove validations because done in Options.
-     * TODO Change method names according to Options.
      *
      * @since 1.0.0
      */
