@@ -10,7 +10,6 @@ import java.util.Set;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
-import org.junit.Ignore;
 
 /**
  * Tests for {@link Slug.Builder}.
@@ -156,8 +155,13 @@ public class BuilderTest {
     }
 
     @Test
-    @Ignore
     public void create_withCustom() {
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("foo", "bar");
+        custom.put("baz", "baz");
 
+        final Slug product = sut.custom(custom).create();
+
+        assertThat(product.getCustom(), is(equalTo(custom)));
     }
 }
