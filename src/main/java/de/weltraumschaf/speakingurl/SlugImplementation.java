@@ -179,9 +179,9 @@ final class SlugImplementation implements Slug {
     /**
      * Processes each character of the input string.
      *
-     * @param input must not be {@cde null}
+     * @param input must not be {@code null}
      * @param separator must not be {@code null} or empty
-     * @param allowedChars must not be {@cde null}
+     * @param allowedChars must not be {@code null}
      * @return never {@code null}
      */
     private String processByCharacters(final String input, final String separator, final String allowedChars) {
