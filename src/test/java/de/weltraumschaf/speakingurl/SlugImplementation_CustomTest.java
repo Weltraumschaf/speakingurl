@@ -66,6 +66,15 @@ public class SlugImplementation_CustomTest {
     }
 
     @Test
+    public void withCustomStringReplacementOfStar() {
+        final Map<String, String> custom = new HashMap<>();
+        custom.put("*", " and ");
+        final Slug sut = Slug.Builder.newBuiler().custom(custom).create();
+
+        assertThat(sut.get("bus*train"), is(equalTo("bus-and-train")));
+    }
+
+    @Test
     public void withCustomStringReplacement() {
         final Map<String, String> custom = new HashMap<>();
         custom.put("and", "und");
@@ -77,7 +86,6 @@ public class SlugImplementation_CustomTest {
         assertThat(sut.get("bus or train"), is(equalTo("bus-oder-train")));
         assertThat(sut.get("busandtrain"), is(equalTo("busandtrain")));
         assertThat(sut.get("busortrain"), is(equalTo("busortrain")));
-        assertThat(sut.get("bus*train"), is(equalTo("bus-and-train")));
 
         assertThat(sut.get("bus and train bus and train"), is(equalTo("bus-und-train-bus-und-train")));
         assertThat(sut.get("bus or train bus or train"), is(equalTo("bus-oder-train-bus-oder-train")));

@@ -142,7 +142,15 @@ final class SlugImplementation implements Slug {
         String result = "";
 
         for (final String key : customReplacements.keySet()) {
-            input = input.replaceAll(Pattern.quote(key), customReplacements.get(key));
+            final String pattern;
+
+            if (key.length() > 1) {
+                pattern = "\\b" + Pattern.quote(key) + "\\b";
+            } else {
+                pattern = Pattern.quote(key);
+            }
+
+            input = input.replaceAll(pattern, customReplacements.get(key));
         }
 
         if (options.titleCase()) {
