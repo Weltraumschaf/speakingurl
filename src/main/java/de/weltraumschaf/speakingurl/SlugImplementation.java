@@ -234,7 +234,7 @@ final class SlugImplementation implements Slug {
             final String result,
             final String separator,
             final String input,
-            final int index) {
+            final int currentPos) {
         if (ch == null) {
             return "";
         }
@@ -244,23 +244,30 @@ final class SlugImplementation implements Slug {
         }
 
         final StringBuilder buffer = new StringBuilder();
-        final int prevPos = result.length() - 1;
 
-        if (prevPos >= 0) {
-            if (lastCharWasSymbol || ALPHA_NUMERIC.matcher(result.substring(prevPos)).matches()) {
-                buffer.append(separator);
+        if (null != result) {
+            final int prevPos = result.length() - 1;
+
+            if (prevPos >= 0) {
+                final String lastChar = result.substring(prevPos);
+
+                if (lastCharWasSymbol || ALPHA_NUMERIC.matcher(lastChar).matches()) {
+                    buffer.append(separator);
+                }
             }
-
-            symbols().get(ch);
         }
 
-        final int nextPos = index + 1;
+        buffer.append(symbols().get(ch));
 
-        if (nextPos < input.length()) {
-            final char next = input.charAt(nextPos);
+        if (input != null) {
+            final int nextPos = currentPos + 1;
 
-            if (ALPHA_NUMERIC.matcher(String.valueOf(next)).matches()) {
-                buffer.append(separator);
+            if (nextPos < input.length()) {
+                final char nextChar = input.charAt(nextPos);
+
+                if (ALPHA_NUMERIC.matcher(String.valueOf(nextChar)).matches()) {
+                    buffer.append(separator);
+                }
             }
         }
 
@@ -327,8 +334,7 @@ final class SlugImplementation implements Slug {
     }
 
     /**
-     * Make each word which starts with alphanumeric character to upper case, except
-     * them in the replacement map.
+     * Make each word which starts with alphanumeric character to upper case, except them in the replacement map.
      *
      * @param input may be {@code null} or empty
      * @param exclusiions map with key and value same
@@ -385,7 +391,7 @@ final class SlugImplementation implements Slug {
      * Maps language dependent characters.
      */
     private Map<String, String> langChars() {
-        return  new LanguageCharacterMapper().map(options.language());
+        return new LanguageCharacterMapper().map(options.language());
     }
 
     /**

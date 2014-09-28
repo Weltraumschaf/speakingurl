@@ -95,11 +95,37 @@ public class SlugImplementationTest {
     }
 
     @Test
-    public void replaceSymbols() {
+    public void replaceSymbols_lastCharWasSymbolTrue() {
         assertThat(sut.replaceSymbols(null, true, null, null, null, 0), is(equalTo("")));
-        assertThat(sut.replaceSymbols(null, false, null, null, null, 0), is(equalTo("")));
         assertThat(sut.replaceSymbols("", true, null, null, null, 0), is(equalTo("")));
+
+        final String separator = "-";
+        assertThat(sut.replaceSymbols("", true, null, separator, null, 0), is(equalTo("")));
+        assertThat(sut.replaceSymbols("&", true, null, separator, null, 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", true, "", separator, null, 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", true, null, separator, "", 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", true, "", separator, "", 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", true, "result", separator, "", 0), is(equalTo("-and")));
+        assertThat(sut.replaceSymbols("&", true, "result!", separator, "", 0), is(equalTo("-and")));
+        assertThat(sut.replaceSymbols("&", true, "result", separator, "&foo", 0), is(equalTo("-and-")));
+        assertThat(sut.replaceSymbols("&", true, "result", separator, "& foo", 0), is(equalTo("-and")));
+    }
+
+    @Test
+    public void replaceSymbols_lastCharWasSymbolFalse() {
+        assertThat(sut.replaceSymbols(null, false, null, null, null, 0), is(equalTo("")));
         assertThat(sut.replaceSymbols("", false, null, null, null, 0), is(equalTo("")));
+
+        final String separator = "-";
+        assertThat(sut.replaceSymbols("", false, null, separator, null, 0), is(equalTo("")));
+        assertThat(sut.replaceSymbols("&", false, null, separator, null, 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", false, "", separator, null, 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", false, null, separator, "", 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", false, "", separator, "", 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", false, "result", separator, "", 0), is(equalTo("-and")));
+        assertThat(sut.replaceSymbols("&", false, "result!", separator, "", 0), is(equalTo("and")));
+        assertThat(sut.replaceSymbols("&", false, "result", separator, "&foo", 0), is(equalTo("-and-")));
+        assertThat(sut.replaceSymbols("&", false, "result", separator, "& foo", 0), is(equalTo("-and")));
     }
 
     @Test
