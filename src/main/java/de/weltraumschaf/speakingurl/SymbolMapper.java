@@ -71,6 +71,7 @@ final class SymbolMapper {
         english.put("∑", "sum");
         english.put("¤", "currency");
         tmp.put(Language.ENGLISH, Collections.unmodifiableMap(english));
+        tmp.put(Language.NONE, Collections.unmodifiableMap(english));
 
         final Map<String, String> spanish = new HashMap<>();
         spanish.put("∆", "delta");
@@ -97,15 +98,15 @@ final class SymbolMapper {
         tmp.put(Language.FRENCH, Collections.unmodifiableMap(french));
 
         final Map<String, String> portuguese = new HashMap<>();
-        french.put("∆", "delta");
-        french.put("∞", "infinito");
-        french.put("♥", "amor");
-        french.put("&", "e");
-        french.put("|", "ou");
-        french.put("<", "menor que");
-        french.put(">", "maior que");
-        french.put("∑", "soma");
-        french.put("¤", "moeda");
+        portuguese.put("∆", "delta");
+        portuguese.put("∞", "infinito");
+        portuguese.put("♥", "amor");
+        portuguese.put("&", "e");
+        portuguese.put("|", "ou");
+        portuguese.put("<", "menor que");
+        portuguese.put(">", "maior que");
+        portuguese.put("∑", "soma");
+        portuguese.put("¤", "moeda");
         tmp.put(Language.PORTUGUESE, Collections.unmodifiableMap(portuguese));
 
         final Map<String, String> russian = new HashMap<>();
@@ -159,23 +160,20 @@ final class SymbolMapper {
         MAPPING = Collections.unmodifiableMap(tmp);
     }
 
-    /**
-     * Get the mapping for given language.
-     *
-     * <p>
-     * If the given language has no mapping, then the mapping for {@link #DEFAULT}
-     * will be returned.
-     * </p>
-     *
-     * @param lang the get the mapping for
-     * @return never {@code null}, immutable
-     */
-    Map<String, String> map(final Language lang) {
+    boolean knowsSymbol(final Language lang, final String symbol) {
         if (MAPPING.containsKey(lang)) {
-            return MAPPING.get(lang);
+            return MAPPING.get(lang).containsKey(symbol);
         }
 
-        return MAPPING.get(DEFAULT);
+        return false;
+    }
+
+    String mapSymbol(final Language lang, final String symbol) {
+        if (knowsSymbol(lang, symbol)) {
+            return MAPPING.get(lang).get(symbol);
+        }
+
+        throw new IllegalArgumentException(String.format("Unknown symbol '%s' for language %s!", symbol, lang));
     }
 
 }

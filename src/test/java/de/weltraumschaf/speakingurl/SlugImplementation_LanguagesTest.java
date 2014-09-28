@@ -12,7 +12,6 @@ import org.junit.Test;
  * @author Sascha Droste <pid@posteo.net>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-@Ignore
 public class SlugImplementation_LanguagesTest {
 
     @Test
@@ -130,7 +129,7 @@ public class SlugImplementation_LanguagesTest {
         assertThat(sut.get("Foo & Bar"), is(equalTo("Foo-und-Bar")));
         assertThat(sut.get("Foo | Bar"), is(equalTo("Foo-oder-Bar")));
         assertThat(sut.get("Foo < Bar"), is(equalTo("Foo-kleiner-als-Bar")));
-        assertThat(sut.get("Foo > Bar"), is(equalTo("foo-groesser-als-Bar")));
+        assertThat(sut.get("Foo > Bar"), is(equalTo("Foo-groesser-als-Bar")));
         assertThat(sut.get("Foo ∑ Bar"), is(equalTo("Foo-Summe-von-Bar")));
         assertThat(sut.get("Foo ¤ Bar"), is(equalTo("Foo-Waehrung-Bar")));
     }

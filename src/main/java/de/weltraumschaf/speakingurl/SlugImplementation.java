@@ -183,7 +183,7 @@ final class SlugImplementation implements Slug {
         for (int i = 0, l = input.length(); i < l; i++) {
             String ch = currentCharacter(input, i);
 
-            if (langChars().containsKey(ch)) {
+            if (new LanguageCharacterMapper().knowsCharacter(options.language(), ch)) {
                 ch = replaceLanguageCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
@@ -191,7 +191,7 @@ final class SlugImplementation implements Slug {
                 ch = replaceCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
-            } else if (symbols().containsKey(ch)
+            } else if (new SymbolMapper().knowsSymbol(options.language(), ch)
                     && !(options.uric() && (URIC_WITHOUT_SLASH + URIC_SLASH).contains(ch))
                     && !(options.uricWithoutSlash() && URIC_WITHOUT_SLASH.contains(ch))
                     && !(options.mark() && MARK.contains(ch))) {
@@ -274,7 +274,7 @@ final class SlugImplementation implements Slug {
             }
         }
 
-        buffer.append(symbols().get(ch));
+        buffer.append(new SymbolMapper().mapSymbol(options.language(), ch));
 
         if (input != null) {
             final int nextPos = currentPos + 1;
@@ -316,8 +316,8 @@ final class SlugImplementation implements Slug {
             return "";
         }
 
-        final String replacement = langChars().containsKey(ch)
-                ? langChars().get(ch)
+        final String replacement = new LanguageCharacterMapper().knowsCharacter(options.language(), ch)
+                ? new LanguageCharacterMapper().mapCharacter(options.language(), ch)
                 : ch;
 
         if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(replacement).matches()) {
@@ -404,17 +404,4 @@ final class SlugImplementation implements Slug {
         }
     }
 
-    /**
-     * Maps language dependent characters.
-     */
-    private Map<String, String> langChars() {
-        return new LanguageCharacterMapper().map(options.language());
-    }
-
-    /**
-     * Maps language dependent symbols.
-     */
-    private Map<String, String> symbols() {
-        return new SymbolMapper().map(options.language());
-    }
 }

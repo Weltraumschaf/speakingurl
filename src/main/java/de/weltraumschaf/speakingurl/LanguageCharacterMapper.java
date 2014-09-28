@@ -31,23 +31,20 @@ final class LanguageCharacterMapper {
         MAPPING.put(Language.SWEDISH, Collections.unmodifiableMap(swedish));
     }
 
-    /**
-     * Get the mapping for given language.
-     *
-     * <p>
-     * If the given language has no mapping, then the mapping for {@link #DEFAULT}
-     * will be returned.
-     * </p>
-     *
-     * @param lang the get the mapping for
-     * @return never {@code null}, immutable
-     */
-    Map<String, String> map(final Language lang) {
+    boolean knowsCharacter(final Language lang, final String ch) {
         if (MAPPING.containsKey(lang)) {
-            return MAPPING.get(lang);
+            return MAPPING.get(lang).containsKey(ch);
         }
 
-        return MAPPING.get(DEFAULT);
+        return MAPPING.get(DEFAULT).containsKey(ch);
+    }
+
+    String mapCharacter(final Language lang, final String ch) {
+        if (knowsCharacter(lang, ch)) {
+            return MAPPING.get(lang).get(ch);
+        }
+
+        throw new IllegalArgumentException(String.format("Unknown character '%s' for language %s!", ch, lang));
     }
 
 }
