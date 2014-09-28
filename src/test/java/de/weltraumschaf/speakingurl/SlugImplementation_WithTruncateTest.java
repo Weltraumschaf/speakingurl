@@ -26,7 +26,7 @@ public class SlugImplementation_WithTruncateTest {
         assertThat(sut.get("Foobarbaz, Bar Baz"), is(equalTo("foobarbaz")));
 
         sut = Slug.Builder.newBuiler().truncate(15).create();
-        assertThat(sut.get("Foobarbaz, Bar Baz"), is(equalTo("'foobarbaz-bar")));
+        assertThat(sut.get("Foobarbaz, Bar Baz"), is(equalTo("foobarbaz-bar")));
 
         sut = Slug.Builder.newBuiler().truncate(15).create();
         assertThat(sut.get(" Foobarbaz, Bar Baz"), is(equalTo("foobarbaz-bar")));
