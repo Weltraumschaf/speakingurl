@@ -32,7 +32,12 @@ to Pid's versions.
 - [@simov](https://github.com/simov/slugify)
 - [@henrikjoreteg](https://github.com/henrikjoreteg/slugger)
 
-[original]:   https://github.com/pid/speakingurl
-[license]:    https://raw.github.com/Weltraumschaf/speakingurl/master/LICENSE
-[versioning]: http://semver.org/
-[changelog]:  https://github.com/Weltraumschaf/speakingurl/blob/master/CHANGELOG.md
+## License
+
+For license information see [here][license].
+
+[original]:     https://github.com/pid/speakingurl
+[license]:      https://raw.github.com/Weltraumschaf/speakingurl/master/LICENSE
+[versioning]:   http://semver.org/
+[changelog]:    https://github.com/Weltraumschaf/speakingurl/blob/master/CHANGELOG.md
+[license]:      license.html
