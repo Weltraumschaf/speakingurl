@@ -30,7 +30,10 @@ final class SlugImplementation implements Slug {
      * Matches alpha numeric characters.
      */
     private static final Pattern ALPHA_NUMERIC = Pattern.compile("[a-zA-Z0-9]+");
-
+    /**
+     * Matches each word for titles.
+     */
+    private static final Pattern TITLE = Pattern.compile("(\\w\\S*)");
     /**
      * Validates input.
      */
@@ -333,19 +336,27 @@ final class SlugImplementation implements Slug {
                 + "|" + Pattern.quote(separator) + "+$)", "");
     }
 
-    String transformCase(final String input, final Map<String, String> customReplacements) {
+    /**
+     * Make each word which starts with alphanumeric character to upper case, except
+     * them in the replacement map.
+     *
+     * @param input may be {@code null} or empty
+     * @param exclusiions map with key and value same
+     * @return never {@code null}, may be empty
+     */
+    String transformCase(final String input, final Map<String, String> exclusiions) {
         if (input == null || input.isEmpty()) {
             return "";
         }
 
-        final Pattern pattern = Pattern.compile("(\\w\\S*)");
+        final Pattern pattern = TITLE;
         final Matcher matcher = pattern.matcher(input);
         final StringBuffer buffer = new StringBuffer();
 
         while (matcher.find()) {
             final String match = ucfirst(matcher.group());
 
-            if (null != customReplacements && customReplacements.containsKey(match.toLowerCase())) {
+            if (null != exclusiions && exclusiions.containsKey(match.toLowerCase())) {
                 matcher.appendReplacement(buffer, match.toLowerCase());
             } else {
                 matcher.appendReplacement(buffer, match);
