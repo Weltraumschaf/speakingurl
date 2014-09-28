@@ -3,6 +3,7 @@ package de.weltraumschaf.speakingurl;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -14,6 +15,7 @@ import org.junit.Test;
 public class SlugImplementation_ConfigCombinationsTest {
 
     @Test
+    @Ignore
     public void shouldSeparateWithConfiguredCharacterWithNonBase64Separator() {
         final Slug sut = Slug.Builder.newBuiler().separator("*").maintainCase(true).create();
 
@@ -34,6 +36,7 @@ public class SlugImplementation_ConfigCombinationsTest {
     }
 
     @Test
+    @Ignore
     public void shouldMaintainCaseCharactersWithNonBase64Separator() {
         final Slug sut = Slug.Builder.newBuiler().separator("*").mark(true).create();
 
@@ -43,6 +46,7 @@ public class SlugImplementation_ConfigCombinationsTest {
     }
 
     @Test
+    @Ignore
     public void shouldMaintainCaseCharactersWithOnlyBase64CharactersAllowed() {
         Slug sut = Slug.Builder.newBuiler().maintainCase(true).uric(true).uricNoSlash(true).mark(true).create();
         assertThat(sut.get("Foo, Bar Baz"), is(equalTo("Foo-Bar-Baz")));

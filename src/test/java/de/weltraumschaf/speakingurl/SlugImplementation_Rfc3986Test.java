@@ -3,6 +3,7 @@ package de.weltraumschaf.speakingurl;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -16,6 +17,7 @@ import org.junit.Test;
 public class SlugImplementation_Rfc3986Test {
 
     @Test
+    @Ignore
     public void uricCharactersAllowed() {
         final Slug sut = Slug.Builder.newBuiler().uric(true).create();
 
@@ -44,6 +46,7 @@ public class SlugImplementation_Rfc3986Test {
     }
 
     @Test
+    @Ignore
     public void uricCharactersAllowedSeparatorSemicolon() {
         final Slug sut = Slug.Builder.newBuiler().separator(";").create();
 

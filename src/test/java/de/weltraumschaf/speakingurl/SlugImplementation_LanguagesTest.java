@@ -12,6 +12,7 @@ import org.junit.Test;
  * @author Sascha Droste <pid@posteo.net>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
+@Ignore
 public class SlugImplementation_LanguagesTest {
 
     @Test
