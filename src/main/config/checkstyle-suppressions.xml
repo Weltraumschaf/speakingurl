@@ -24,4 +24,5 @@
     <suppress checks="IllegalThrows" files=".*Test\.java$"/>
     <suppress checks="ImportControl" files=".*Test\.java$"/>
     <suppress checks="JavadocPackage" files=".*Test\.java$"/>
+    <suppress checks="TypeName" files=".*Test\.java$"/>
 </suppressions>
