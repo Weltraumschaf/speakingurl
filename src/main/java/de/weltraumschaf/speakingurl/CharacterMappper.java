@@ -518,11 +518,39 @@ final class CharacterMappper {
     }
 
     /**
-     * Get the mapping.
-     *
-     * @return never {@code null}, immutable
+     * Validates input.
      */
-    Map<String, String> map() {
-        return MAPPING;
+    private final Validator validator = new Validator();
+
+    /**
+     * Whether the maps know the character to mapCharacter.
+     *
+     * @param ch must not be {@code null}
+     * @return {@code true} if known, else {@code false}
+     */
+    boolean knowsCharacter(final String ch) {
+        return MAPPING.containsKey(validator.notNull(ch, "ch"));
+    }
+
+    /**
+     * Maps a given character.
+     * <p>
+     * Throws an {@link IllegalArgumentException} if the given character
+     * {@link #knowsCharacter(java.lang.String) is not knwon}.
+     * </p>
+     *
+     * @param ch must not be {@code null}
+     * @return never {@code null}
+     */
+    String mapCharacter(final String ch) {
+        if (ch == null || ch.isEmpty()) {
+            return "";
+        }
+
+        if (knowsCharacter(ch)) {
+            return MAPPING.get(ch);
+        }
+
+        throw new IllegalArgumentException(String.format("Can't map character '%s'!", ch));
     }
 }

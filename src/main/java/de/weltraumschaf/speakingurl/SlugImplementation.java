@@ -187,7 +187,7 @@ final class SlugImplementation implements Slug {
                 ch = replaceLanguageCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
-            } else if (characterMapper.map().containsKey(ch)) {
+            } else if (characterMapper.knowsCharacter(ch)) {
                 ch = replaceCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
@@ -300,11 +300,11 @@ final class SlugImplementation implements Slug {
             return "";
         }
 
-        if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(characterMapper.map().get(ch)).matches()) {
-            return " " + characterMapper.map().get(ch);
+        if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(characterMapper.mapCharacter(ch)).matches()) {
+            return " " + characterMapper.mapCharacter(ch);
         }
 
-        return characterMapper.map().get(ch);
+        return characterMapper.mapCharacter(ch);
     }
 
     String replaceLanguageCharacters(final boolean lastCharWasSymbol, final String ch) {
@@ -351,10 +351,10 @@ final class SlugImplementation implements Slug {
     }
 
     /**
-     * Make each word which starts with alphanumeric character to upper case, except them in the replacement map.
+     * Make each word which starts with alphanumeric character to upper case, except them in the replacement mapCharacter.
      *
      * @param input may be {@code null} or empty
-     * @param exclusiions map with key and value same
+     * @param exclusiions mapCharacter with key and value same
      * @return never {@code null}, may be empty
      */
     String transformCase(final String input, final Map<String, String> exclusiions) {
