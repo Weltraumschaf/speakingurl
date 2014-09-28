@@ -46,14 +46,6 @@ final class SlugImplementation implements Slug {
      * Holds the slugger options.
      */
     private final Options options;
-    /**
-     * Maps language dependent characters.
-     */
-    private final Map<String, String> langChars;
-    /**
-     * Maps language dependent symbols.
-     */
-    private final Map<String, String> symbols;
 
     /**
      * Creates slugger with default options.
@@ -70,8 +62,6 @@ final class SlugImplementation implements Slug {
     SlugImplementation(final Options options) {
         super();
         this.options = validator.notNull(options, "options");
-        this.langChars = new LanguageCharacterMapper().map(options.language());
-        this.symbols = new SymbolMapper().map(options.language());
     }
 
     @Override
@@ -165,7 +155,7 @@ final class SlugImplementation implements Slug {
         for (int i = 0, l = input.length(); i < l; i++) {
             String ch = currentCharacter(input, i);
 
-            if (langChars.containsKey(ch)) {
+            if (langChars().containsKey(ch)) {
                 ch = replaceLanguageCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
@@ -173,7 +163,7 @@ final class SlugImplementation implements Slug {
                 ch = replaceCharacters(lastCharWasSymbol, ch);
 
                 lastCharWasSymbol = false;
-            } else if (symbols.containsKey(ch)
+            } else if (symbols().containsKey(ch)
                     && !(options.uric() && URIC_SLASH.contains(ch))
                     && !(options.uricWithoutSlash() && URIC_WITHOUT_SLASH.contains(ch))
                     && !(options.mark() && MARK.contains(ch))) {
@@ -261,7 +251,7 @@ final class SlugImplementation implements Slug {
                 buffer.append(separator);
             }
 
-            symbols.get(ch);
+            symbols().get(ch);
         }
 
         final int nextPos = index + 1;
@@ -302,8 +292,8 @@ final class SlugImplementation implements Slug {
             return "";
         }
 
-        final String replacement = langChars.containsKey(ch)
-                ? langChars.get(ch)
+        final String replacement = langChars().containsKey(ch)
+                ? langChars().get(ch)
                 : ch;
 
         if (lastCharWasSymbol && ALPHA_NUMERIC.matcher(replacement).matches()) {
@@ -389,5 +379,19 @@ final class SlugImplementation implements Slug {
             buffer.append(input.toCharArray(), 1, input.length() - 1);
             return buffer.toString();
         }
+    }
+
+    /**
+     * Maps language dependent characters.
+     */
+    private Map<String, String> langChars() {
+        return  new LanguageCharacterMapper().map(options.language());
+    }
+
+    /**
+     * Maps language dependent symbols.
+     */
+    private Map<String, String> symbols() {
+        return new SymbolMapper().map(options.language());
     }
 }
