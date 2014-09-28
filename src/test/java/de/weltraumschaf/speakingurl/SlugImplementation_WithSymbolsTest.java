@@ -144,8 +144,14 @@ public class SlugImplementation_WithSymbolsTest {
         sut = Slug.Builder.newBuiler().uric(true).uricNoSlash(true).mark(true).lang(Language.SWEDISH).create();
         assertThat(sut.get("Foo (♥) ; Baz=Bar"), is(equalTo("foo-(laska)-;-baz=bar")));
 
-        sut = Slug.Builder.newBuiler().uric(true).uricNoSlash(true).mark(true).maintainCase(true).lang(Language.ENGLISH).create();
-        assertThat(sut.get(" Sch(* )ner (♥)Ti♥tel ♥läßt grüßen!? Bel♥♥ été !"), is(equalTo("Sch(*-)ner-(love)Ti-love-tel-love-laesst-gruessen!?-Bel-love-love-ete-!")));
+        sut = Slug.Builder.newBuiler().uric(true)
+            .uricNoSlash(true)
+            .mark(true)
+            .maintainCase(true)
+            .lang(Language.ENGLISH)
+            .create();
+        assertThat(sut.get(" Sch(* )ner (♥)Ti♥tel ♥läßt grüßen!? Bel♥♥ été !"),
+            is(equalTo("Sch(*-)ner-(love)Ti-love-tel-love-laesst-gruessen!?-Bel-love-love-ete-!")));
     }
 
     @Test
@@ -160,20 +166,28 @@ public class SlugImplementation_WithSymbolsTest {
     @Test
     public void shouldReplaceCharsByCzechLanguageStandards() {
         Slug sut = Slug.Builder.newBuiler().lang(Language.CZECH).create();
-        assertThat(sut.get("AaÁáBbCcČčDdĎďEeÉéĚěFfGgHhChchIiÍíJjKkLlMmNnŇňOoÓóPpQqRrŘřSsŠšTtŤťUuÚúŮůVvWwXxYyÝýZzŽž"), is(equalTo("aaaabbccccddddeeeeeeffgghhchchiiiijjkkllmmnnnnooooppqqrrrrssssttttuuuuuuvvwwxxyyyyzzzz")));
+        assertThat(sut.get("AaÁáBbCcČčDdĎďEeÉéĚěFfGgHhChchIiÍíJjKkLlMmNnŇňOoÓóPpQqRrŘřSsŠšTtŤťUuÚúŮůVvWwXxYyÝýZzŽž"),
+                is(equalTo("aaaabbccccddddeeeeeeffgghhchchiiiijjkkllmmnnnnooooppqqrrrrssssttttuuuuuuvvwwxxyyyyzzzz")));
 
         sut = Slug.Builder.newBuiler().lang(Language.CZECH).maintainCase(true).create();
-        assertThat(sut.get("AaÁáBbCcČčDdĎďEeÉéĚěFfGgHhChchIiÍíJjKkLlMmNnŇňOoÓóPpQqRrŘřSsŠšTtŤťUuÚúŮůVvWwXxYyÝýZzŽž"), is(equalTo("AaAaBbCcCcDdDdEeEeEeFfGgHhChchIiIiJjKkLlMmNnNnOoOoPpQqRrRrSsSsTtTtUuUuUuVvWwXxYyYyZzZz")));
+        assertThat(sut.get("AaÁáBbCcČčDdĎďEeÉéĚěFfGgHhChchIiÍíJjKkLlMmNnŇňOoÓóPpQqRrŘřSsŠšTtŤťUuÚúŮůVvWwXxYyÝýZzŽž"),
+                is(equalTo("AaAaBbCcCcDdDdEeEeEeFfGgHhChchIiIiJjKkLlMmNnNnOoOoPpQqRrRrSsSsTtTtUuUuUuVvWwXxYyYyZzZz")));
     }
 
     @Test
     public void shouldReplaceCharsBySwedishLanguageStandards() {
         Slug sut = Slug.Builder.newBuiler().lang(Language.SWEDISH).create();
 
-        assertThat(sut.get("AaÁaÄäBbCcČčDdĎďDzdzDždžEeÉéFfGgHhChchIiÍíJjKkLlĹĺĽľMmNnŇňOoÓóÔôPpQqRrŔŕSsŠšTtŤťUuÚúVvWwXxYyÝýZzŽž"), is(equalTo("aaaaaabbccccdddddzdzdzdzeeeeffgghhchchiiiijjkkllllllmmnnnnooooooppqqrrrrssssttttuuuuvvwwxxyyyyzzzz")));
+        assertThat(sut.get("AaÁaÄäBbCcČčDdĎďDzdzDždžEeÉéFfGgHhChchIiÍíJjKkLlĹĺĽľMmNnŇňOoÓóÔôPpQqRrŔŕSsŠšTtŤťUuÚúVvWwXx"
+                + "YyÝýZzŽž"),
+                is(equalTo("aaaaaabbccccdddddzdzdzdzeeeeffgghhchchiiiijjkkllllllmmnnnnooooooppqqrrrrssssttttuuuuvvwwxx"
+                        + "yyyyzzzz")));
 
         sut = Slug.Builder.newBuiler().lang(Language.SWEDISH).maintainCase(true).create();
-        assertThat(sut.get("AaÁaÄäBbCcČčDdĎďDzdzDždžEeÉéFfGgHhChchIiÍíJjKkLlĹĺĽľMmNnŇňOoÓóÔôPpQqRrŔŕSsŠšTtŤťUuÚúVvWwXxYyÝýZzŽž"), is(equalTo("AaAaAaBbCcCcDdDdDzdzDzdzEeEeFfGgHhChchIiIiJjKkLlLlLlMmNnNnOoOoOoPpQqRrRrSsSsTtTtUuUuVvWwXxYyYyZzZz")));
+        assertThat(sut.get("AaÁaÄäBbCcČčDdĎďDzdzDždžEeÉéFfGgHhChchIiÍíJjKkLlĹĺĽľMmNnŇňOoÓóÔôPpQqRrŔŕSsŠšTtŤťUuÚúVvWwXx"
+                + "YyÝýZzŽž"),
+                is(equalTo("AaAaAaBbCcCcDdDdDzdzDzdzEeEeFfGgHhChchIiIiJjKkLlLlLlMmNnNnOoOoOoPpQqRrRrSsSsTtTtUuUuVvWwXx"
+                        + "YyYyZzZz")));
     }
 
     @Test
