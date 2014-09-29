@@ -1,17 +1,35 @@
 # Speaking URL
 
-Generate a slug with a lot of  options; create of so called 'static' or 'Clean
-URL' or 'Pretty  URL' or 'nice-looking URL' or 'Speaking  URL' or 'user-friendly
-URL' or 'SEO-friendly URL' from a  string. This module aims to transliterate the
-input string.
+> Generate a slug with a lot of  options; create of so called 'static' or 'Clean
+> URL' or 'Pretty  URL' or 'nice-looking URL' or 'Speaking  URL' or 'user-friendly
+> URL' or 'SEO-friendly URL' from a  string. This module aims to transliterate the
+> input string.
 
-For use in Maven projects add this dependnecy:
+(from the [original][original])
+
+See [examples][examples] to see how it works.
+
+## Installation
+
+For use in [Maven][mvn] projects add this dependnecy:
 
     <dependnecy>
       <groupId>de.weltraumschaf</groupId>
       <artifactId>speakingurl</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependnecy>
+
+For manual instalation clone this repository and run Maven. You need at least
+[Maven][mvn] 3.0.3 or above installed:
+
+    $> git clone https://github.com/Weltraumschaf/speakingurl.git
+    $> cd speakingurl
+    $> mvn clean install
+
+## Dependencies
+
+This module has no dependencies except some test libraries (scope test) or
+some Maven plugins.
 
 ## Version
 
@@ -37,7 +55,8 @@ to Pid's versions.
 For license information see [here][license].
 
 [original]:     https://github.com/pid/speakingurl
-[license]:      https://raw.github.com/Weltraumschaf/speakingurl/master/LICENSE
 [versioning]:   http://semver.org/
+[mvn]:          http://maven.apache.org/
 [changelog]:    https://github.com/Weltraumschaf/speakingurl/blob/master/CHANGELOG.md
 [license]:      license.html
+[examples]:     examples.html
