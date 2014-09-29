@@ -14,7 +14,7 @@ For use in [Maven][mvn] projects add this dependnecy:
     <dependnecy>
       <groupId>de.weltraumschaf</groupId>
       <artifactId>speakingurl</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0</version>
     </dependnecy>
 
 For manual instalation clone this repository and run Maven. You need at least
@@ -23,6 +23,8 @@ For manual instalation clone this repository and run Maven. You need at least
     $> git clone https://github.com/Weltraumschaf/speakingurl.git
     $> cd speakingurl
     $> mvn clean install
+
+Or you can download the jar-file directly from the [Maven Central Repository][mvn-repo].
 
 ## Dependencies
 
@@ -56,5 +58,6 @@ For license information see [here][license].
 [versioning]:   http://semver.org/
 [mvn]:          http://maven.apache.org/
 [changelog]:    https://github.com/Weltraumschaf/speakingurl/blob/master/CHANGELOG.md
+[mvn-repo]:     http://search.maven.org/#search|gav|1|g:%22de.weltraumschaf%22%20AND%20a:%22speakingurl%22
 [license]:      license.html
 [examples]:     examples.html
