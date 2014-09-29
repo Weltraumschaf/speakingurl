@@ -31,6 +31,17 @@ Or you can download the jar-file directly from the [Maven Central Repository][mv
 This module has no dependencies except some test libraries (scope test) or
 some Maven plugins.
 
+## Note
+
+Never use  the slug to  reference to the  unique page in  the database –  if the
+title will change, you want to change the slug – you run into problems.
+
+1.  Use a  unique  reference  to the  record  – e.g.  a  unique  key "12345"
+    => /my-little-title-12345.html
+2.  Store all historical  slugs in the  page record; but you  have to
+    re-calculate the  slug from all  pages – every time  you update
+    speakingurl
+
 ## Version
 
 First I considered to use the  same version numbers like the original JavaScript
