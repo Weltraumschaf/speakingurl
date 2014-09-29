@@ -18,7 +18,7 @@
 
     <groupId>de.weltraumschaf</groupId>
     <artifactId>speakingurl</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Speaking URL</name>
@@ -91,7 +91,7 @@
         <connection>scm:git:git://github.com/Weltraumschaf/speakingurl</connection>
         <developerConnection>scm:git:git@github.com:Weltraumschaf/speakingurl.git</developerConnection>
         <url>https://github.com/Weltraumschaf/speakingurl.git</url>
-        <tag>speakingurl-1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
