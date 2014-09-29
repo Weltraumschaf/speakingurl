@@ -74,8 +74,8 @@ the allowed characters. The separator character is always allowed.
 - `Builder#titleCaseExclude(Set<String> titleCaseExclude)` default: empty
     - Set of words to not uppercase if `titleCase` is `true`.
 - `Builder#truncate(int truncate)` default: `0`
-    - 0 -> Don't trim length.
-    - > 0 -> Trim to max length while not breaking any words.
+    - `0` -> Don't trim length.
+    - `> 0` -> Trim to max length while not breaking any words.
 - `Builder#uric(boolean uric)` default: `false`
     - `true`: Additionally allow characters: `";", "?", ":", "@", "&", "=", "+", "$", ",", "/"`.
     - `false`: Only Base64 characters allowed (`/A-Za-z0-9-_`/).

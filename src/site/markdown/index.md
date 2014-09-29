@@ -3,11 +3,9 @@
 > Generate a slug with a lot of  options; create of so called 'static' or 'Clean
 > URL' or 'Pretty  URL' or 'nice-looking URL' or 'Speaking  URL' or 'user-friendly
 > URL' or 'SEO-friendly URL' from a  string. This module aims to transliterate the
-> input string.
+> input string. (from the [original][original])
 
-(from the [original][original])
-
-See [examples][examples] to see how it works.
+Read [examples][examples] to see how it works.
 
 ## Installation
 
