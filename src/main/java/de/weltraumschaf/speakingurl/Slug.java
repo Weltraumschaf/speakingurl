@@ -32,7 +32,10 @@ public interface Slug {
     String get(String input);
 
     /**
-     * Generates a slug from given input string.
+     * Generates a slug from given input string with custom separator.
+     * <p>
+     * This method overwrites the separator configured by {@link Slug.Builder#separator(java.lang.String)}.
+     * </p>
      *
      * @param input may be {@code null} or empty
      * @param separator must not be {@code null}
