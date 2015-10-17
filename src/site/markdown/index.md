@@ -11,11 +11,11 @@ Read [examples][examples] to see how it works.
 
 For use in [Maven][mvn] projects add this dependnecy:
 
-    <dependnecy>
+    <dependency>
       <groupId>de.weltraumschaf</groupId>
       <artifactId>speakingurl</artifactId>
       <version>1.0.0</version>
-    </dependnecy>
+    </dependency>
 
 For manual instalation clone this repository and run Maven. You need at least
 [Maven][mvn] 3.0.3 or above installed:
